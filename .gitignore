@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+
+.claude/
+.omx/
+
+data/skill_runs/
+data/skill_artifacts/
+data/structured_outputs/
+data/regulatory_snapshots/
+uploads/
+
+__pycache__/
+**/__pycache__/
+*.pyc
+.DS_Store

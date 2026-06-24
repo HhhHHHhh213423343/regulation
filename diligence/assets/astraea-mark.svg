@@ -1,0 +1,29 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ring" x1="18" y1="16" x2="112" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8CE7FF"/>
+      <stop offset="0.42" stop-color="#5DB3FF"/>
+      <stop offset="1" stop-color="#6A63FF"/>
+    </linearGradient>
+    <linearGradient id="core" x1="40" y1="30" x2="84" y2="97" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EAF8FF"/>
+      <stop offset="1" stop-color="#72C7FF"/>
+    </linearGradient>
+    <filter id="glow" x="0" y="0" width="128" height="128" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#glow)">
+    <circle cx="64" cy="64" r="47" stroke="url(#ring)" stroke-width="4"/>
+    <circle cx="64" cy="64" r="34" stroke="url(#ring)" stroke-width="2" opacity="0.42"/>
+    <path d="M42 89C48 74 55 61 64 50C73 61 80 74 86 89" stroke="url(#ring)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M64 34C71.1797 34 77 39.8203 77 47C77 54.1797 71.1797 60 64 60C56.8203 60 51 54.1797 51 47C51 39.8203 56.8203 34 64 34Z" fill="url(#core)"/>
+    <path d="M53 88V60H75V88" stroke="url(#core)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M45 49L34 59" stroke="url(#ring)" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+    <path d="M83 49L94 59" stroke="url(#ring)" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+  </g>
+</svg>

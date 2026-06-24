@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>尽职调查 Agent</title>
+    <link rel="icon" href="./assets/logo.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="agent-page">
+    <div class="cosmic-background" aria-hidden="true">
+      <div class="cosmic-background__mesh"></div>
+      <div class="cosmic-background__glow cosmic-background__glow--blue"></div>
+      <div class="cosmic-background__glow cosmic-background__glow--violet"></div>
+      <div class="cosmic-background__glow cosmic-background__glow--cyan"></div>
+      <div class="cosmic-background__stars"></div>
+    </div>
+
+    <div class="app-shell">
+      <div class="app-frame">
+        <header class="topbar">
+          <div class="topbar-heading" id="topbar-heading"></div>
+
+          <div class="topbar-main">
+            <nav class="topbar-nav" id="topbar-nav" aria-label="二级导航"></nav>
+
+            <div class="topbar-actions">
+              <button class="glow-button glow-button--ghost" type="button">新手引导</button>
+              <button class="topbar-icon-button" type="button" aria-label="通知中心">
+                <span class="topbar-icon-button__badge">3</span>
+                <span class="topbar-icon">N</span>
+              </button>
+              <div class="topbar-user glass-card">
+                <div class="topbar-user__avatar">C</div>
+                <div>
+                  <strong>托管内控</strong>
+                  <span>尽职调查 Agent</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="workspace">
+          <aside class="sidebar">
+            <nav class="sidebar-nav" id="sidebar-nav" aria-label="一级主导航"></nav>
+            <div class="sidebar-footer" id="sidebar-footer" aria-label="侧边栏底部工具区"></div>
+          </aside>
+
+          <main class="main-panel">
+            <section id="toolbar-area"></section>
+            <section id="content-area"></section>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-overlay is-hidden" id="preview-overlay">
+      <div class="preview-drawer">
+        <div class="preview-drawer-head">
+          <div>
+            <p class="section-kicker">尽调报告全文</p>
+            <h3 id="preview-title"></h3>
+          </div>
+          <button class="ghost-action" type="button" data-action="close-preview">关闭</button>
+        </div>
+
+        <div class="preview-drawer-body">
+          <aside class="preview-outline" id="preview-outline"></aside>
+          <article class="preview-article" id="preview-article"></article>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay is-hidden" id="completion-modal">
+      <div class="completion-modal">
+        <div class="modal-head">
+          <div>
+            <p class="section-kicker">资料完善</p>
+            <h3 id="completion-modal-title"></h3>
+          </div>
+          <button class="ghost-action" type="button" data-action="close-completion-modal">关闭</button>
+        </div>
+        <div class="modal-body" id="completion-modal-body"></div>
+      </div>
+    </div>
+
+    <div class="global-demo-disclaimer" aria-label="页面声明">
+      本页面内为模拟示例，仅用于内部技术可行性验证。
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

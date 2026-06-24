@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>外规内化全流程分析报告 — PBOC令〔2026〕第4号</title>
+<style>
+:root {
+    --navy: #0a1628; --navy-light: #152238; --navy-mid: #1a2d4a;
+    --gold: #b8973e; --gold-light: #d4af37; --gold-pale: #faf6ed;
+    --gray-50: #f8f9fa; --gray-100: #f1f3f5; --gray-200: #e9ecef;
+    --gray-300: #dee2e6; --gray-500: #adb5bd; --gray-700: #495057; --gray-900: #212529;
+    --red: #c0392b; --red-bg: #fdf2f2; --red-light: #fce8e6;
+    --orange: #e67e22; --orange-bg: #fef9f4;
+    --green: #1e7e34; --green-bg: #f0faf3;
+    --blue: #1a5276; --blue-bg: #e8f0fe;
+    --serif: "Noto Serif SC", "SimSun", "STSong", serif;
+    --sans: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--sans); background: #e8ecf1; color: var(--gray-900); line-height: 1.75; }
+
+/* ── Header ── */
+.top-nav { background: var(--navy); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; padding: 0 40px; height: 48px; gap: 28px; }
+.top-nav a { color: rgba(255,255,255,.55); text-decoration: none; font-size: 12px; letter-spacing: 1px; transition: color .2s; }
+.top-nav a:hover, .top-nav a.active { color: var(--gold-light); }
+.top-nav .pipelet { color: rgba(255,255,255,.12); font-size: 14px; }
+
+.hero { background: linear-gradient(135deg, var(--navy) 0%, #0d1f3c 50%, var(--navy-mid) 100%); color: #fff; border-bottom: 4px solid var(--gold); position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(184,151,62,.08) 0%, transparent 70%); }
+.hero-inner { max-width: 1200px; margin: 0 auto; padding: 48px 40px 40px; position: relative; z-index: 1; }
+.hero-badge { display: inline-block; background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 2px; letter-spacing: 2px; margin-bottom: 16px; }
+.hero h1 { font-family: var(--serif); font-size: 30px; font-weight: 700; letter-spacing: 3px; margin-bottom: 8px; line-height: 1.3; }
+.hero .meta-row { display: flex; gap: 32px; font-size: 13px; color: rgba(255,255,255,.55); letter-spacing: .5px; flex-wrap: wrap; margin-top: 16px; }
+.hero .meta-row span { display: flex; align-items: center; gap: 6px; }
+.hero .meta-row .lbl { color: rgba(255,255,255,.35); }
+.hero .meta-row .val { color: var(--gold-light); font-weight: 600; }
+.hero .deadline-alert { margin-top: 20px; background: rgba(192,57,43,.15); border: 1px solid rgba(192,57,43,.3); border-radius: 4px; padding: 12px 20px; display: inline-flex; align-items: center; gap: 10px; font-size: 13px; }
+.deadline-alert .days { font-size: 28px; font-weight: 800; color: #e74c3c; font-family: var(--serif); }
+
+/* ── Pipeline ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 28px 40px 60px; }
+.pipeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+.pipe-step { background: #fff; border-radius: 4px; border: 1px solid var(--gray-300); padding: 20px; text-align: center; position: relative; cursor: pointer; transition: all .2s; }
+.pipe-step:hover { border-color: var(--gold); box-shadow: 0 4px 16px rgba(0,0,0,.08); transform: translateY(-2px); }
+.pipe-step .step-num { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; margin-bottom: 10px; }
+.pipe-step.s1 .step-num { background: var(--blue-bg); color: var(--blue); }
+.pipe-step.s2 .step-num { background: #e8f8f5; color: #0e6655; }
+.pipe-step.s3 .step-num { background: var(--red-bg); color: var(--red); }
+.pipe-step.s4 .step-num { background: var(--gold-pale); color: var(--gold); }
+.pipe-step .step-title { font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+.pipe-step .step-stat { font-size: 12px; color: var(--gray-500); }
+.pipe-step .step-kpi { font-size: 22px; font-weight: 800; font-family: var(--serif); margin: 4px 0; color: var(--navy); }
+.pipe-arrow { position: absolute; right: -10px; top: 50%; transform: translateY(-50%); color: var(--gray-300); font-size: 18px; z-index: 1; }
+
+/* ── Dashboard KPI ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 28px; }
+.kpi-card { background: #fff; border: 1px solid var(--gray-300); border-radius: 4px; padding: 18px 16px; }
+.kpi-card .kpi-val { font-size: 32px; font-weight: 800; font-family: var(--serif); line-height: 1; margin-bottom: 6px; }
+.kpi-card .kpi-lbl { font-size: 11px; color: var(--gray-500); letter-spacing: 1px; }
+.kpi-card.k-red { border-left: 3px solid var(--red); } .kpi-card.k-red .kpi-val { color: var(--red); }
+.kpi-card.k-orange { border-left: 3px solid var(--orange); } .kpi-card.k-orange .kpi-val { color: var(--orange); }
+.kpi-card.k-green { border-left: 3px solid var(--green); } .kpi-card.k-green .kpi-val { color: var(--green); }
+.kpi-card.k-blue { border-left: 3px solid var(--blue); } .kpi-card.k-blue .kpi-val { color: var(--blue); }
+.kpi-card.k-gold { border-left: 3px solid var(--gold); } .kpi-card.k-gold .kpi-val { color: var(--gold); }
+
+/* ── Section ── */
+.section { background: #fff; border: 1px solid var(--gray-300); border-radius: 4px; margin-bottom: 24px; overflow: hidden; }
+.section-hd { padding: 18px 28px; font-family: var(--serif); font-size: 17px; font-weight: 700; letter-spacing: 2px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid var(--gray-200); }
+.section-hd .dot { width: 12px; height: 12px; border-radius: 50%; }
+.section-hd .dot.d1 { background: var(--blue); } .section-hd .dot.d2 { background: #0e6655; }
+.section-hd .dot.d3 { background: var(--red); } .section-hd .dot.d4 { background: var(--gold); }
+.section-bd { padding: 28px; }
+
+/* ── Tables ── */
+.tbl-wrap { overflow-x: auto; margin: 16px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--navy); color: #fff; padding: 12px 14px; font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-align: left; white-space: nowrap; }
+td { padding: 11px 14px; border-bottom: 1px solid var(--gray-200); vertical-align: top; }
+tr:hover td { background: var(--gray-50); }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 2px; font-size: 11px; font-weight: 700; letter-spacing: .5px; white-space: nowrap; }
+.badge-r { background: var(--red-bg); color: var(--red); } .badge-o { background: var(--orange-bg); color: var(--orange); }
+.badge-g { background: var(--green-bg); color: var(--green); } .badge-b { background: var(--blue-bg); color: var(--blue); }
+.badge-gold { background: var(--gold-pale); color: var(--gold); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 2px; font-size: 11px; margin: 2px 4px 2px 0; }
+.tag-m { background: #ffe8e8; color: #c0392b; } .tag-p { background: #fff0f0; color: #b71c1c; }
+.tag-c { background: #e8f0fe; color: #1a5276; } .tag-g { background: #f1f3f5; color: #495057; }
+
+/* ── Intent Cards ── */
+.intent-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.intent-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 4px; padding: 20px; }
+.intent-card .ic-lbl { font-size: 11px; color: var(--gold); letter-spacing: 2px; font-weight: 700; margin-bottom: 8px; }
+.intent-card .ic-text { font-size: 13px; color: var(--gray-700); line-height: 1.8; }
+
+/* ── Requirement Grid ── */
+.req-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.req-item { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 3px; padding: 14px; font-size: 12px; }
+.req-item .req-id { font-size: 10px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+.req-item .req-act { font-size: 11px; color: var(--gray-500); margin-bottom: 4px; }
+.req-item .req-text { color: var(--gray-700); line-height: 1.6; }
+
+/* ── Action Plan Timeline ── */
+.timeline { position: relative; padding-left: 30px; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--gray-300); }
+.tl-item { position: relative; margin-bottom: 24px; padding-left: 16px; }
+.tl-item::before { content: ''; position: absolute; left: -26px; top: 4px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--gold); background: #fff; z-index: 1; }
+.tl-item .tl-date { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+.tl-item .tl-title { font-family: var(--serif); font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.tl-item .tl-desc { font-size: 13px; color: var(--gray-700); line-height: 1.7; }
+
+/* ── Footer ── */
+.footer { background: var(--navy); color: rgba(255,255,255,.4); text-align: center; padding: 24px; font-size: 11px; letter-spacing: 1px; border-top: 2px solid var(--gold); }
+.footer strong { color: var(--gold-light); }
+
+/* ── Alert Box ── */
+.alert { border-radius: 4px; padding: 16px 20px; margin-bottom: 16px; font-size: 13px; display: flex; align-items: flex-start; gap: 12px; }
+.alert-urgent { background: var(--red-bg); border: 1px solid #f5c6cb; color: #721c24; }
+.alert-info { background: var(--blue-bg); border: 1px solid #bee5eb; color: #0c5460; }
+.alert .alert-icon { font-size: 18px; flex-shrink: 0; }
+
+/* ── Summary Strip ── */
+.summary-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: var(--navy); border-radius: 4px; overflow: hidden; margin-bottom: 28px; }
+.summary-strip .ss-item { padding: 24px 20px; text-align: center; border-right: 1px solid rgba(255,255,255,.08); }
+.summary-strip .ss-item:last-child { border-right: none; }
+.ss-item .ss-num { font-size: 36px; font-weight: 800; font-family: var(--serif); color: #fff; }
+.ss-item .ss-lbl { font-size: 12px; color: rgba(255,255,255,.45); letter-spacing: 1px; margin-top: 6px; }
+.ss-item .ss-sub { font-size: 11px; color: var(--gold-light); margin-top: 2px; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .pipeline, .kpi-grid, .intent-grid, .req-grid { grid-template-columns: repeat(2, 1fr); }
+    .summary-strip { grid-template-columns: repeat(2, 1fr); }
+    .hero h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ TOP NAV ═══════════ -->
+<nav class="top-nav">
+    <a href="#dashboard" class="active">总览</a><span class="pipelet">|</span>
+    <a href="#step1">一·识别</a><span class="pipelet">|</span>
+    <a href="#step2">二·拆解</a><span class="pipelet">|</span>
+    <a href="#step3">三·对标</a><span class="pipelet">|</span>
+    <a href="#step4">四·整改</a><span class="pipelet">|</span>
+    <a href="#timeline">倒排计划</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+<div class="hero-inner">
+    <div class="hero-badge">外规内化 · 全流程分析</div>
+    <h1>PBOC令〔2026〕第4号<br>银行间债券市场制度修订</h1>
+    <div class="meta-row">
+        <span><span class="lbl">监管机构</span><span class="val">中国人民银行</span></span>
+        <span><span class="lbl">发布日期</span><span class="val">2026-05-26</span></span>
+        <span><span class="lbl">生效日期</span><span class="val">2026-07-01</span></span>
+        <span><span class="lbl">分类</span><span class="val">金融法治 · 消费者保护</span></span>
+        <span><span class="lbl">风险等级</span><span class="val" style="color:#e74c3c;">极重</span></span>
+    </div>
+    <div class="deadline-alert">
+        <span class="days">21</span>
+        <span>天<br><small>距生效日倒计时</small></span>
+    </div>
+</div>
+</header>
+
+<div class="container">
+
+<!-- ═══════════ PIPELINE OVERVIEW ═══════════ -->
+<div class="pipeline">
+    <div class="pipe-step s1">
+        <div class="step-num">1</div>
+        <div class="step-title">监管识别</div>
+        <div class="step-kpi">1 份</div>
+        <div class="step-stat">分类 · 摘要 · 风险评估</div>
+    </div>
+    <div class="pipe-step s2">
+        <div class="step-num">2</div>
+        <div class="step-title">义务拆解</div>
+        <div class="step-kpi">19 条</div>
+        <div class="step-stat">4维意图 · 12类动作 · 5维输出</div>
+    </div>
+    <div class="pipe-step s3">
+        <div class="step-num">3</div>
+        <div class="step-title">GAP分析</div>
+        <div class="step-kpi">16 条</div>
+        <div class="step-stat" style="color: var(--red);">合规率 6.2% · 6项高风险</div>
+    </div>
+    <div class="pipe-step s4">
+        <div class="step-num">4</div>
+        <div class="step-title">整改落地</div>
+        <div class="step-kpi">4维</div>
+        <div class="step-stat">2新制度 · 14修订 · 8控制点</div>
+    </div>
+</div>
+
+<!-- ═══════════ DASHBOARD KPI ═══════════ -->
+<div id="dashboard">
+<div class="summary-strip">
+    <div class="ss-item"><div class="ss-num">3</div><div class="ss-lbl">涉及修订规章</div><div class="ss-sub">央行令〔2005〕1号 · 〔2008〕1号 · 〔2009〕1号</div></div>
+    <div class="ss-item"><div class="ss-num">19</div><div class="ss-lbl">提取监管要求</div><div class="ss-sub">强制性 9 · 程序性 1 · 一般性 9</div></div>
+    <div class="ss-item"><div class="ss-num">6</div><div class="ss-lbl">高风险Gap</div><div class="ss-sub">需在7月1日前完成整改</div></div>
+    <div class="ss-item"><div class="ss-num">21</div><div class="ss-lbl">天整改窗口</div><div class="ss-sub">2项新制度 · 8个新控制点</div></div>
+</div>
+</div>
+
+<!-- ═══════════ 核心发现 ═══════════ -->
+<div class="alert alert-urgent">
+    <span class="alert-icon">▲</span>
+    <div>
+        <strong>核心发现：</strong>PBOC令〔2026〕第4号的核心变革是<strong>引入"债券中央存管机构"双主体制度</strong>——将存管机构从中债登单一主体扩展到中债登+上清所双主体并行。这一变革直接触发了<strong>6项高风险合规Gap</strong>：制度称谓未更新、双存管机构并行机制缺失、信息披露渠道未对接、资金清算路径单一、登记托管流程未适配、合规衔接倒排计划空白。
+    </div>
+</div>
+
+<!-- ═══════════ STEP 1: 监管识别 ═══════════ -->
+<div class="section" id="step1">
+<div class="section-hd"><span class="dot d1"></span>第一步 · 监管识别 — 新规扫描与自动分类</div>
+<div class="section-bd">
+    <div class="kpi-grid" style="grid-template-columns: repeat(4,1fr);">
+        <div class="kpi-card k-blue"><div class="kpi-val">1</div><div class="kpi-lbl">目标外规</div></div>
+        <div class="kpi-card k-gold"><div class="kpi-val">消费者保护</div><div class="kpi-lbl">分类判定</div></div>
+        <div class="kpi-card k-orange"><div class="kpi-val">极重</div><div class="kpi-lbl">风险等级</div></div>
+        <div class="kpi-card k-green"><div class="kpi-val">07-01</div><div class="kpi-lbl">生效日期</div></div>
+    </div>
+
+    <div class="tbl-wrap">
+    <table>
+        <thead><tr><th>维度</th><th>详情</th></tr></thead>
+        <tbody>
+            <tr><td style="font-weight:700;">文件全称</td><td>中国人民银行令〔2026〕第4号——中国人民银行关于修改部分规章的决定</td></tr>
+            <tr><td style="font-weight:700;">监管机构</td><td>中国人民银行</td></tr>
+            <tr><td style="font-weight:700;">发布日期</td><td>2026-05-26</td></tr>
+            <tr><td style="font-weight:700;">生效日期</td><td>2026-07-01</td></tr>
+            <tr><td style="font-weight:700;">分类</td><td><span class="badge badge-b">消费者保护</span>（金融法治建设与市场制度完善）</td></tr>
+            <tr><td style="font-weight:700;">适用机构</td><td>商业银行、所有金融机构、债券中央存管机构（中债登/上清所）</td></tr>
+            <tr><td style="font-weight:700;">处罚风险</td><td><span class="badge badge-r">极重</span> — 影响全市场债券登记托管结算制度，违规可能导致清算失败和数据混乱</td></tr>
+            <tr><td style="font-weight:700;">涉及被修订规章</td><td>①《全国银行间债券市场金融债券发行管理办法》(2005年1号) — 删除第8/13/25条<br>②《银行间债券市场非金融企业债务融资工具管理办法》(2008年1号) — 术语统一<br>③《银行间债券市场债券登记托管结算管理办法》(2009年1号) — 双存管机构制度确立</td></tr>
+            <tr><td style="font-weight:700;">原文链接</td><td><a href="https://jrj.sh.gov.cn/ZXYW178/20260526/4839131f4d5142978f0712db05f0fb2e.html" style="color:var(--blue);">上海市金融局转载</a>（已验证可访问）</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════ STEP 2: 义务拆解 ═══════════ -->
+<div class="section" id="step2">
+<div class="section-hd"><span class="dot d2"></span>第二步 · 监管义务拆解 — 穿透式五维分析</div>
+<div class="section-bd">
+    <div class="kpi-grid">
+        <div class="kpi-card k-blue"><div class="kpi-val">20</div><div class="kpi-lbl">解析条款</div></div>
+        <div class="kpi-card k-orange"><div class="kpi-val">19</div><div class="kpi-lbl">提取要求</div></div>
+        <div class="kpi-card k-green"><div class="kpi-val">41</div><div class="kpi-lbl">监管动作</div></div>
+        <div class="kpi-card k-red"><div class="kpi-val">9</div><div class="kpi-lbl">强制性义务</div></div>
+        <div class="kpi-card k-gold"><div class="kpi-val">30</div><div class="kpi-lbl">知识图谱边</div></div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:15px;margin:20px 0 14px;letter-spacing:1px;">▌监管意图推理（四维）</h3>
+    <div class="intent-grid">
+        <div class="intent-card">
+            <div class="ic-lbl">政策背景</div>
+            <div class="ic-text">为加强金融法治建设，完善金融监管法律体系。中国债券市场经过十余年发展，市场规模和参与主体发生显著变化，原单一存管机构制度已不能适应市场发展需要。</div>
+        </div>
+        <div class="intent-card">
+            <div class="ic-lbl">监管目标</div>
+            <div class="ic-text">修订现行规章条款以适应市场发展需要；规范登记托管结算制度，引入双存管机构并行机制；实现制度统一，消除规则冲突，提升市场效率。</div>
+        </div>
+        <div class="intent-card">
+            <div class="ic-lbl">风险关切</div>
+            <div class="ic-text">债券市场操作风险与法律风险（登记托管不统一导致的权利争议）、信息不对称风险（披露不充分引发投资者保护不足）、权属风险（登记托管环节的账实不符）、结算风险（结算失败引发的连锁违约和系统性风险）、监管信息不对称（数据未共享导致穿透式监管失效）。</div>
+        </div>
+        <div class="intent-card">
+            <div class="ic-lbl">预期效果</div>
+            <div class="ic-text">实现制度统一、消除规则冲突；提升市场信息透明度、增强投资者保护；打通数据壁垒、支持穿透式监管和宏观审慎管理；规则体系与时俱进、制度框架更加完善、监管效能提升。</div>
+        </div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:15px;margin:24px 0 14px;letter-spacing:1px;">▌监管要求速览（19条）</h3>
+    <div class="req-grid">
+        <div class="req-item"><div class="req-id" style="color:var(--red);">M-001</div><div class="req-act">报送 · 强制性</div><div class="req-text">金融机构发行金融债券须向央行报送7类申请文件</div></div>
+        <div class="req-item"><div class="req-id" style="color:var(--red);">M-002</div><div class="req-act">报告 · 强制性</div><div class="req-text">发行结束后10个工作日内向央行报告发行情况</div></div>
+        <div class="req-item"><div class="req-id" style="color:var(--red);">M-003</div><div class="req-act">登记 · 强制性</div><div class="req-text">兑付日前5个工作日将资金划入存管机构指定账户</div></div>
+        <div class="req-item"><div class="req-id" style="color:var(--red);">M-004</div><div class="req-act">登记 · 强制性</div><div class="req-text">债务融资工具须由债券中央存管机构登记托管，确保数据完整/准确/及时</div></div>
+        <div class="req-item"><div class="req-id" style="color:var(--red);">M-005</div><div class="req-act">建立 · 强制性</div><div class="req-text">两存管机构须在业务规则/技术标准/数据格式上保持一致，建立信息共享和数据互认</div></div>
+        <div class="req-item"><div class="req-id" style="color:var(--red);">M-006</div><div class="req-act">建立 · 强制性</div><div class="req-text">存管机构须建立风险管理制度和业务连续性计划</div></div>
+        <div class="req-item"><div class="req-id" style="color:var(--red);">M-007</div><div class="req-act">报送 · 强制性</div><div class="req-text">存管机构须定期向央行报送业务运行报告（含托管数据/结算量/系统状况/风险事件）</div></div>
+        <div class="req-item"><div class="req-id" style="color:var(--red);">M-008</div><div class="req-act">报送 · 强制性</div><div class="req-text">报送频率每月一次，重大事项立即报告</div></div>
+        <div class="req-item"><div class="req-id" style="color:var(--red);">M-009</div><div class="req-act">建立 · 强制性</div><div class="req-text">存管机构须建立信息安全管理体系，数据分类分级保护，加密/访问控制/审计追踪</div></div>
+        <div class="req-item"><div class="req-id">C-001</div><div class="req-act">报送 · 程序性</div><div class="req-text">"信息披露"改为"信息报送与披露"，发行人通过存管机构统一平台报送</div></div>
+        <div class="req-item"><div class="req-id">G-001</div><div class="req-act">审批 · 一般性</div><div class="req-text">简化发行审批流程，减少申请材料要求（删除原第8条）</div></div>
+        <div class="req-item"><div class="req-id">G-002</div><div class="req-act">报告 · 一般性</div><div class="req-text">优化信息披露机制，将事前报告改为事中事后监测（删除原第13条）</div></div>
+        <div class="req-item"><div class="req-id">G-003</div><div class="req-act">修订 · 一般性</div><div class="req-text">配合中央存管机构制度改革，统一资金清算路径（删除原第25条）</div></div>
+        <div class="req-item"><div class="req-id">G-004</div><div class="req-act">修改 · 一般性</div><div class="req-text">术语"金融机构法人"→"金融债券发行人"</div></div>
+        <div class="req-item"><div class="req-id">G-005</div><div class="req-act">登记 · 一般性</div><div class="req-text">术语"中央国债登记结算有限责任公司"→"债券中央存管机构"</div></div>
+        <div class="req-item"><div class="req-id">G-006</div><div class="req-act">登记 · 一般性</div><div class="req-text">全文统一存管机构称谓替换（2008年1号令）</div></div>
+        <div class="req-item"><div class="req-id">G-007</div><div class="req-act">登记 · 一般性</div><div class="req-text">删除原存管机构单一定义条款（2009年1号令第2条第2款）</div></div>
+        <div class="req-item"><div class="req-id">G-008</div><div class="req-act">登记 · 一般性</div><div class="req-text">全文"债券登记托管结算机构"→"债券中央存管机构"（2009年1号令）</div></div>
+        <div class="req-item"><div class="req-id">G-009</div><div class="req-act">登记 · 一般性</div><div class="req-text">明确央行指定存管机构为中债登+上清所两家</div></div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:15px;margin:24px 0 14px;letter-spacing:1px;">▌适用对象</h3>
+    <div class="tbl-wrap">
+    <table>
+        <thead><tr><th>层级</th><th>对象</th></tr></thead>
+        <tbody>
+            <tr><td style="font-weight:700;">直接适用</td><td>中央国债登记结算有限责任公司（金融基础设施）<br>银行间市场清算所股份有限公司（金融基础设施）<br>交易商协会（行业自律组织）</td></tr>
+            <tr><td style="font-weight:700;">间接适用</td><td>商业银行（债券发行/承销/托管参与机构）<br>所有金融机构（债券市场参与者）<br>非金融企业（债务融资工具发行人）</td></tr>
+            <tr><td style="font-weight:700;">豁免</td><td>无</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════ STEP 3: GAP分析 ═══════════ -->
+<div class="section" id="step3">
+<div class="section-hd"><span class="dot d3"></span>第三步 · GAP分析 — 外规vs内规条款对标</div>
+<div class="section-bd">
+    <div class="kpi-grid">
+        <div class="kpi-card k-blue"><div class="kpi-val">16</div><div class="kpi-lbl">Gap总数</div></div>
+        <div class="kpi-card k-green"><div class="kpi-val">1</div><div class="kpi-lbl">完全满足</div></div>
+        <div class="kpi-card k-orange"><div class="kpi-val">7</div><div class="kpi-lbl">部分满足</div></div>
+        <div class="kpi-card k-red"><div class="kpi-val">8</div><div class="kpi-lbl">未满足</div></div>
+        <div class="kpi-card k-gold"><div class="kpi-val">6.2%</div><div class="kpi-lbl">合规率</div></div>
+    </div>
+
+    <div class="alert alert-urgent">
+        <span class="alert-icon">▲</span>
+        <div><strong>6项高风险Gap需紧急整改：</strong>G-001(存管机构称谓未更新)、G-002(双存管并行机制缺失)、G-003(信息披露渠道未对接)、G-009(资金清算路径单一)、G-010(登记托管流程未适配)、G-013(合规衔接倒排计划空白)</div>
+    </div>
+
+    <div class="tbl-wrap">
+    <table>
+        <thead><tr><th style="width:70px;">ID</th><th>领域</th><th style="width:90px;">外规条款</th><th>外规要求（摘要）</th><th style="width:90px;">满足度</th><th style="width:70px;">风险</th><th>整改建议</th></tr></thead>
+        <tbody>
+            <tr><td>G-001</td><td>登记托管制度</td><td>第1条(四)</td><td>存管机构称谓统一为"债券中央存管机构"</td><td><span class="badge badge-r">未满足</span></td><td><span class="badge badge-r">高</span></td><td>修订docA第3条；更新业务合同模板</td></tr>
+            <tr><td>G-002</td><td>登记托管制度</td><td>第1条(五)</td><td>双存管机构数据互认与信息共享</td><td><span class="badge badge-r">未满足</span></td><td><span class="badge badge-r">高</span></td><td>制定《双存管机构并行运行操作规程》</td></tr>
+            <tr><td>G-003</td><td>信息报送与披露</td><td>第1条(六)</td><td>通过存管机构统一平台进行信息报送与披露</td><td><span class="badge badge-o">部分满足</span></td><td><span class="badge badge-r">高</span></td><td>修订docC第2/5条；对接统一信息平台</td></tr>
+            <tr><td>G-004</td><td>风险管理</td><td>第3条(四)</td><td>存管机构风险管理与业务连续性</td><td><span class="badge badge-o">部分满足</span></td><td><span class="badge badge-o">中</span></td><td>新增存管机构风险评估条款</td></tr>
+            <tr><td>G-005</td><td>定期报告</td><td>第3条(五)</td><td>存管机构按月报送业务运行报告</td><td><span class="badge badge-o">部分满足</span></td><td><span class="badge badge-o">中</span></td><td>新增运营数据交叉比对机制</td></tr>
+            <tr><td>G-006</td><td>信息安全</td><td>第3条(六)</td><td>托管数据分类分级保护</td><td><span class="badge badge-o">部分满足</span></td><td><span class="badge badge-o">中</span></td><td>建立三级数据分类分级保护体系</td></tr>
+            <tr><td>G-007</td><td>发行流程简化</td><td>第1条(一)</td><td>删除已废止的申请材料</td><td><span class="badge badge-r">未满足</span></td><td><span class="badge badge-o">中</span></td><td>修订docB第3条删除废止材料要求</td></tr>
+            <tr><td>G-008</td><td>信息披露优化</td><td>第1条(二)</td><td>删除发行后10日报告条款</td><td><span class="badge badge-r">未满足</span></td><td><span class="badge badge-o">中</span></td><td>修订docC第6条调整为事中事后监测</td></tr>
+            <tr><td>G-009</td><td>资金清算</td><td>第1条(三)</td><td>统一资金清算路径（双通道）</td><td><span class="badge badge-r">未满足</span></td><td><span class="badge badge-r">高</span></td><td>紧急修订docB第12条清算路径</td></tr>
+            <tr><td>G-010</td><td>登记托管流程</td><td>第2条(二)</td><td>上清所通道登记托管+数据三重校验</td><td><span class="badge badge-r">未满足</span></td><td><span class="badge badge-r">高</span></td><td>修订docA第10-11条纳入双通道</td></tr>
+            <tr><td>G-011</td><td>数据治理</td><td>第1条(六)</td><td>信息披露审核时效</td><td><span class="badge badge-o">部分满足</span></td><td><span class="badge badge-g">低</span></td><td>压缩审核时效至3个工作日</td></tr>
+            <tr><td>G-012</td><td>数据治理</td><td>第3条(五)</td><td>报送维度完整性</td><td><span class="badge badge-o">部分满足</span></td><td><span class="badge badge-g">低</span></td><td>新增系统运行状况和风险事件维度</td></tr>
+            <tr><td>G-013</td><td>合规衔接</td><td>全文</td><td>2026-07-01前完成制度修订</td><td><span class="badge badge-r">未满足</span></td><td><span class="badge badge-r">高</span></td><td>成立专项组，制定21天倒排计划</td></tr>
+            <tr><td>G-014</td><td>合同管理</td><td>第2条</td><td>合同模板存管机构条款更新</td><td><span class="badge badge-r">未满足</span></td><td><span class="badge badge-o">中</span></td><td>更新全部合同模板+存量合同补充协议</td></tr>
+            <tr><td>G-015</td><td>系统改造</td><td>第3条(四)</td><td>系统灾备和业务连续性</td><td><span class="badge badge-g">满足</span></td><td><span class="badge badge-g">低</span></td><td>持续执行，每半年灾备演练</td></tr>
+            <tr><td>G-016</td><td>制度统一</td><td>全文</td><td>术语定义统一</td><td><span class="badge badge-o">部分满足</span></td><td><span class="badge badge-g">低</span></td><td>修订docA第1条术语定义</td></tr>
+        </tbody>
+    </table>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:15px;margin:20px 0 14px;letter-spacing:1px;">▌Gap热力图 — 按领域分布</h3>
+    <div class="tbl-wrap">
+    <table>
+        <thead><tr><th>领域</th><th>Gap数</th><th>高风险</th><th>中风险</th><th>低风险</th><th>风险热度</th></tr></thead>
+        <tbody>
+            <tr><td>登记托管制度</td><td>4</td><td>2</td><td>1</td><td>1</td><td style="color:var(--red);font-weight:700;">●●●</td></tr>
+            <tr><td>信息报送与披露</td><td>3</td><td>1</td><td>1</td><td>1</td><td style="color:var(--orange);font-weight:700;">●●○</td></tr>
+            <tr><td>资金清算</td><td>1</td><td>1</td><td>0</td><td>0</td><td style="color:var(--red);font-weight:700;">●●●</td></tr>
+            <tr><td>登记托管流程</td><td>1</td><td>1</td><td>0</td><td>0</td><td style="color:var(--red);font-weight:700;">●●●</td></tr>
+            <tr><td>合规衔接</td><td>1</td><td>1</td><td>0</td><td>0</td><td style="color:var(--red);font-weight:700;">●●●</td></tr>
+            <tr><td>风险管理</td><td>1</td><td>0</td><td>1</td><td>0</td><td style="color:var(--orange);font-weight:700;">●○○</td></tr>
+            <tr><td>信息安全</td><td>1</td><td>0</td><td>1</td><td>0</td><td style="color:var(--orange);font-weight:700;">●○○</td></tr>
+            <tr><td>合同管理</td><td>1</td><td>0</td><td>1</td><td>0</td><td style="color:var(--orange);font-weight:700;">●○○</td></tr>
+            <tr><td>发行流程简化</td><td>1</td><td>0</td><td>1</td><td>0</td><td style="color:var(--orange);font-weight:700;">●○○</td></tr>
+            <tr><td>制度统一</td><td>1</td><td>0</td><td>0</td><td>1</td><td style="color:var(--green);">○○○</td></tr>
+            <tr><td>数据治理</td><td>2</td><td>0</td><td>0</td><td>2</td><td style="color:var(--green);">○○○</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════ STEP 4: 整改落地 ═══════════ -->
+<div class="section" id="step4">
+<div class="section-hd"><span class="dot d4"></span>第四步 · 整改落地 — 四维整改方案与制度起草</div>
+<div class="section-bd">
+    <div class="kpi-grid">
+        <div class="kpi-card k-red"><div class="kpi-val">2</div><div class="kpi-lbl">需新增制度</div></div>
+        <div class="kpi-card k-orange"><div class="kpi-val">14</div><div class="kpi-lbl">制度条款修订</div></div>
+        <div class="kpi-card k-blue"><div class="kpi-val">3</div><div class="kpi-lbl">系统改造项</div></div>
+        <div class="kpi-card k-green"><div class="kpi-val">8</div><div class="kpi-lbl">新增控制点</div></div>
+        <div class="kpi-card k-gold"><div class="kpi-val">21天</div><div class="kpi-lbl">整改窗口</div></div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:15px;margin:20px 0 14px;letter-spacing:1px;">▌紧急整改项（6项高风险）</h3>
+    <div class="tbl-wrap">
+    <table>
+        <thead><tr><th>Gap</th><th>制度</th><th>流程</th><th>系统</th><th>控制点</th></tr></thead>
+        <tbody>
+            <tr>
+                <td style="font-weight:700;">G-001</td>
+                <td>修订docA第3条：替换存管机构名称</td>
+                <td>更新全部涉及登记托管机构名称的业务流程</td>
+                <td>系统字典新增"上清所"选项</td>
+                <td><span class="badge badge-r">C-NEW-001</span> 合同签署前验证存管机构名称</td>
+            </tr>
+            <tr>
+                <td style="font-weight:700;">G-002</td>
+                <td><strong>新增</strong>《双存管机构并行运行操作规程》</td>
+                <td>新建双通道登记托管流程</td>
+                <td>新增上清所接口适配模块</td>
+                <td><span class="badge badge-r">C-NEW-002</span> 双通道数据每日自动比对</td>
+            </tr>
+            <tr>
+                <td style="font-weight:700;">G-003</td>
+                <td>修订docC第2/5条：新增统一平台报送渠道</td>
+                <td>新建双线报送流程</td>
+                <td>对接存管机构统一信息平台API</td>
+                <td><span class="badge badge-r">C-NEW-003</span> 披露前双重确认：平台报送+官网</td>
+            </tr>
+            <tr>
+                <td style="font-weight:700;">G-009</td>
+                <td>修订docB第12条：双通道清算路径</td>
+                <td>新建双通道清算流程</td>
+                <td>资金清算系统新增上清所通道</td>
+                <td><span class="badge badge-r">C-NEW-004</span> 清算前验证路径与合同一致</td>
+            </tr>
+            <tr>
+                <td style="font-weight:700;">G-010</td>
+                <td>修订docA第10-11条：双通道+三重校验</td>
+                <td>新建登记托管数据完整性校验流程</td>
+                <td>新增托管数据校验模块</td>
+                <td><span class="badge badge-r">C-NEW-005</span> 三重校验通过方可确认</td>
+            </tr>
+            <tr>
+                <td style="font-weight:700;">G-013</td>
+                <td>全部制度修订倒排计划</td>
+                <td>新建合规衔接项目管理流程</td>
+                <td>—</td>
+                <td><span class="badge badge-r">C-NEW-006</span> 专项组每日站会+进度看板</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:15px;margin:24px 0 14px;letter-spacing:1px;">▌新增制度草案摘要</h3>
+    <div class="intent-grid">
+        <div class="intent-card" style="border-left:3px solid var(--red);">
+            <div class="ic-lbl">制度一（新增）</div>
+            <div style="font-family:var(--serif);font-size:15px;font-weight:700;margin-bottom:8px;">《双存管机构并行运行操作规程》</div>
+            <div class="ic-text">
+                <strong>制定目的：</strong>规范中债登和上清所双存管机构并行运行机制。<br>
+                <strong>核心条款：</strong>存管机构选择原则 → 数据互认标准 → 信息共享机制 → 一致性校验 → 三级审批流程。<br>
+                <strong>外规依据：</strong>PBOC令〔2026〕第4号 第三条第四款<br>
+                <strong>责任人：</strong>法律合规部起草，运营管理部会签
+            </div>
+        </div>
+        <div class="intent-card" style="border-left:3px solid var(--orange);">
+            <div class="ic-lbl">制度二（新增）</div>
+            <div style="font-family:var(--serif);font-size:15px;font-weight:700;margin-bottom:8px;">《债券登记托管数据分类分级保护办法》</div>
+            <div class="ic-text">
+                <strong>制定目的：</strong>建立托管数据三级分类分级保护体系（核心/重要/一般）。<br>
+                <strong>核心条款：</strong>数据分类标准 → 分级加密/访问控制/审计 → 最小权限原则 → 数据泄露应急响应。<br>
+                <strong>外规依据：</strong>PBOC令〔2026〕第4号 第三条第六款<br>
+                <strong>责任人：</strong>信息科技部起草，风险管理部会签
+            </div>
+        </div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:15px;margin:24px 0 14px;letter-spacing:1px;">▌制度修订条文明细</h3>
+    <div class="tbl-wrap">
+    <table>
+        <thead><tr><th style="width:90px;">制度文件</th><th>条款</th><th style="width:70px;">操作</th><th>核心变更</th></tr></thead>
+        <tbody>
+            <tr><td>docA</td><td>第1条</td><td><span class="badge badge-o">修订</span></td><td>术语定义：明确"债券中央存管机构"指中债登+上清所</td></tr>
+            <tr><td>docA</td><td>第3条</td><td><span class="badge badge-r">替换</span></td><td>"中央国债登记结算有限责任公司" → "债券中央存管机构（中债登/上清所）"</td></tr>
+            <tr><td>docA</td><td>第10条</td><td><span class="badge badge-o">新增</span></td><td>新增上清所登记托管通道及操作流程</td></tr>
+            <tr><td>docA</td><td>第11条</td><td><span class="badge badge-o">强化</span></td><td>形式审核 → 三重校验（完整性/准确性/及时性）</td></tr>
+            <tr><td>docA</td><td>第20条</td><td><span class="badge badge-o">新增</span></td><td>新增存管机构风险管理状态评估条款</td></tr>
+            <tr><td>docA</td><td>第25条</td><td><span class="badge badge-o">升级</span></td><td>单一保护 → 核心/重要/一般三级分类分级保护</td></tr>
+            <tr><td>docB</td><td>第3条</td><td><span class="badge badge-r">删除</span></td><td>删除已废止的信用评级报告/律师意见书申请材料要求</td></tr>
+            <tr><td>docB</td><td>第12条</td><td><span class="badge badge-o">升级</span></td><td>中债登单一通道 → 双通道清算路径（中债登/上清所）</td></tr>
+            <tr><td>docC</td><td>第2条</td><td><span class="badge badge-o">新增</span></td><td>新增存管机构统一信息平台报送渠道</td></tr>
+            <tr><td>docC</td><td>第5条</td><td><span class="badge badge-o">修订</span></td><td>新增双线报送流程（平台+官网并行）</td></tr>
+            <tr><td>docC</td><td>第6条</td><td><span class="badge badge-r">删除</span></td><td>删除已废止的发行后10日报告条款</td></tr>
+            <tr><td>docC</td><td>第8条</td><td><span class="badge badge-o">扩展</span></td><td>报告内容新增系统运行状况和风险事件维度</td></tr>
+            <tr><td>docC</td><td>第9条</td><td><span class="badge badge-o">更新</span></td><td>更新月度报告模板</td></tr>
+            <tr><td>docC</td><td>第12条</td><td><span class="badge badge-o">压缩</span></td><td>审核时效：5个工作日 → 3个工作日</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════ 倒排计划 ═══════════ -->
+<div class="section" id="timeline">
+<div class="section-hd" style="background:linear-gradient(135deg,var(--navy),var(--navy-mid));color:#fff;">
+    21天倒排计划 — 2026年7月1日正式切换
+</div>
+<div class="section-bd">
+    <div class="timeline">
+        <div class="tl-item">
+            <div class="tl-date">D+0 ～ D+2 · 6月10-12日</div>
+            <div class="tl-title">成立专项组 · 制度修订清单确认</div>
+            <div class="tl-desc">托管业务分管行长牵头，法务/风险/运营/信息技术四部门组建合规衔接专项工作组。确认docA/docB/docC制度修订清单和优先级排序。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-date">D+3 ～ D+7 · 6月13-17日</div>
+            <div class="tl-title">核心条款修订 · 新制度起草</div>
+            <div class="tl-desc">docA第3/10/11条（存管机构称谓+双通道+三重校验）修订完成；《双存管机构并行运行操作规程》《债券登记托管数据分类分级保护办法》初稿完成。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-date">D+8 ～ D+10 · 6月18-20日</div>
+            <div class="tl-title">跨部门评审 · 制度会签</div>
+            <div class="tl-desc">风险管理部复审控制点设计；运营管理部验证流程可行性；信息技术部评估系统改造工期。全部制度修订完成跨部门会签。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-date">D+11 ～ D+14 · 6月21-24日</div>
+            <div class="tl-title">系统改造 · 接口开发</div>
+            <div class="tl-desc">系统字典批量更新（存管机构名称）；上清所接口适配模块开发；托管数据校验模块开发；存管机构统一信息平台API对接。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-date">D+15 ～ D+17 · 6月25-27日</div>
+            <div class="tl-title">合同更新 · 存量合同梳理</div>
+            <div class="tl-desc">全部合同模板中存管机构条款更新；存量合同补充协议签署启动。法务优先处理6月30日前到期的产品合同。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-date">D+18 ～ D+19 · 6月28-29日</div>
+            <div class="tl-title">全员培训 · 考试验收</div>
+            <div class="tl-desc">全行债券业务相关人员（交易/运营/合规/风控/IT）参加新规培训，培训内容包括：双存管机构制度、新的清算路径、统一信息平台操作、数据分类分级要求。培训后全员考试，不合格者补考。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-date">D+20 · 6月30日</div>
+            <div class="tl-title">全流程试运行 · 压力测试</div>
+            <div class="tl-desc">选择3-5只存量债券产品进行双通道全流程试运行。验证：双存管机构数据一致性、资金清算双通道可用性、统一信息平台报送成功率、系统灾备切换时间达标。</div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-date" style="color:var(--red);">D+21 · 7月1日</div>
+            <div class="tl-title" style="color:var(--red);">正式切换 · 首日运行监控</div>
+            <div class="tl-desc">所有新发行债券产品按双存管机构制度运行。专项组全天候监控：登记托管成功率、清算完成率、数据一致性、异常事件即时响应。</div>
+        </div>
+    </div>
+</div>
+</div>
+
+</div><!-- .container -->
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+    <p><strong>外规内化全流程分析系统</strong> · PBOC令〔2026〕第4号银行间债券市场制度修订</p>
+    <p>生成时间：2026-06-10 · 分析引擎：@skill:监管识别 + @skill:regulatory-decomposer + @skill:regulation-gap-analysis + @skill:remediation-implementation</p>
+    <p style="margin-top:8px;font-size:10px;color:rgba(255,255,255,.25);">本报告由AI辅助生成，须经法律合规部门审查 — 机密 · 仅供内部使用</p>
+</footer>
+
+</body>
+</html>
