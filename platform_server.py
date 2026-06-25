@@ -11,7 +11,9 @@ import sqlite3
 import subprocess
 import threading
 import time
-from cgi import FieldStorage
+from email.parser import BytesParser
+from email.policy import default as email_policy
+from io import BytesIO
 from datetime import datetime, timedelta, timezone
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -43,6 +45,17 @@ DILIGENCE_ROOT = Path("/Users/hanshuting/Desktop/dtt工作/尽职调查")
 DILIGENCE_SERVER = DILIGENCE_ROOT / "due_diligence_assistant_demo" / "server.py"
 DILIGENCE_PROCESS: subprocess.Popen | None = None
 LLM_LAST_TEST_STATUS: dict[str, Any] = {"status": "not_run"}
+
+
+class FormValue:
+    def __init__(self, value: str) -> None:
+        self.value = value
+
+
+class UploadedFile:
+    def __init__(self, filename: str, content: bytes) -> None:
+        self.filename = filename
+        self.file = BytesIO(content)
 
 REGULATOR_SOURCES = [
     {
@@ -620,6 +633,35 @@ def ensure_diligence_backend() -> None:
     )
 
 
+def parse_multipart_form(handler: SimpleHTTPRequestHandler) -> dict[str, FormValue | UploadedFile]:
+    content_type = handler.headers.get("Content-Type", "")
+    if "multipart/form-data" not in content_type:
+        return {}
+    length = int(handler.headers.get("Content-Length", "0") or "0")
+    body = handler.rfile.read(length) if length else b""
+    message_bytes = (
+        f"Content-Type: {content_type}\r\n"
+        "MIME-Version: 1.0\r\n"
+        "\r\n"
+    ).encode("utf-8") + body
+    message = BytesParser(policy=email_policy).parsebytes(message_bytes)
+    form: dict[str, FormValue | UploadedFile] = {}
+    for part in message.iter_parts():
+        if part.get_content_disposition() != "form-data":
+            continue
+        name = part.get_param("name", header="content-disposition")
+        if not name:
+            continue
+        payload = part.get_payload(decode=True) or b""
+        filename = part.get_filename()
+        if filename is not None:
+            form[name] = UploadedFile(filename, payload)
+            continue
+        charset = part.get_content_charset() or "utf-8"
+        form[name] = FormValue(payload.decode(charset, errors="replace"))
+    return form
+
+
 class PlatformHandler(SimpleHTTPRequestHandler):
     def translate_path(self, path: str) -> str:
         return str(ROOT / unquote(urlparse(path).path).lstrip("/"))
@@ -783,13 +825,9 @@ class PlatformHandler(SimpleHTTPRequestHandler):
         return self.respond_json(result, status=201 if result.get("status") != "failed" else 502)
 
     def handle_regulatory_decomposer_run(self) -> None:
-        form = FieldStorage(
-            fp=self.rfile,
-            headers=self.headers,
-            environ={"REQUEST_METHOD": "POST", "CONTENT_TYPE": self.headers.get("Content-Type", "")},
-        )
+        form = parse_multipart_form(self)
         file_field = form["file"] if "file" in form else None
-        if not isinstance(file_field, FieldStorage):
+        if not isinstance(file_field, UploadedFile):
             return self.respond_json({"error": "Missing file field"}, status=400)
         filename = Path(file_field.filename or "regulation.txt").name
         suffix = Path(filename).suffix.lower()
@@ -829,11 +867,7 @@ class PlatformHandler(SimpleHTTPRequestHandler):
         return self.respond_json(run_data, status=201 if run_data.get("status") != "failed" else 500)
 
     def handle_regulatory_mapping_run(self) -> None:
-        form = FieldStorage(
-            fp=self.rfile,
-            headers=self.headers,
-            environ={"REQUEST_METHOD": "POST", "CONTENT_TYPE": self.headers.get("Content-Type", "")},
-        )
+        form = parse_multipart_form(self)
         task_id = (form["task_id"].value if "task_id" in form else "") or selected_task_id()
         decomposer_run_id = form["decomposer_run_id"].value if "decomposer_run_id" in form else ""
         if not decomposer_run_id:
@@ -841,7 +875,7 @@ class PlatformHandler(SimpleHTTPRequestHandler):
         if not decomposer_run_id:
             return self.respond_json({"error": "缺少上游监管解读运行：请先执行监管解读。"}, status=400)
         file_field = form["file"] if "file" in form else None
-        if not isinstance(file_field, FieldStorage):
+        if not isinstance(file_field, UploadedFile):
             return self.respond_json({"error": "缺少内规制度文件（file 字段）。"}, status=400)
         filename = Path(file_field.filename or "internal-policy.txt").name
         if Path(filename).suffix.lower() not in {".docx", ".txt", ".md"}:
@@ -993,13 +1027,9 @@ class PlatformHandler(SimpleHTTPRequestHandler):
     def handle_upload(self, kind: str) -> None:
         if kind not in {"external", "internal"}:
             return self.respond_json({"error": "Invalid upload kind"}, status=400)
-        form = FieldStorage(
-            fp=self.rfile,
-            headers=self.headers,
-            environ={"REQUEST_METHOD": "POST", "CONTENT_TYPE": self.headers.get("Content-Type", "")},
-        )
+        form = parse_multipart_form(self)
         file_field = form["file"] if "file" in form else None
-        if not isinstance(file_field, FieldStorage):
+        if not isinstance(file_field, UploadedFile):
             return self.respond_json({"error": "Missing file field"}, status=400)
         filename = Path(file_field.filename or "upload.bin").name
         stored_name = f"{int(time.time())}-{hashlib.sha1(filename.encode()).hexdigest()[:8]}-{filename}"
