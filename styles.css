@@ -3837,3 +3837,40 @@ iframe {
 .risk-dot.high { background: var(--red); }
 .risk-dot.medium { background: var(--orange); }
 .risk-dot.low { background: var(--green); }
+
+/* ── 风险监测：托管内控控制点卡片 ─────────────────────────────────── */
+.ctrl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.ctrl-card { border: 1px solid var(--line); border-left-width: 4px; border-radius: var(--radius); padding: 12px 14px; background: var(--panel); }
+.ctrl-card.tone-high { border-left-color: var(--red); }
+.ctrl-card.tone-medium { border-left-color: var(--orange); }
+.ctrl-card.tone-low { border-left-color: var(--green); }
+.ctrl-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.ctrl-card-head strong { font-size: 14px; color: var(--ink); }
+.ctrl-card p { margin: 0 0 8px; font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+.ctrl-card em { font-style: normal; font-size: 11.5px; font-weight: 700; color: var(--muted); }
+
+/* ── 尽调：任务 / 报告 / 知识中心 ─────────────────────────────────── */
+.mgr-task-list { display: grid; gap: 10px; }
+.mgr-task { display: grid; grid-template-columns: 8px 1fr auto; gap: 12px; align-items: start; border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; background: var(--panel); }
+.mgr-task .task-rail { width: 8px; height: 100%; border-radius: 999px; }
+.mgr-task .task-rail.tone-high { background: var(--red); }
+.mgr-task .task-rail.tone-medium { background: var(--orange); }
+.mgr-task .task-rail.tone-low { background: var(--green); }
+.mgr-task-body strong { display: block; font-size: 13.5px; color: var(--ink); }
+.mgr-task-body span { font-size: 12px; color: var(--muted); }
+.mgr-task-meta { text-align: right; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.mgr-report-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.mgr-report-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; background: var(--panel); display: flex; flex-direction: column; gap: 8px; }
+.mgr-report-card h4 { margin: 0; font-size: 14px; color: var(--ink); }
+.mgr-report-card ol { margin: 4px 0 0; padding-left: 18px; }
+.mgr-report-card li { font-size: 12px; color: var(--muted); line-height: 1.7; }
+.mgr-report-actions { display: flex; gap: 8px; margin-top: auto; }
+.mgr-report-actions button { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 5px 12px; font-size: 12px; cursor: pointer; }
+.mgr-report-actions button.primary { border-color: var(--blue); color: var(--blue); }
+.mgr-know-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.mgr-know-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; background: #fbfcfe; }
+.mgr-know-card h4 { margin: 0 0 8px; font-size: 13.5px; color: var(--ink); }
+.mgr-know-card ul { margin: 0; padding-left: 16px; }
+.mgr-know-card li { font-size: 12.5px; color: var(--muted); line-height: 1.8; }
+.mgr-checklist { display: grid; gap: 6px; }
+.mgr-checklist label { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--ink); }

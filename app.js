@@ -19,7 +19,7 @@ const pages = {
   },
   monitoring: {
     title: "风险监测",
-    subtitle: "当前保留框架占位；规则库、预警中心和处置台账后续接入。",
+    subtitle: "基于托管业务日常运营全流程的内控控制目标库，按控制点持续监测运行状态。",
     breadcrumb: "首页总览 / 风险监测",
     kicker: "风险监测",
   },
@@ -616,6 +616,40 @@ const CUSTODY_ADMITTANCE_DD = {
       { label: "其他", value: 1 },
     ],
   },
+  // 洞察任务（“洞察任务”Tab）：围绕该管理人的尽调任务
+  tasks: [
+    { id: "T-01", title: "管理人准入尽调（首次）", object: "示例私募证券投资基金管理有限公司", owner: "托管业务部", status: "已完成", level: "低", date: "2026-05-20" },
+    { id: "T-02", title: "存续期年度尽调回顾", object: "管理人 + 23 只在管产品", owner: "托管业务部", status: "进行中", level: "中", date: "2026-06-30 截止" },
+    { id: "T-03", title: "关联方穿透核查", object: "股东方 / 关联私募机构", owner: "法律合规部", status: "待处理", level: "高", date: "2026-06-28 截止" },
+    { id: "T-04", title: "净值异常核查（示例进取 2 号）", object: "示例进取 2 号", owner: "运营核算部", status: "进行中", level: "中", date: "2026-06-20 截止" },
+    { id: "T-05", title: "反洗钱与客户身份识别复核", object: "管理人账户开立", owner: "法律合规部", status: "待复核", level: "中", date: "2026-06-25" },
+    { id: "T-06", title: "年度现场尽调", object: "管理人办公场所 / 投研团队", owner: "托管业务部", status: "待处理", level: "低", date: "2026-09 计划" },
+  ],
+  // 尽调报告（“尽调报告”Tab）
+  reports: [
+    { name: "管理人准入尽调报告", status: "已生成", sections: ["机构概况与股东背景", "六维准入评估", "合规与诚信核查", "准入结论与附加条件"] },
+    { name: "存续期尽调报告", status: "草稿", sections: ["规模与产品线变化", "存续期风险事件", "合规与监管跟踪", "持续准入结论"] },
+    { name: "关联方穿透专项报告", status: "待生成", sections: ["股权穿透图谱", "关联私募机构", "关联交易与定价", "利益冲突防控"] },
+  ],
+  // 知识中心（“知识中心”Tab）
+  knowledge: {
+    categories: [
+      { title: "私募监管规则", items: ["私募投资基金监督管理条例", "私募投资基金登记备案办法", "私募证券投资基金运作指引"] },
+      { title: "中基协自律规则", items: ["私募基金管理人登记须知", "登记备案相关问题解答", "异常经营 / 失联机构公示机制"] },
+      { title: "托管准入标准", items: ["管理人准入尽调标准", "产品准入审核要点", "投资者适当性管理要求"] },
+      { title: "尽调清单模板", items: ["管理人准入尽调清单", "关联方穿透核查清单", "存续期尽调要点清单"] },
+    ],
+    checklist: [
+      "营业执照与统一社会信用代码核验",
+      "中基协登记状态（正常 / 异常 / 失联）核验",
+      "实控人、股东结构与关联方穿透",
+      "合规风控负责人与制度体系",
+      "在管产品托管与估值外包安排",
+      "代表产品历史业绩与最大回撤",
+      "诉讼仲裁、行政处罚与自律处分核查",
+      "舆情与负面信息扫描",
+    ],
+  },
 };
 
 function admittanceBandTone(band) {
@@ -623,6 +657,98 @@ function admittanceBandTone(band) {
   if (band === "良好") return "ok";
   if (band === "关注") return "watch";
   return "weak";
+}
+
+// ── 风险监测：托管业务日常运营流程 × 内控控制目标库（27 个控制目标 / 20 个流程）──
+// 来源为托管内控控制目标清单；status 为演示监测状态（正常/关注/预警），与外规内化叙事呼应。
+const CUSTODY_CONTROL_OBJECTIVES = [
+  { flow: "组织与管理", category: "运营控制", status: "正常", objCount: 1, cp: "控制目标1：控制措施可合理保证托管业务得到有效监督和管理，以及不相容职责分离。" },
+  { flow: "合作机构管理", category: "运营控制", status: "关注", objCount: 1, cp: "控制目标2：控制措施可合理保证对合作机构风险信号进行及时跟踪识别，合作风险充分披露。" },
+  { flow: "产品准入", category: "运营控制", status: "正常", objCount: 1, cp: "控制目标3：控制措施可合理保证按规定对托管产品准入进行填报、审核和审批。" },
+  { flow: "合同管理", category: "运营控制", status: "正常", objCount: 1, cp: "控制目标4：控制措施可合理保证托管业务合同经过各职能岗位审核，托管协议签订前得到适当授权，规范托管业务的工作。" },
+  { flow: "账户服务", category: "运营控制", status: "正常", objCount: 1, cp: "控制目标5：控制措施可合理保证开立和管理账户符合托管协议和适用法规要求，并且账户管理的关键信息被准确、及时地传递给委托人或管理人。" },
+  { flow: "产品建账与参数设置", category: "运营控制", status: "正常", objCount: 1, cp: "控制目标6：控制措施可合理保证所接收的托管资产被准确、完整和及时地记录。" },
+  { flow: "场内清算", category: "运营控制", status: "正常", objCount: 1, cp: "控制目标7：控制措施可合理保证场内清算被准确、及时地执行和记录。" },
+  { flow: "场外清算", category: "运营控制", status: "正常", objCount: 1, cp: "控制目标8：控制措施可合理保证场外清算经过授权且被准确、及时地执行和记录。" },
+  { flow: "会计估值与核算", category: "运营控制", status: "关注", objCount: 6, cp: "控制目标9-14：合理保证投资收入、相关费用、公司行为、资产估值、账务核对与会计资料保管的准确、完整、及时与安全。" },
+  { flow: "投资监督", category: "运营控制", status: "关注", objCount: 1, cp: "控制目标15：控制措施可合理保证托管人根据法律法规、相关合同或投资指引，建立并维护对资产管理人的投资运作监督事项，并及时监控资产管理人的投资运作。" },
+  { flow: "重要物品保管", category: "运营控制", status: "正常", objCount: 2, cp: "控制目标16-17：合理保证实物资产的妥善保管（防止丢失、盗用、未经授权使用）并被定期核对。" },
+  { flow: "信息披露", category: "运营控制", status: "关注", objCount: 2, cp: "控制目标18-19：合理保证对管理人出具的信息披露内容进行复核确认并按时提供，且向监管机构准确、及时提交托管报告并经审核授权。" },
+  { flow: "业务档案管理", category: "运营控制", status: "正常", objCount: 1, cp: "控制目标20：控制措施可合理保证业务档案及时进行有效移交保管，业务档案文件得到保密和安全保管。" },
+  { flow: "系统开发及变更管理", category: "信息系统控制", status: "正常", objCount: 1, cp: "控制目标21：控制措施可合理保证对现有托管系统、应用程序和软件的修改经授权、测试和实施。" },
+  { flow: "权限管理", category: "信息系统控制", status: "正常", objCount: 1, cp: "控制目标22：控制措施可合理保证对托管系统、程序、数据和参数的逻辑访问仅限于经授权的人员。" },
+  { flow: "系统检查", category: "信息系统控制", status: "正常", objCount: 1, cp: "控制目标23：控制措施可合理保证定期开展托管系统检查，系统运行顺畅。" },
+  { flow: "物理安全", category: "信息系统控制", status: "正常", objCount: 1, cp: "控制目标24：控制措施可合理保证已对机房实施环境控制措施及物理访问安全措施。" },
+  { flow: "网络与数据传输安全", category: "信息系统控制", status: "预警", objCount: 1, cp: "控制目标25：控制措施可合理保证在服务机构与其对应数据交换方之间的数据传输安全。" },
+  { flow: "备份与应急管理", category: "信息系统控制", status: "正常", objCount: 1, cp: "控制目标26：控制措施可合理保证定期地备份系统和数据，且存在处理中断恢复程序。" },
+  { flow: "软件与硬件管理", category: "信息系统控制", status: "正常", objCount: 1, cp: "控制目标27：控制措施可合理保证信息技术硬件和软件问题得到监控并及时解决。" },
+];
+
+function monitorStatusTone(status) {
+  if (status === "预警") return "high";
+  if (status === "关注") return "medium";
+  return "low";
+}
+
+function renderMonitoring() {
+  const panel = document.getElementById("monitoring-panel");
+  if (!panel) return;
+  const items = CUSTODY_CONTROL_OBJECTIVES;
+  const totalObj = items.reduce((s, x) => s + x.objCount, 0);
+  const byStatus = (st) => items.filter((x) => x.status === st).length;
+  const normal = byStatus("正常");
+  const watch = byStatus("关注");
+  const warn = byStatus("预警");
+  const kpis = [
+    ["监测流程", items.length],
+    ["控制目标", totalObj],
+    ["运行正常", normal],
+    ["关注", watch],
+    ["预警", warn],
+  ];
+  const dist = [
+    { label: "正常", count: normal, tone: "low" },
+    { label: "关注", count: watch, tone: "medium" },
+    { label: "预警", count: warn, tone: "high" },
+  ];
+  const distTotal = dist.reduce((s, x) => s + x.count, 0) || 1;
+  const distBar = `
+    <div class="reg-distribution">
+      <div class="reg-distribution-bar">
+        ${dist.map((x) => `<span class="tone-${x.tone}" style="width:${Math.max(4, x.count / distTotal * 100).toFixed(1)}%"></span>`).join("")}
+      </div>
+      <div class="reg-distribution-legend">
+        ${dist.map((x) => `<span><i class="tone-${x.tone}"></i>${escapeHtml(x.label)} ${x.count}</span>`).join("")}
+      </div>
+    </div>
+  `;
+  const categories = ["运营控制", "信息系统控制"];
+  const card = (it) => `
+    <article class="ctrl-card tone-${monitorStatusTone(it.status)}">
+      <div class="ctrl-card-head">
+        <strong>${escapeHtml(it.flow)}</strong>
+        <span class="status-badge ${it.status === "正常" ? "done" : "pending"}">${escapeHtml(it.status)}</span>
+      </div>
+      <p>${escapeHtml(it.cp)}</p>
+      <em>${it.objCount} 个控制目标</em>
+    </article>
+  `;
+  panel.innerHTML = `
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">风险监测 · 托管内控控制台</span><h3>托管业务运营控制点监测</h3><p>覆盖托管日常运营全流程的内控控制目标库，按控制点持续监测运行状态。</p></div><span class="status-badge ${warn ? "pending" : "done"}">${warn ? `${warn} 项预警` : "运行平稳"}</span></div>
+      <div class="adm-kpis">${kpis.map(([l, v]) => `<div><span>${escapeHtml(l)}</span><strong>${v}</strong></div>`).join("")}</div>
+      <div style="margin-top:14px">${distBar}</div>
+    </section>
+    ${categories.map((cat) => {
+      const group = items.filter((x) => x.category === cat);
+      return `
+        <section class="section-card">
+          <div class="section-title-row"><div><span class="mini-label">${escapeHtml(cat)}</span><h3>${escapeHtml(cat)}控制点（${group.length}）</h3></div></div>
+          <div class="ctrl-grid">${group.map(card).join("")}</div>
+        </section>
+      `;
+    }).join("")}
+  `;
 }
 
 const diligenceState = {
@@ -1092,17 +1218,11 @@ function renderDiligence() {
     home: renderManagerOverview, // 尽调总览（风险雷达 + 三层分类 + 产品组合 + 区域分布）
     profile: renderManagerProfile, // 管理人画像
     alerts: renderManagerMonitoring, // 动态风险监测
+    tasks: renderManagerTasks, // 洞察任务
+    reports: renderManagerReports, // 尽调报告
+    knowledge: renderManagerKnowledge, // 知识中心
   };
-  const placeholderLabels = {
-    tasks: "洞察任务",
-    reports: "尽调报告",
-    knowledge: "知识中心",
-  };
-  if (renderers[diligenceState.activeTab]) {
-    panel.innerHTML = renderers[diligenceState.activeTab]();
-  } else {
-    panel.innerHTML = renderManagerPlaceholder(placeholderLabels[diligenceState.activeTab] || "该模块");
-  }
+  panel.innerHTML = (renderers[diligenceState.activeTab] || renderManagerOverview)();
 }
 
 function renderManagerBars(items, unit = "") {
@@ -1264,6 +1384,90 @@ function renderManagerMonitoring() {
           </article>
         `).join("")}
       </div>
+    </section>
+  `;
+}
+
+function renderManagerTasks() {
+  const d = CUSTODY_ADMITTANCE_DD;
+  const tasks = d.tasks;
+  const levelTone = (lv) => (lv === "高" ? "high" : lv === "中" ? "medium" : "low");
+  const statuses = ["待处理", "进行中", "待复核", "已完成"];
+  const dist = statuses.map((s) => ({ label: s, count: tasks.filter((t) => t.status === s).length }));
+  const distTotal = tasks.length || 1;
+  const statusTone = { 待处理: "high", 进行中: "medium", 待复核: "medium", 已完成: "low" };
+  return `
+    <div class="showcase-notice"><span>${escapeHtml(d.badge)}</span><strong>洞察任务 · 围绕同一私募管理人的尽调任务编排（演示样本）。</strong></div>
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">洞察任务 · 状态分布</span><h3>${escapeHtml(d.manager.name)} · 尽调任务</h3></div><span class="status-badge pending">${tasks.filter((t) => t.status !== "已完成").length} 项进行中/待办</span></div>
+      <div class="reg-distribution">
+        <div class="reg-distribution-bar">${dist.map((x) => `<span class="tone-${statusTone[x.label]}" style="width:${Math.max(4, x.count / distTotal * 100).toFixed(1)}%"></span>`).join("")}</div>
+        <div class="reg-distribution-legend">${dist.map((x) => `<span><i class="tone-${statusTone[x.label]}"></i>${escapeHtml(x.label)} ${x.count}</span>`).join("")}</div>
+      </div>
+    </section>
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">任务清单</span><h3>尽调任务时间轴</h3></div></div>
+      <div class="mgr-task-list">
+        ${tasks.map((t) => `
+          <div class="mgr-task">
+            <span class="task-rail tone-${levelTone(t.level)}"></span>
+            <div class="mgr-task-body">
+              <strong>${escapeHtml(t.id)} ${escapeHtml(t.title)}</strong>
+              <span>对象：${escapeHtml(t.object)}｜牵头：${escapeHtml(t.owner)}</span>
+            </div>
+            <div class="mgr-task-meta"><span class="status-badge ${t.status === "已完成" ? "done" : "pending"}">${escapeHtml(t.status)}</span><br>${escapeHtml(t.date)}</div>
+          </div>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderManagerReports() {
+  const d = CUSTODY_ADMITTANCE_DD;
+  return `
+    <div class="showcase-notice"><span>${escapeHtml(d.badge)}</span><strong>尽调报告 · 围绕同一私募管理人的报告产出（演示样本，预览为占位）。</strong></div>
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">尽调报告</span><h3>${escapeHtml(d.manager.name)} · 报告</h3></div></div>
+      <div class="mgr-report-grid">
+        ${d.reports.map((r) => `
+          <article class="mgr-report-card">
+            <div class="section-title-row" style="margin:0"><h4>${escapeHtml(r.name)}</h4><span class="status-badge ${r.status === "已生成" ? "done" : "pending"}">${escapeHtml(r.status)}</span></div>
+            <div><span class="mini-label">章节大纲</span><ol>${r.sections.map((s) => `<li>${escapeHtml(s)}</li>`).join("")}</ol></div>
+            <div class="mgr-report-actions">
+              <button type="button" class="primary" data-bridge-action="noop">${r.status === "已生成" ? "预览报告" : "生成报告"}</button>
+              <button type="button" data-bridge-action="noop">下载</button>
+            </div>
+          </article>
+        `).join("")}
+      </div>
+      <div class="empty-state small">报告生成 / 预览为演示占位；正式版将基于准入尽调、画像与监测结果自动成稿。</div>
+    </section>
+  `;
+}
+
+function renderManagerKnowledge() {
+  const d = CUSTODY_ADMITTANCE_DD;
+  const k = d.knowledge;
+  return `
+    <div class="showcase-notice"><span>${escapeHtml(d.badge)}</span><strong>知识中心 · 私募基金管理人尽调与托管准入知识库（演示样本）。</strong></div>
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">知识中心</span><h3>私募 / 托管准入知识库</h3></div></div>
+      <div class="mgr-know-grid">
+        ${k.categories.map((c) => `
+          <article class="mgr-know-card">
+            <h4>${escapeHtml(c.title)}</h4>
+            <ul>${c.items.map((i) => `<li>${escapeHtml(i)}</li>`).join("")}</ul>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">尽调清单模板</span><h3>管理人准入尽调清单（${k.checklist.length} 项）</h3></div></div>
+      <div class="mgr-checklist">
+        ${k.checklist.map((c) => `<label><input type="checkbox" disabled> ${escapeHtml(c)}</label>`).join("")}
+      </div>
+      <div class="empty-state small">清单为演示模板，正式版可勾选、留痕并关联尽调任务与报告。</div>
     </section>
   `;
 }
@@ -2678,6 +2882,9 @@ function applyRoute(options = {}) {
   }
   if (routeState.viewId === "diligence") {
     loadDiligence();
+  }
+  if (routeState.viewId === "monitoring") {
+    renderMonitoring();
   }
   if (options.scroll !== false) {
     document.getElementById("main-workspace")?.scrollTo({ top: 0, behavior: "auto" });
@@ -4739,6 +4946,8 @@ document.addEventListener("click", (event) => {
       navigateTo("/diligence");
       const short = concern.length > 40 ? `${concern.slice(0, 40)}…` : concern;
       showToast(short ? `已进入尽职调查：建议对相关交易对手/发行人发起尽调，重点关注「${short}」` : "已进入尽职调查模块。");
+    } else if (bridgeTarget.dataset.bridgeAction === "noop") {
+      showToast("演示样本：报告生成 / 下载为占位操作。");
     }
     return;
   }
