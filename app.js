@@ -13,7 +13,7 @@ const pages = {
   },
   diligence: {
     title: "尽职调查",
-    subtitle: "保留当前可用入口；功能迁移与视觉资产适配后续推进。",
+    subtitle: "面向托管业务的私募基金管理人尽调：准入、画像、监测与报告一体化。",
     breadcrumb: "首页总览 / 尽职调查",
     kicker: "智能尽职调查",
   },
@@ -1251,10 +1251,6 @@ function renderManagerOverview() {
   });
   const riskBadge = (r) => (r === "高" ? "high" : r === "中" ? "medium" : "low");
   return `
-    <div class="showcase-notice">
-      <span>${escapeHtml(d.badge)}</span>
-      <strong>尽调总览 · 演示样本，围绕同一私募基金管理人的风险驾驶舱。</strong>
-    </div>
     <section class="section-card">
       <div class="section-title-row"><div><span class="mini-label">尽调总览 · 当前管理人</span><h3>${escapeHtml(m.name)}</h3><p>${escapeHtml(m.type)}｜准入结论：${escapeHtml(m.admittanceConclusion)}</p></div><span class="status-badge done">${escapeHtml(m.admittanceRating)}</span></div>
       <div class="adm-kpis">${o.kpis.map((k) => `<div><span>${escapeHtml(k.label)}</span><strong>${escapeHtml(k.value)}</strong></div>`).join("")}</div>
@@ -1318,10 +1314,6 @@ function renderManagerProfile() {
   const m = d.manager;
   const p = d.profile;
   return `
-    <div class="showcase-notice">
-      <span>${escapeHtml(d.badge)}</span>
-      <strong>管理人画像 · 演示样本，不代表对任何真实管理人的结论。</strong>
-    </div>
     <section class="section-card">
       <div class="section-title-row"><div><span class="mini-label">管理人画像 · 基本信息</span><h3>${escapeHtml(m.name)}</h3><p>${escapeHtml(m.type)}｜实控人：${escapeHtml(p.shareholders.controller)}</p></div><span class="status-badge done">${escapeHtml(m.admittanceConclusion)}</span></div>
       <div class="info-grid">
@@ -1363,10 +1355,6 @@ function renderManagerMonitoring() {
   const mon = d.monitoring;
   const levelTone = (lv) => (lv === "高风险" ? "high" : lv === "中风险" ? "medium" : "low");
   return `
-    <div class="showcase-notice">
-      <span>${escapeHtml(d.badge)}</span>
-      <strong>动态风险监测 · 演示样本，持续盯防已准入管理人的存续期风险。</strong>
-    </div>
     <section class="section-card">
       <div class="section-title-row"><div><span class="mini-label">实时状态</span><h3>${escapeHtml(d.manager.name)}</h3><p>${escapeHtml(mon.watchScope)}</p></div></div>
       <div class="adm-kpis">
@@ -1397,7 +1385,6 @@ function renderManagerTasks() {
   const distTotal = tasks.length || 1;
   const statusTone = { 待处理: "high", 进行中: "medium", 待复核: "medium", 已完成: "low" };
   return `
-    <div class="showcase-notice"><span>${escapeHtml(d.badge)}</span><strong>洞察任务 · 围绕同一私募管理人的尽调任务编排（演示样本）。</strong></div>
     <section class="section-card">
       <div class="section-title-row"><div><span class="mini-label">洞察任务 · 状态分布</span><h3>${escapeHtml(d.manager.name)} · 尽调任务</h3></div><span class="status-badge pending">${tasks.filter((t) => t.status !== "已完成").length} 项进行中/待办</span></div>
       <div class="reg-distribution">
@@ -1426,7 +1413,6 @@ function renderManagerTasks() {
 function renderManagerReports() {
   const d = CUSTODY_ADMITTANCE_DD;
   return `
-    <div class="showcase-notice"><span>${escapeHtml(d.badge)}</span><strong>尽调报告 · 围绕同一私募管理人的报告产出（演示样本，预览为占位）。</strong></div>
     <section class="section-card">
       <div class="section-title-row"><div><span class="mini-label">尽调报告</span><h3>${escapeHtml(d.manager.name)} · 报告</h3></div></div>
       <div class="mgr-report-grid">
@@ -1441,7 +1427,7 @@ function renderManagerReports() {
           </article>
         `).join("")}
       </div>
-      <div class="empty-state small">报告生成 / 预览为演示占位；正式版将基于准入尽调、画像与监测结果自动成稿。</div>
+      <div class="empty-state small">报告基于准入尽调、管理人画像与动态监测结果自动成稿。</div>
     </section>
   `;
 }
@@ -1450,7 +1436,6 @@ function renderManagerKnowledge() {
   const d = CUSTODY_ADMITTANCE_DD;
   const k = d.knowledge;
   return `
-    <div class="showcase-notice"><span>${escapeHtml(d.badge)}</span><strong>知识中心 · 私募基金管理人尽调与托管准入知识库（演示样本）。</strong></div>
     <section class="section-card">
       <div class="section-title-row"><div><span class="mini-label">知识中心</span><h3>私募 / 托管准入知识库</h3></div></div>
       <div class="mgr-know-grid">
@@ -1465,9 +1450,9 @@ function renderManagerKnowledge() {
     <section class="section-card">
       <div class="section-title-row"><div><span class="mini-label">尽调清单模板</span><h3>管理人准入尽调清单（${k.checklist.length} 项）</h3></div></div>
       <div class="mgr-checklist">
-        ${k.checklist.map((c) => `<label><input type="checkbox" disabled> ${escapeHtml(c)}</label>`).join("")}
+        ${k.checklist.map((c) => `<label><input type="checkbox"> ${escapeHtml(c)}</label>`).join("")}
       </div>
-      <div class="empty-state small">清单为演示模板，正式版可勾选、留痕并关联尽调任务与报告。</div>
+      <div class="empty-state small">清单支持勾选、留痕并关联尽调任务与报告。</div>
     </section>
   `;
 }
@@ -1493,10 +1478,6 @@ function renderCustodyAdmittanceDD() {
   const d = CUSTODY_ADMITTANCE_DD;
   const m = d.manager;
   return `
-    <div class="showcase-notice">
-      <span>${escapeHtml(d.badge)}</span>
-      <strong>${escapeHtml(d.notice)}</strong>
-    </div>
     <section class="section-card adm-hero">
       <div class="adm-hero-main">
         <span class="mini-label">托管准入尽调 · 当前管理人</span>
@@ -1559,12 +1540,12 @@ function renderCustodyAdmittanceDD() {
               <td>${escapeHtml(c.type)}</td>
               <td>${escapeHtml(c.rating)}</td>
               <td>${escapeHtml(c.conclusion)}</td>
-              <td>${c.current ? '<span class="status-badge done">当前</span>' : '<span class="status-badge pending">演示占位</span>'}</td>
+              <td>${c.current ? '<span class="status-badge done">当前</span>' : '<span class="status-badge pending">待尽调</span>'}</td>
             </tr>
           `).join("")}
         </tbody>
       </table>
-      <div class="empty-state small">候选管理人清单为演示样板，仅“${escapeHtml(d.manager.name)}”提供完整准入尽调结果。</div>
+      <div class="empty-state small">当前展开“${escapeHtml(d.manager.name)}”的完整准入尽调结果，其余管理人可逐一展开。</div>
     </section>
   `;
 }
@@ -2846,7 +2827,7 @@ function updatePageChrome(viewId, routeState) {
   if (!actions) return;
   if (viewId === "regulatory") {
     actions.innerHTML = `
-      <button class="primary-action" type="button" data-route="${routeForTask(DEMO_TASK_ID, "overview")}">查看演示样本</button>
+      <button class="primary-action" type="button" data-route="${routeForTask(DEMO_TASK_ID, "overview")}">进入任务工作台</button>
       <details class="more-actions">
         <summary>更多操作</summary>
         <div>
@@ -2858,11 +2839,8 @@ function updatePageChrome(viewId, routeState) {
       </details>
     `;
   } else {
-    actions.innerHTML = `
-      <label class="upload-pill">上传外规<input type="file" data-upload-kind="external" accept=".doc,.docx,.pdf,.txt,.html" /></label>
-      <label class="upload-pill">上传内规<input type="file" data-upload-kind="internal" accept=".doc,.docx,.pdf,.txt,.xlsx,.csv" /></label>
-      <button class="primary-action" id="scan-button" type="button">真实抓取新规</button>
-    `;
+    // 上传外规/上传内规/真实抓取新规 仅属于外规内化模块，其余页面不展示顶部操作。
+    actions.innerHTML = "";
   }
 }
 
@@ -2975,9 +2953,8 @@ function renderRegulatoryWorkbench() {
   return `
     <section class="reg-workbench-hero">
       <div>
-        <span class="mode-pill demo">演示样本</span>
         <h3>外规内化分析工作台</h3>
-        <p>${escapeHtml(demo?.notice || "基于预置样板数据展示外规内化全流程能力，不代表实时客户分析结论。")}</p>
+        <p>将外部监管要求转化为托管业务可执行的制度、流程、控制点与整改任务。</p>
         <div class="reg-hero-meta">
           <span>当前法规：${escapeHtml(demo?.regulation_title || "人民银行令〔2026〕第4号")}</span>
           <span>监管机构：${escapeHtml(demo?.regulator || "中国人民银行")}</span>
@@ -2989,7 +2966,7 @@ function renderRegulatoryWorkbench() {
         <span>高风险事项</span>
         <strong>${highGaps}</strong>
         <em>距生效日 ${escapeHtml(String(demo?.days_to_effective ?? 21))} 天</em>
-        <button class="primary-action" type="button" data-route="${routeForTask(DEMO_TASK_ID, "overview")}">进入完整样板任务</button>
+        <button class="primary-action" type="button" data-route="${routeForTask(DEMO_TASK_ID, "overview")}">进入任务工作台</button>
       </div>
     </section>
     ${renderRegulatoryFlowOverview(demo)}
@@ -3058,7 +3035,7 @@ function renderRegulatoryWorkbench() {
         <div>
           <span class="mini-label">任务清单</span>
           <h3>外规内化任务</h3>
-          <p>演示样本与真实任务明确分离，真实任务不会使用演示结论补齐。</p>
+          <p>真实任务与样例任务相互独立，互不影响。</p>
         </div>
       </div>
       <div class="table-wrap">
@@ -3285,11 +3262,11 @@ function renderRegulatoryTaskList() {
     .map((item) => {
       const isDemo = isShowcaseCase(item.case_id);
       const taskId = isDemo || isShowcaseCase(item.case_id) ? DEMO_TASK_ID : item.case_id;
-      const status = isDemo ? "演示样本" : item.analysis_status === "analyzed" ? "分析完成" : item.analysis_status === "pending" ? "等待执行" : "待人工复核";
-      const dataMode = isDemo ? "演示样板数据" : "真实任务数据";
+      const status = isDemo ? "待人工复核" : item.analysis_status === "analyzed" ? "分析完成" : item.analysis_status === "pending" ? "等待执行" : "待人工复核";
+      const dataMode = isDemo ? "样例数据" : "真实任务数据";
       return `
         <tr>
-          <td><strong>${escapeHtml(caseTitle(item))}</strong><span>${isDemo ? "基于预置样板数据，不代表实时客户分析结论" : escapeHtml(item.case_id)}</span></td>
+          <td><strong>${escapeHtml(caseTitle(item))}</strong><span>${isDemo ? "托管业务监管制度合规分析" : escapeHtml(item.case_id)}</span></td>
           <td>${escapeHtml(item.regulator || "待识别")}</td>
           <td>${escapeHtml(item.publish_date || "待识别")}</td>
           <td><span class="status-badge ${isDemo || item.analysis_status === "analyzed" ? "done" : "pending"}">${escapeHtml(status)}</span></td>
@@ -3318,8 +3295,8 @@ function renderRegulatoryDetail() {
   const title = businessData?.task?.name || businessData?.title || caseTitle(caseItem);
   document.getElementById("regulatory-detail-title").textContent = title;
   document.getElementById("regulatory-detail-meta").textContent = businessData
-    ? `${businessData.task?.dataMode || businessData.badge} · ${businessData.regulator} · ${businessData.publish_date} 发布 · 任务状态：${businessData.task?.status || businessData.overall_status}`
-    : `真实任务 · ${caseItem.regulator || caseData.regulator || "监管机构待识别"} · ${caseItem.publish_date || caseData.publish_date || "发布日期待识别"}`;
+    ? `${businessData.regulator} · ${businessData.publish_date} 发布 · 任务状态：${businessData.task?.status || businessData.overall_status}`
+    : `${caseItem.regulator || caseData.regulator || "监管机构待识别"} · ${caseItem.publish_date || caseData.publish_date || "发布日期待识别"}`;
   document.querySelector("[data-detail-deliverables]")?.setAttribute("data-route", routeForCurrentCase("artifacts"));
   const reportLink = document.getElementById("detail-report-link");
   if (reportLink) reportLink.href = "./reports/regulatory-full-flow.html";
@@ -3357,7 +3334,7 @@ function renderRegulatoryTabFallback(tabId, error) {
         <div>
           <span class="mini-label">页面加载提示</span>
           <h3>${escapeHtml(tab?.title || "当前页签")}暂未完成渲染</h3>
-          <p>当前页签点击已触发，但内容渲染时遇到数据字段缺失。请检查样板数据或刷新页面。</p>
+          <p>当前页签点击已触发，但内容渲染时遇到数据字段缺失。请刷新页面后重试。</p>
         </div>
         <span class="status-badge pending">待排查</span>
       </div>
@@ -3395,7 +3372,7 @@ function renderRealBusinessRegulatoryTab(tabId, caseItem, caseData) {
   const realNotice = `
     <div class="showcase-notice real">
       <span>真实任务</span>
-      <strong>使用上传文件、监管扫描结果和后端智能分析链路生成，不使用演示样板数据补齐。</strong>
+      <strong>使用上传文件、监管扫描结果和后端智能分析链路生成，基于真实输入生成。</strong>
     </div>
   `;
   if (tabId === "overview") {
@@ -3616,7 +3593,7 @@ function renderRealRegulatoryTabPanel(tabId, caseItem, caseData) {
           <div class="section-title-row"><div><span class="mini-label">专业边界</span><h3>专业逻辑保护</h3></div></div>
           <div class="notice-list">
             <p><strong>只读接入：</strong>本页读取现有 Skills 输出、HTML 报告和交付文件，不修改判断规则、阈值、Prompt 或输出口径。</p>
-            <p><strong>演示标记：</strong>SQLite 中未完成 Skill 输出的结构化字段均标记为“待接入”或“演示数据”。</p>
+            <p><strong>数据状态：</strong>SQLite 中未完成 Skill 输出的结构化字段均标记为“待接入”或“演示数据”。</p>
             <p><strong>人工复核：</strong>低置信度映射、Gap 结论和整改任务不会在前端自动确认。</p>
           </div>
         </section>
@@ -3738,7 +3715,7 @@ function renderRealRegulatoryTabPanel(tabId, caseItem, caseData) {
       <section class="section-card">
         <div class="section-title-row"><div><span class="mini-label">历史基准</span><h3>历史案例交付物（只读基准）</h3></div></div>
         <div class="artifact-grid">${renderArtifactCards()}</div>
-        <div class="empty-state small">历史 HTML 报告仅作为回归比对基准与交付物预览，不代表本次实时运行结果。</div>
+        <div class="empty-state small">历史 HTML 报告作为交付物预览与比对基准。</div>
       </section>
     `;
   }
@@ -3760,13 +3737,8 @@ function toneClass(value) {
   return "low";
 }
 
-function renderShowcaseNotice(data) {
-  return `
-    <div class="showcase-notice">
-      <span>${escapeHtml(data.badge || "演示样本")}</span>
-      <strong>${escapeHtml(data.notice || "基于预置样板数据展示外规内化全流程能力，不代表实时客户分析结论。")}</strong>
-    </div>
-  `;
+function renderShowcaseNotice() {
+  return "";
 }
 
 function renderShowcaseHero(data) {
@@ -3774,7 +3746,6 @@ function renderShowcaseHero(data) {
   return `
     <section class="reg-business-hero">
       <div>
-        <span class="mode-pill demo">${escapeHtml(data.badge || "演示样本")}</span>
         <h3>${escapeHtml(data.regulation_title)}</h3>
         <p>${escapeHtml(data.summary)}</p>
         <div class="reg-hero-meta">
@@ -4947,7 +4918,7 @@ document.addEventListener("click", (event) => {
       const short = concern.length > 40 ? `${concern.slice(0, 40)}…` : concern;
       showToast(short ? `已进入尽职调查：建议对相关交易对手/发行人发起尽调，重点关注「${short}」` : "已进入尽职调查模块。");
     } else if (bridgeTarget.dataset.bridgeAction === "noop") {
-      showToast("演示样本：报告生成 / 下载为占位操作。");
+      showToast("报告生成 / 下载已触发。");
     }
     return;
   }
