@@ -3648,3 +3648,173 @@ iframe {
     text-align: left;
   }
 }
+
+/* ── 托管内控控制塔：外规内化 ↔ 尽职调查 桥接（首页 L1）─────────── */
+.control-tower .ct-chain-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+.ct-chain {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fbfcfe;
+  padding: 14px 16px;
+}
+.ct-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.ct-head strong { font-size: 15px; color: var(--ink); }
+.ct-head em { font-style: normal; font-size: 12px; font-weight: 600; }
+.ct-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.ct-stage {
+  flex: 1 1 0;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+.ct-stage > span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.ct-stage strong { font-size: 13.5px; color: var(--ink); line-height: 1.4; }
+.ct-stage p { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.5; }
+.ct-stage.is-exec { border-color: rgba(47, 111, 237, 0.5); background: rgba(47, 111, 237, 0.05); }
+.ct-stage.is-monitor { border-style: dashed; background: transparent; }
+.ct-arrow {
+  align-self: center;
+  font-style: normal;
+  color: var(--muted);
+  font-weight: 700;
+  padding: 0 2px;
+}
+.bridge-link {
+  align-self: flex-start;
+  margin-top: 4px;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  background: var(--panel);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.bridge-link:hover { background: var(--blue); color: #fff; }
+/* 整改落地卡片内的桥接按钮 */
+.reg-remediation-grid article .bridge-link { margin-top: 8px; }
+@media (max-width: 880px) {
+  .ct-arrow { display: none; }
+}
+
+/* ── 托管准入尽调（管理人/基金公司）演示 ─────────────────────────── */
+.adm-hero { display: flex; gap: 24px; justify-content: space-between; flex-wrap: wrap; }
+.adm-hero-main { flex: 1 1 320px; }
+.adm-conclusion { display: flex; align-items: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+.adm-conclusion em { font-style: normal; font-size: 13px; font-weight: 600; color: var(--ink); }
+.adm-conclusion .adm-review { color: var(--orange); }
+.adm-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 10px;
+  align-content: start;
+}
+.adm-kpis > div {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  background: #fbfcfe;
+}
+.adm-kpis span { display: block; font-size: 11.5px; color: var(--muted); margin-bottom: 4px; }
+.adm-kpis strong { font-size: 16px; color: var(--ink); }
+.adm-dim-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.adm-dim-card {
+  border: 1px solid var(--line);
+  border-left-width: 4px;
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  background: var(--panel);
+}
+.adm-dim-card.tone-good { border-left-color: var(--green); }
+.adm-dim-card.tone-ok { border-left-color: var(--blue); }
+.adm-dim-card.tone-watch { border-left-color: var(--orange); }
+.adm-dim-card.tone-weak { border-left-color: var(--red); }
+.adm-dim-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.adm-dim-head strong { font-size: 14px; color: var(--ink); }
+.adm-band { font-size: 12px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+.adm-dim-card.tone-good .adm-band { color: var(--green); }
+.adm-dim-card.tone-ok .adm-band { color: var(--blue); }
+.adm-dim-card.tone-watch .adm-band { color: var(--orange); }
+.adm-dim-card.tone-weak .adm-band { color: var(--red); }
+.adm-dim-summary { margin: 8px 0; font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+.adm-dim-card ul { margin: 0; padding-left: 18px; }
+.adm-dim-card li { font-size: 12.5px; color: var(--ink); line-height: 1.7; }
+.adm-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.adm-pending { margin: 0; padding-left: 18px; }
+.adm-pending li { font-size: 13px; color: var(--ink); line-height: 1.8; }
+.adm-oblig-list { display: grid; gap: 8px; }
+.adm-oblig {
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fbfcfe;
+  padding: 10px 12px;
+  cursor: pointer;
+  display: grid;
+  gap: 2px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.adm-oblig:hover { border-color: var(--blue); background: rgba(47, 111, 237, 0.05); }
+.adm-oblig strong { font-size: 13px; color: var(--ink); }
+.adm-oblig span { font-size: 12px; color: var(--muted); }
+.adm-oblig em { font-style: normal; font-size: 12px; font-weight: 600; color: var(--blue); }
+.adm-candidates tr.is-current { background: rgba(47, 111, 237, 0.05); }
+@media (max-width: 880px) { .adm-two-col { grid-template-columns: 1fr; } }
+
+/* ── 管理人画像 / 动态风险监测 ─────────────────────────────────────── */
+.adm-integrity { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.adm-integrity li { position: relative; padding-left: 24px; font-size: 13px; color: var(--ink); line-height: 1.6; }
+.adm-integrity li::before { position: absolute; left: 0; top: 0; font-weight: 700; }
+.adm-integrity li.is-ok::before { content: "✓"; color: var(--green); }
+.adm-integrity li.is-warn::before { content: "!"; color: var(--orange); }
+.adm-alert-list { display: grid; gap: 10px; margin-top: 4px; }
+.adm-alert {
+  border: 1px solid var(--line);
+  border-left-width: 4px;
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  background: var(--panel);
+}
+.adm-alert.tone-high { border-left-color: var(--red); }
+.adm-alert.tone-medium { border-left-color: var(--orange); }
+.adm-alert.tone-low { border-left-color: var(--blue); }
+.adm-alert-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.adm-alert-head strong { font-size: 13.5px; color: var(--ink); }
+.adm-alert-head span { font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.adm-alert.tone-high .adm-alert-head span { color: var(--red); }
+.adm-alert.tone-medium .adm-alert-head span { color: var(--orange); }
+.adm-alert p { margin: 6px 0; font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+.adm-alert em { font-style: normal; font-size: 12.5px; color: var(--ink); font-weight: 600; }

@@ -369,13 +369,13 @@ const fallbackRegulatoryCase = {
       step_id: "mapping",
       title: "内规映射",
       status: "已完成",
-      summary: "把外规条款逐条映射到邮储银行托管业务内部制度，形成覆盖矩阵。",
+      summary: "把外规条款逐条映射到示例银行托管业务内部制度，形成覆盖矩阵。",
       kpis: ["49条法规", "16份制度", "24%合规"],
       input_files: ["外规义务库", "16份内部制度"],
       outputs: ["逐条对标映射", "覆盖矩阵", "制度清单"],
       report: {
         label: "步骤 3/5",
-        title: "邮储银行托管业务制度合规对标映射报告",
+        title: "示例银行托管业务制度合规对标映射报告",
         url: "./reports/regulatory-mapping.html",
       },
     },
@@ -389,7 +389,7 @@ const fallbackRegulatoryCase = {
       outputs: ["差距清单", "风险分级", "整改路线图"],
       report: {
         label: "步骤 4/5",
-        title: "邮储银行托管业务制度合规差距分析报告",
+        title: "示例银行托管业务制度合规差距分析报告",
         url: "./reports/regulatory-gap.html",
       },
     },
@@ -429,8 +429,158 @@ let regulatoryScannerLastRun = null;
 let regulatoryScannerDiagnostics = [];
 let regulatoryShowcase = null;
 let diligenceLoaded = false;
+
+// ── 私募基金管理人尽调演示样本 ───────────────────────────────────────
+// 平台自有 showcase 数据，不依赖外部尽调后端。整个尽调模块统一围绕“私募基金管理人”：
+// 准入尽调（能不能进）→ 管理人画像（它到底怎么样）→ 动态风险监测（进来后持续盯），
+// 并与“外规内化”的执行型义务（管理人准入、适当性、关联方、反洗钱）形成闭环。
+const CUSTODY_ADMITTANCE_DD = {
+  badge: "演示样本",
+  notice: "基于预置样板数据展示“私募基金管理人准入尽调”能力，不代表对任何真实管理人的尽调结论。",
+  candidates: [
+    { code: "PF-001", name: "示例私募证券投资基金管理有限公司", type: "私募证券投资基金管理人", rating: "正常", conclusion: "准予准入（附条件）", current: true },
+    { code: "PF-002", name: "示例股权投资基金管理有限公司", type: "私募股权投资基金管理人", rating: "正常", conclusion: "关注·待补充材料", current: false },
+    { code: "PF-003", name: "示例量化私募基金管理有限公司", type: "私募证券投资基金管理人", rating: "提示", conclusion: "暂缓准入", current: false },
+  ],
+  manager: {
+    code: "PF-001",
+    name: "示例私募证券投资基金管理有限公司",
+    type: "私募证券投资基金管理人",
+    established: "2016 年",
+    controller: "示例投资控股有限公司（持股 65%）",
+    admittanceConclusion: "准予准入（附条件）",
+    admittanceRating: "BBB · 良好",
+    reviewStatus: "待人工复核",
+    pendingCount: 3,
+  },
+  metrics: [
+    { label: "管理规模 AUM", value: "86 亿元" },
+    { label: "在管私募基金", value: "23 只" },
+    { label: "中基协登记", value: "正常 · 普通会员" },
+    { label: "成立年限", value: "8 年" },
+    { label: "投资经理", value: "12 人" },
+    { label: "准入待复核项", value: "3 项" },
+  ],
+  dimensions: [
+    {
+      id: "governance", name: "公司治理与股东背景", band: "良好", score: 80,
+      summary: "股权与实控人清晰，实缴到位，存在关联私募需穿透。",
+      evidence: ["实控人为示例投资控股，持股 65%，股权结构稳定", "注册资本 1.5 亿元，实缴 1.2 亿元", "存在 1 家关联私募机构，需穿透核查与并表监测"],
+    },
+    {
+      id: "investment", name: "投研与管理能力", band: "良好", score: 83,
+      summary: "规模与产品线稳健，核心团队成熟，代表产品业绩较好。",
+      evidence: ["管理规模 86 亿元，在管私募基金 23 只", "投资经理 12 名，核心团队平均从业 8 年", "代表产品近 3 年年化 12.4%，最大回撤 18%，同类前 1/3"],
+    },
+    {
+      id: "compliance", name: "合规与风控体系", band: "良好", score: 78,
+      summary: "中基协登记正常，合规风控独立，存在 1 项已整改关注。",
+      evidence: ["中基协登记正常、普通会员，登记编号 P1098765", "设合规风控负责人，制度体系完整", "近 3 年无自律处分 / 行政处罚，1 条整改已闭环"],
+    },
+    {
+      id: "operation", name: "运营与估值核算能力", band: "关注", score: 67,
+      summary: "估值与登记已外包、产品全托管，但发生过净值披露延迟。",
+      evidence: ["估值与份额登记外包至第三方，全部产品已托管", "近 1 年发生 1 次净值披露延迟（已补披露）", "信息披露及时率 98.6%"],
+    },
+    {
+      id: "reputation", name: "风险事件与声誉", band: "良好", score: 79,
+      summary: "无失联 / 异常经营，历史风险事件已企稳，舆情整体正面。",
+      evidence: ["中基协无异常经营 / 失联标记", "1 只产品曾净值大幅回撤，目前已企稳", "无重大诉讼仲裁，公开舆情整体正面"],
+    },
+    {
+      id: "related", name: "关联交易与利益冲突", band: "关注", score: 69,
+      summary: "与股东方存在资金往来需穿透，防控机制已建立需持续监测。",
+      evidence: ["与股东方存在资金往来，需穿透核查", "已建从业人员持基报备、公平交易与异常交易（老鼠仓）监控", "关联私募机构需并表口径持续监测"],
+    },
+  ],
+  pending: [
+    "与关联私募机构的穿透核查与并表口径",
+    "1 次净值披露延迟的原因与整改闭环",
+    "代表产品最大回撤 18% 的风控应对与投资者适当性",
+  ],
+  // 与“外规内化”执行型监管义务的对应关系（闭环回链）
+  obligationLinks: [
+    { title: "管理人准入审查", basis: "托管业务管理人准入义务", route: "/foreign-regulation/tasks/pboc-2026-04?tab=rectification" },
+    { title: "产品适当性管理", basis: "适当性管理要求", route: "/foreign-regulation/tasks/pboc-2026-04?tab=interpretation" },
+    { title: "关联方与关联交易管控", basis: "外规内化差距 M09 · 整改 ACT-019", route: "/foreign-regulation/tasks/pboc-2026-04?tab=gap-analysis" },
+    { title: "反洗钱与客户身份识别", basis: "外规内化差距 M13 · 整改 ACT-022", route: "/foreign-regulation/tasks/pboc-2026-04?tab=rectification" },
+  ],
+  // 管理人画像（“管理人画像”Tab）
+  profile: {
+    basics: [
+      ["统一社会信用代码", "9131DEMO0PF0010001"],
+      ["中基协登记编号", "P1098765"],
+      ["登记时间", "2016-03"],
+      ["机构类型", "私募证券投资基金管理人"],
+      ["注册资本 / 实缴", "1.5 亿元 / 1.2 亿元"],
+      ["注册地", "上海市"],
+      ["经营状态", "正常"],
+      ["中基协会员", "普通会员"],
+    ],
+    shareholders: {
+      controller: "示例投资控股有限公司",
+      items: [
+        ["示例投资控股有限公司", "65%"],
+        ["自然人股东 A", "20%"],
+        ["员工持股平台", "15%"],
+      ],
+      note: "存在 1 家关联私募机构（示例股权投资基金管理有限公司），需穿透核查。",
+    },
+    team: [
+      { label: "员工总数", value: "58 人" },
+      { label: "投资经理", value: "12 人" },
+      { label: "核心高管平均从业", value: "11 年" },
+      { label: "近 2 年高管变更", value: "1 人（风控负责人）" },
+    ],
+    scale: [
+      { label: "管理规模 AUM", value: "86 亿元" },
+      { label: "在管私募基金", value: "23 只" },
+      { label: "策略分布", value: "股票多头 70% / 量化对冲 20% / 其他 10%" },
+      { label: "最大单只规模", value: "12 亿元" },
+    ],
+    performance: {
+      product: "示例稳健 1 号",
+      items: [
+        ["近 3 年年化收益", "12.4%"],
+        ["最大回撤", "18%"],
+        ["同类排名", "前 1/3"],
+        ["成立以来", "正收益"],
+      ],
+    },
+    integrity: [
+      { text: "中基协诚信信息正常，无重大失信记录", ok: true },
+      { text: "无行政处罚", ok: true },
+      { text: "近 3 年 1 条自律关注，已整改闭环", ok: true },
+      { text: "非异常经营机构、非失联机构", ok: true },
+    ],
+  },
+  // 动态风险监测（“动态风险监测”Tab）
+  monitoring: {
+    statusBoard: [
+      { label: "中基协公示", value: "正常", tone: "good" },
+      { label: "经营状态", value: "正常", tone: "good" },
+      { label: "失联标记", value: "无", tone: "good" },
+      { label: "异常经营", value: "无", tone: "good" },
+    ],
+    watchScope: "持续监测对象：示例私募证券投资基金管理有限公司 + 23 只在管私募基金。",
+    alerts: [
+      { level: "中风险", date: "2026-06-15", title: "关联交易：与股东方资金往来", desc: "监测到与股东方新增资金往来，需穿透核查交易背景与公允性。", action: "要求提供资金用途说明与审批留痕" },
+      { level: "中风险", date: "2026-06-10", title: "净值预警：示例进取 2 号近 1 月回撤 12%", desc: "单只产品净值短期大幅回撤，需关注持仓集中度与流动性。", action: "关注后续净值与投资者赎回情况" },
+      { level: "低风险", date: "2026-05-28", title: "信息披露：1 只产品净值披露延迟 1 日", desc: "净值披露延迟，已于次日补充披露。", action: "已闭环，纳入运营能力跟踪" },
+      { level: "低风险", date: "2026-04-20", title: "高管变更：风控负责人变更", desc: "风控负责人发生变更，已向中基协更新登记。", action: "已核实，持续关注合规体系稳定性" },
+    ],
+  },
+};
+
+function admittanceBandTone(band) {
+  if (band === "优秀") return "good";
+  if (band === "良好") return "ok";
+  if (band === "关注") return "watch";
+  return "weak";
+}
+
 const diligenceState = {
-  activeTab: "home",
+  activeTab: "custody-admittance",
   companies: [],
   selectedCompanyCode: "COMP-001",
   companyDetail: null,
@@ -867,9 +1017,9 @@ async function loadDiligence(force = false) {
     await loadDiligenceCompany();
     diligenceLoaded = true;
   } catch (error) {
+    // 尽调模块已统一为私募基金管理人 showcase，外部后端不可用不应影响渲染。
     diligenceState.loading = false;
-    const panel = document.getElementById("diligence-panel");
-    if (panel) panel.innerHTML = `<div class="empty-state">尽职调查后端暂不可用：${escapeHtml(error.message)}</div>`;
+    renderDiligence();
   }
 }
 
@@ -887,19 +1037,198 @@ function renderDiligence() {
   document.querySelectorAll("[data-diligence-tab]").forEach((button) => {
     button.classList.toggle("is-active", button.dataset.diligenceTab === diligenceState.activeTab);
   });
-  if (diligenceState.loading) {
-    panel.innerHTML = `<div class="empty-state">正在加载尽职调查数据...</div>`;
-    return;
-  }
+  // 尽调模块已统一为“私募基金管理人尽调”，全部 Tab 由平台自有 showcase / 占位渲染，
+  // 不依赖外部尽调后端，也不再需要面向单个企业的“当前企业”选择器。
+  const companySelect = document.querySelector(".diligence-select");
+  if (companySelect) companySelect.style.display = "none";
   const renderers = {
-    home: renderDiligenceHome,
-    tasks: renderDiligenceTasks,
-    profile: renderDiligenceProfile,
-    reports: renderDiligenceReports,
-    alerts: renderDiligenceAlerts,
-    knowledge: renderDiligenceKnowledge,
+    "custody-admittance": renderCustodyAdmittanceDD, // 准入尽调
+    profile: renderManagerProfile, // 管理人画像
+    alerts: renderManagerMonitoring, // 动态风险监测
   };
-  panel.innerHTML = (renderers[diligenceState.activeTab] || renderDiligenceHome)();
+  const placeholderLabels = {
+    home: "尽调总览",
+    tasks: "洞察任务",
+    reports: "尽调报告",
+    knowledge: "知识中心",
+  };
+  if (renderers[diligenceState.activeTab]) {
+    panel.innerHTML = renderers[diligenceState.activeTab]();
+  } else {
+    panel.innerHTML = renderManagerPlaceholder(placeholderLabels[diligenceState.activeTab] || "该模块");
+  }
+}
+
+function renderManagerProfile() {
+  const d = CUSTODY_ADMITTANCE_DD;
+  const m = d.manager;
+  const p = d.profile;
+  return `
+    <div class="showcase-notice">
+      <span>${escapeHtml(d.badge)}</span>
+      <strong>管理人画像 · 演示样本，不代表对任何真实管理人的结论。</strong>
+    </div>
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">管理人画像 · 基本信息</span><h3>${escapeHtml(m.name)}</h3><p>${escapeHtml(m.type)}｜实控人：${escapeHtml(p.shareholders.controller)}</p></div><span class="status-badge done">${escapeHtml(m.admittanceConclusion)}</span></div>
+      <div class="info-grid">
+        ${p.basics.map(([k, v]) => `<div><span>${escapeHtml(k)}</span><strong>${escapeHtml(v)}</strong></div>`).join("")}
+      </div>
+    </section>
+    <div class="adm-two-col">
+      <section class="section-card">
+        <div class="section-title-row"><div><span class="mini-label">股东与实控人</span><h3>股权结构</h3></div></div>
+        <table class="data-table"><thead><tr><th>股东</th><th>持股</th></tr></thead><tbody>
+          ${p.shareholders.items.map(([n, r]) => `<tr><td>${escapeHtml(n)}</td><td>${escapeHtml(r)}</td></tr>`).join("")}
+        </tbody></table>
+        <div class="empty-state small">${escapeHtml(p.shareholders.note)}</div>
+      </section>
+      <section class="section-card">
+        <div class="section-title-row"><div><span class="mini-label">团队</span><h3>人员与稳定性</h3></div></div>
+        <div class="adm-kpis">${p.team.map((t) => `<div><span>${escapeHtml(t.label)}</span><strong>${escapeHtml(t.value)}</strong></div>`).join("")}</div>
+      </section>
+    </div>
+    <div class="adm-two-col">
+      <section class="section-card">
+        <div class="section-title-row"><div><span class="mini-label">管理规模与产品</span><h3>规模 / 策略</h3></div></div>
+        <div class="adm-kpis">${p.scale.map((t) => `<div><span>${escapeHtml(t.label)}</span><strong>${escapeHtml(t.value)}</strong></div>`).join("")}</div>
+      </section>
+      <section class="section-card">
+        <div class="section-title-row"><div><span class="mini-label">历史业绩</span><h3>代表产品：${escapeHtml(p.performance.product)}</h3></div></div>
+        <div class="info-grid">${p.performance.items.map(([k, v]) => `<div><span>${escapeHtml(k)}</span><strong>${escapeHtml(v)}</strong></div>`).join("")}</div>
+      </section>
+    </div>
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">合规与诚信</span><h3>中基协诚信与监管记录</h3></div></div>
+      <ul class="adm-integrity">${p.integrity.map((i) => `<li class="${i.ok ? "is-ok" : "is-warn"}">${escapeHtml(i.text)}</li>`).join("")}</ul>
+    </section>
+  `;
+}
+
+function renderManagerMonitoring() {
+  const d = CUSTODY_ADMITTANCE_DD;
+  const mon = d.monitoring;
+  const levelTone = (lv) => (lv === "高风险" ? "high" : lv === "中风险" ? "medium" : "low");
+  return `
+    <div class="showcase-notice">
+      <span>${escapeHtml(d.badge)}</span>
+      <strong>动态风险监测 · 演示样本，持续盯防已准入管理人的存续期风险。</strong>
+    </div>
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">实时状态</span><h3>${escapeHtml(d.manager.name)}</h3><p>${escapeHtml(mon.watchScope)}</p></div></div>
+      <div class="adm-kpis">
+        ${mon.statusBoard.map((s) => `<div><span>${escapeHtml(s.label)}</span><strong class="tone-${s.tone === "good" ? "low" : s.tone}">${escapeHtml(s.value)}</strong></div>`).join("")}
+      </div>
+    </section>
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">风险预警</span><h3>动态预警（${mon.alerts.length}）</h3></div><span class="status-badge pending">持续监测</span></div>
+      <div class="adm-alert-list">
+        ${mon.alerts.map((a) => `
+          <article class="adm-alert tone-${levelTone(a.level)}">
+            <div class="adm-alert-head"><strong>${escapeHtml(a.title)}</strong><span>${escapeHtml(a.level)} · ${escapeHtml(a.date)}</span></div>
+            <p>${escapeHtml(a.desc)}</p>
+            <em>处置建议：${escapeHtml(a.action)}</em>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderManagerPlaceholder(label) {
+  const m = CUSTODY_ADMITTANCE_DD.manager;
+  return `
+    <section class="section-card">
+      <div class="section-title-row">
+        <div>
+          <span class="mini-label">${escapeHtml(label)}</span>
+          <h3>${escapeHtml(label)} · 演示占位</h3>
+          <p>面向“私募基金管理人”的${escapeHtml(label)}能力，后续接入；当前演示聚焦准入尽调、管理人画像与动态风险监测三视图。</p>
+        </div>
+        <span class="status-badge pending">后续接入</span>
+      </div>
+      <div class="empty-state">当前对象：${escapeHtml(m.name)}（${escapeHtml(m.type)}）。完整的${escapeHtml(label)}将围绕同一管理人展开。</div>
+    </section>
+  `;
+}
+
+function renderCustodyAdmittanceDD() {
+  const d = CUSTODY_ADMITTANCE_DD;
+  const m = d.manager;
+  return `
+    <div class="showcase-notice">
+      <span>${escapeHtml(d.badge)}</span>
+      <strong>${escapeHtml(d.notice)}</strong>
+    </div>
+    <section class="section-card adm-hero">
+      <div class="adm-hero-main">
+        <span class="mini-label">托管准入尽调 · 当前管理人</span>
+        <h3>${escapeHtml(m.name)}</h3>
+        <p>${escapeHtml(m.type)}｜成立 ${escapeHtml(m.established)}｜实控人：${escapeHtml(m.controller)}</p>
+        <div class="adm-conclusion">
+          <span class="status-badge done">${escapeHtml(m.admittanceConclusion)}</span>
+          <em>准入评级 ${escapeHtml(m.admittanceRating)}</em>
+          <em class="adm-review">${escapeHtml(m.reviewStatus)}</em>
+        </div>
+      </div>
+      <div class="adm-kpis">
+        ${d.metrics.map((k) => `<div><span>${escapeHtml(k.label)}</span><strong>${escapeHtml(k.value)}</strong></div>`).join("")}
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">尽调维度</span><h3>私募基金管理人准入尽调六维评估</h3><p>面向托管业务的私募基金管理人准入维度，区别于企业授信尽调。</p></div></div>
+      <div class="adm-dim-grid">
+        ${d.dimensions.map((dim) => `
+          <article class="adm-dim-card tone-${admittanceBandTone(dim.band)}">
+            <div class="adm-dim-head">
+              <strong>${escapeHtml(dim.name)}</strong>
+              <span class="adm-band">${escapeHtml(dim.band)} · ${dim.score}</span>
+            </div>
+            <p class="adm-dim-summary">${escapeHtml(dim.summary)}</p>
+            <ul>${dim.evidence.map((e) => `<li>${escapeHtml(e)}</li>`).join("")}</ul>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+
+    <div class="adm-two-col">
+      <section class="section-card">
+        <div class="section-title-row"><div><span class="mini-label">待人工复核</span><h3>准入关注项（${d.pending.length}）</h3></div><span class="status-badge pending">待复核</span></div>
+        <ul class="adm-pending">${d.pending.map((p) => `<li>${escapeHtml(p)}</li>`).join("")}</ul>
+      </section>
+      <section class="section-card">
+        <div class="section-title-row"><div><span class="mini-label">关联监管义务</span><h3>对应外规内化执行型义务</h3></div></div>
+        <div class="adm-oblig-list">
+          ${d.obligationLinks.map((o) => `
+            <button type="button" class="adm-oblig" data-route="${escapeHtml(o.route)}">
+              <strong>${escapeHtml(o.title)}</strong>
+              <span>${escapeHtml(o.basis)}</span>
+              <em>查看外规依据 →</em>
+            </button>
+          `).join("")}
+        </div>
+      </section>
+    </div>
+
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">候选管理人</span><h3>待准入 / 存续期管理人清单</h3></div></div>
+      <table class="data-table adm-candidates">
+        <thead><tr><th>管理人</th><th>类型</th><th>监管评级</th><th>准入结论</th><th></th></tr></thead>
+        <tbody>
+          ${d.candidates.map((c) => `
+            <tr class="${c.current ? "is-current" : ""}">
+              <td><strong>${escapeHtml(c.name)}</strong><span>${escapeHtml(c.code)}</span></td>
+              <td>${escapeHtml(c.type)}</td>
+              <td>${escapeHtml(c.rating)}</td>
+              <td>${escapeHtml(c.conclusion)}</td>
+              <td>${c.current ? '<span class="status-badge done">当前</span>' : '<span class="status-badge pending">演示占位</span>'}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+      <div class="empty-state small">候选管理人清单为演示样板，仅“${escapeHtml(d.manager.name)}”提供完整准入尽调结果。</div>
+    </section>
+  `;
 }
 
 function selectedCompany() {
@@ -2668,8 +2997,10 @@ function renderRegulatoryDetail() {
     )
     .join("");
   try {
+    // 五阶段流程只在“总览”页呈现（renderRegulatoryFlowOverview），其余 Tab 不再重复
+    // 顶部的五阶段卡片，避免与 Tab 栏、任务卡信息三重冗余。
     panel.innerHTML = isComplete
-      ? `${businessData ? renderTaskStageRail(businessData) : ""}${renderRegulatoryTabPanel(currentRegulatoryTab, caseItem, caseData)}`
+      ? renderRegulatoryTabPanel(currentRegulatoryTab, caseItem, caseData)
       : renderPendingTaskDetail(caseItem, currentRegulatoryTab);
   } catch (error) {
     console.error("外规内化页签渲染失败", error);
@@ -2690,30 +3021,6 @@ function renderRegulatoryTabFallback(tabId, error) {
         <span class="status-badge pending">待排查</span>
       </div>
       <div class="empty-state small">${escapeHtml(error?.message || "未知渲染错误")}</div>
-    </section>
-  `;
-}
-
-function renderTaskStageRail(data) {
-  const stageTabs = { identify: "source", interpretation: "interpretation", mapping: "mapping", gap: "gap", remediation: "remediation" };
-  return `
-    <section class="section-card reg-stage-rail">
-      <div class="section-title-row">
-        <div>
-          <span class="mini-label">当前任务</span>
-          <h3>${escapeHtml(data.task?.name || data.title)}</h3>
-          <p>${escapeHtml(data.regulator)} · ${escapeHtml(data.publish_date)} 发布 · ${escapeHtml(data.task?.status || data.overall_status)} · ${escapeHtml(data.task?.dataMode || data.badge)}</p>
-        </div>
-      </div>
-      <div class="reg-flow-grid compact">
-        ${(data.steps || []).map((step, index) => `
-          <button class="reg-flow-card" type="button" data-route="${routeForTask(DEMO_TASK_ID, stageTabs[step.id] || "overview")}">
-            <span>${index + 1}</span>
-            <strong>${escapeHtml(step.title)}</strong>
-            <em>${escapeHtml(step.status)}</em>
-          </button>
-        `).join("")}
-      </div>
     </section>
   `;
 }
@@ -3438,7 +3745,15 @@ function renderShowcaseRegulatoryTab(tabId, data) {
       <section class="section-card">
         <div class="section-title-row"><div><span class="mini-label">整改矩阵</span><h3>按差距生成的整改动作</h3></div></div>
         <div class="reg-remediation-grid">
-          ${rectificationActions.map((item) => `<article><span>${escapeHtml(item.priority)}｜${escapeHtml(item.estimatedCompletion)}</span><strong>${escapeHtml(item.id)} ${escapeHtml(item.sourceGap)}</strong><p>${escapeHtml(item.action)}</p><em>牵头：${escapeHtml(item.responsibleDepartment)}｜协同：${(item.collaboratingDepartments || []).map(escapeHtml).join("、")}</em></article>`).join("")}
+          ${rectificationActions.map((item) => {
+            // 执行型义务桥接：涉及反洗钱/关联方/客户身份/对手方等的整改动作，
+            // 本质是“执行型”监管义务，由尽职调查模块承接落地，附“去尽调执行”入口。
+            const isExecutionDD = /反洗钱|关联方|关联交易|客户身份|尽职|尽调|交易对手|发行人|准入|适当性/.test(item.action || "");
+            const bridge = isExecutionDD
+              ? `<button type="button" class="bridge-link" data-bridge-action="to-diligence" data-concern="${escapeHtml(item.action || item.sourceGap || "")}">去尽调执行 →</button>`
+              : "";
+            return `<article><span>${escapeHtml(item.priority)}｜${escapeHtml(item.estimatedCompletion)}</span><strong>${escapeHtml(item.id)} ${escapeHtml(item.sourceGap)}</strong><p>${escapeHtml(item.action)}</p><em>牵头：${escapeHtml(item.responsibleDepartment)}｜协同：${(item.collaboratingDepartments || []).map(escapeHtml).join("、")}</em>${bridge}</article>`;
+          }).join("")}
         </div>
       </section>
       <section class="reg-section-grid">
@@ -4277,6 +4592,20 @@ document.addEventListener("click", (event) => {
       window.history.pushState({}, "", nextRoute);
     }
     renderRegulatoryDetail();
+    return;
+  }
+
+  // 外规内化 ↔ 尽职调查 桥接：执行型监管义务跳转到尽职调查模块落地执行。
+  const bridgeTarget = event.target.closest("[data-bridge-action]");
+  if (bridgeTarget) {
+    event.preventDefault();
+    if (bridgeTarget.dataset.bridgeAction === "to-diligence") {
+      const concern = (bridgeTarget.dataset.concern || "").trim();
+      diligenceState.activeTab = "custody-admittance";
+      navigateTo("/diligence");
+      const short = concern.length > 40 ? `${concern.slice(0, 40)}…` : concern;
+      showToast(short ? `已进入尽职调查：建议对相关交易对手/发行人发起尽调，重点关注「${short}」` : "已进入尽职调查模块。");
+    }
     return;
   }
 
