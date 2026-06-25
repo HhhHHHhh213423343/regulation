@@ -3818,3 +3818,22 @@ iframe {
 .adm-alert.tone-medium .adm-alert-head span { color: var(--orange); }
 .adm-alert p { margin: 6px 0; font-size: 12.5px; color: var(--muted); line-height: 1.6; }
 .adm-alert em { font-style: normal; font-size: 12.5px; color: var(--ink); font-weight: 600; }
+
+/* ── 尽调总览：区域/策略分布条 + 风险列表 + 三层卡着色 ───────────────── */
+.layer-score-card.layer-micro { border-left: 3px solid var(--red); }
+.layer-score-card.layer-meso { border-left: 3px solid var(--purple); }
+.layer-score-card.layer-macro { border-left: 3px solid var(--blue); }
+.mgr-dist { display: grid; gap: 9px; }
+.mgr-dist-row { display: grid; grid-template-columns: 84px 1fr 56px; align-items: center; gap: 10px; }
+.mgr-dist-label { font-size: 12.5px; color: var(--ink); }
+.mgr-dist-track { height: 10px; border-radius: 999px; background: #eef2f7; overflow: hidden; }
+.mgr-dist-track i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--blue), var(--purple)); }
+.mgr-dist-val { font-size: 12.5px; font-weight: 700; color: var(--muted); text-align: right; }
+.mgr-risk-list { display: grid; gap: 6px; margin-top: 10px; }
+.mgr-risk-item { display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 8px; font-size: 12.5px; }
+.mgr-risk-item strong { font-weight: 600; color: var(--ink); }
+.mgr-risk-item em { font-style: normal; font-weight: 700; color: var(--muted); }
+.risk-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.risk-dot.high { background: var(--red); }
+.risk-dot.medium { background: var(--orange); }
+.risk-dot.low { background: var(--green); }

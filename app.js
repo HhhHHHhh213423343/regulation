@@ -570,6 +570,52 @@ const CUSTODY_ADMITTANCE_DD = {
       { level: "低风险", date: "2026-04-20", title: "高管变更：风控负责人变更", desc: "风控负责人发生变更，已向中基协更新登记。", action: "已核实，持续关注合规体系稳定性" },
     ],
   },
+  // 尽调总览（“尽调总览”Tab）：风险雷达（分值越高风险越大）+ 三层分类 + 在管产品组合 + 区域分布
+  overview: {
+    kpis: [
+      { label: "综合准入评分", value: "BBB · 良好" },
+      { label: "管理规模 AUM", value: "86 亿元" },
+      { label: "在管私募基金", value: "23 只" },
+      { label: "在监预警", value: "4 条" },
+      { label: "待复核项", value: "3 项" },
+    ],
+    // 风险雷达模块（score 为风险分，越高越红；layer 三层：micro 管理人自身 / meso 在管产品 / macro 行业政策）
+    riskModules: [
+      { id: "G", title: "公司治理风险", score: 38, layer: "micro" },
+      { id: "C", title: "合规风险", score: 42, layer: "micro" },
+      { id: "O", title: "运营估值风险", score: 66, layer: "micro" },
+      { id: "R", title: "关联交易风险", score: 64, layer: "micro" },
+      { id: "N", title: "产品净值风险", score: 72, layer: "meso" },
+      { id: "L", title: "流动性风险", score: 55, layer: "meso" },
+      { id: "V", title: "估值差错风险", score: 60, layer: "meso" },
+      { id: "P", title: "监管政策风险", score: 58, layer: "macro" },
+      { id: "S", title: "行业舆情风险", score: 45, layer: "macro" },
+      { id: "B", title: "同业相对风险", score: 50, layer: "macro" },
+    ],
+    layerLabels: { micro: "微观·管理人自身", meso: "中观·在管产品", macro: "宏观·行业政策" },
+    // 在管产品组合：策略分布 + 规模 Top 产品
+    portfolio: {
+      strategies: [
+        { label: "股票多头", value: 70 },
+        { label: "量化对冲", value: 20 },
+        { label: "其他策略", value: 10 },
+      ],
+      topProducts: [
+        { name: "示例稳健 1 号", scale: "12 亿元", strategy: "股票多头", risk: "低" },
+        { name: "示例进取 2 号", scale: "8 亿元", strategy: "股票多头", risk: "中" },
+        { name: "示例量化 1 号", scale: "6 亿元", strategy: "量化对冲", risk: "低" },
+        { name: "示例稳健 3 号", scale: "5 亿元", strategy: "股票多头", risk: "低" },
+      ],
+    },
+    // 区域分布（在管产品 / 托管对接所在地）
+    regions: [
+      { label: "上海", value: 9 },
+      { label: "北京", value: 6 },
+      { label: "深圳", value: 4 },
+      { label: "杭州", value: 3 },
+      { label: "其他", value: 1 },
+    ],
+  },
 };
 
 function admittanceBandTone(band) {
@@ -1043,11 +1089,11 @@ function renderDiligence() {
   if (companySelect) companySelect.style.display = "none";
   const renderers = {
     "custody-admittance": renderCustodyAdmittanceDD, // 准入尽调
+    home: renderManagerOverview, // 尽调总览（风险雷达 + 三层分类 + 产品组合 + 区域分布）
     profile: renderManagerProfile, // 管理人画像
     alerts: renderManagerMonitoring, // 动态风险监测
   };
   const placeholderLabels = {
-    home: "尽调总览",
     tasks: "洞察任务",
     reports: "尽调报告",
     knowledge: "知识中心",
@@ -1057,6 +1103,94 @@ function renderDiligence() {
   } else {
     panel.innerHTML = renderManagerPlaceholder(placeholderLabels[diligenceState.activeTab] || "该模块");
   }
+}
+
+function renderManagerBars(items, unit = "") {
+  const max = Math.max(1, ...items.map((it) => Number(it.value) || 0));
+  return `
+    <div class="mgr-dist">
+      ${items.map((it) => {
+        const w = Math.max(6, (Number(it.value) || 0) / max * 100);
+        return `<div class="mgr-dist-row"><span class="mgr-dist-label">${escapeHtml(it.label)}</span><div class="mgr-dist-track"><i style="width:${w.toFixed(1)}%"></i></div><span class="mgr-dist-val">${escapeHtml(String(it.value))}${escapeHtml(unit)}</span></div>`;
+      }).join("")}
+    </div>
+  `;
+}
+
+function renderManagerOverview() {
+  const d = CUSTODY_ADMITTANCE_DD;
+  const m = d.manager;
+  const o = d.overview;
+  const mods = o.riskModules;
+  const overall = Math.round(mods.reduce((s, x) => s + x.score, 0) / mods.length);
+  const layers = ["micro", "meso", "macro"].map((layer) => {
+    const items = mods.filter((x) => x.layer === layer);
+    const avg = items.length ? Math.round(items.reduce((s, x) => s + x.score, 0) / items.length) : 0;
+    const high = items.filter((x) => x.score >= 58).length;
+    return { layer, label: o.layerLabels[layer], avg, count: items.length, high };
+  });
+  const riskBadge = (r) => (r === "高" ? "high" : r === "中" ? "medium" : "low");
+  return `
+    <div class="showcase-notice">
+      <span>${escapeHtml(d.badge)}</span>
+      <strong>尽调总览 · 演示样本，围绕同一私募基金管理人的风险驾驶舱。</strong>
+    </div>
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">尽调总览 · 当前管理人</span><h3>${escapeHtml(m.name)}</h3><p>${escapeHtml(m.type)}｜准入结论：${escapeHtml(m.admittanceConclusion)}</p></div><span class="status-badge done">${escapeHtml(m.admittanceRating)}</span></div>
+      <div class="adm-kpis">${o.kpis.map((k) => `<div><span>${escapeHtml(k.label)}</span><strong>${escapeHtml(k.value)}</strong></div>`).join("")}</div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">风险雷达</span><h3>管理人风险雷达（分值越高风险越大）</h3><p>按“微观·管理人自身 / 中观·在管产品 / 宏观·行业政策”三层对风险维度分类。</p></div><span class="risk-pill ${scoreTone(overall)}">${escapeHtml(riskLevelByScore(overall))}</span></div>
+      <div class="diligence-risk-layout">
+        <div class="risk-radar-panel" aria-label="管理人风险雷达">
+          <div class="risk-radar-stage">
+            <div class="risk-radar-ring ring-1"></div>
+            <div class="risk-radar-ring ring-2"></div>
+            <div class="risk-radar-ring ring-3"></div>
+            <div class="risk-radar-axis axis-x"></div>
+            <div class="risk-radar-axis axis-y"></div>
+            <div class="risk-radar-center"><strong>${overall}</strong><span>综合风险分</span></div>
+            ${mods.map((mod, index) => {
+              const angle = (index / mods.length) * Math.PI * 2 - Math.PI / 2;
+              const radius = 42 - (mod.score / 100) * 22;
+              const x = 50 + Math.cos(angle) * radius;
+              const y = 50 + Math.sin(angle) * radius;
+              return `<span class="risk-radar-point tone-${scoreTone(mod.score)} layer-${mod.layer}" style="left:${x.toFixed(2)}%;top:${y.toFixed(2)}%;"><i>${escapeHtml(mod.id)}</i><em>${escapeHtml(mod.title)}：${mod.score}</em></span>`;
+            }).join("")}
+          </div>
+          <div class="risk-radar-legend">
+            <span><i class="layer-dot layer-micro"></i>微观</span>
+            <span><i class="layer-dot layer-meso"></i>中观</span>
+            <span><i class="layer-dot layer-macro"></i>宏观</span>
+          </div>
+        </div>
+        <div class="risk-overview-column">
+          <div class="layer-score-grid">
+            ${layers.map((l) => `<div class="layer-score-card layer-${l.layer}"><span>${escapeHtml(l.label)}</span><strong>${l.avg}</strong><em>${l.count} 维 · ${l.high} 维偏高</em></div>`).join("")}
+          </div>
+          <div class="mgr-risk-list">
+            ${mods.slice().sort((a, b) => b.score - a.score).slice(0, 4).map((mod) => `<div class="mgr-risk-item"><span class="risk-dot tone-${scoreTone(mod.score)}"></span><strong>${escapeHtml(mod.title)}</strong><em>${mod.score}</em></div>`).join("")}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="adm-two-col">
+      <section class="section-card">
+        <div class="section-title-row"><div><span class="mini-label">在管产品组合</span><h3>策略分布</h3></div></div>
+        ${renderManagerBars(o.portfolio.strategies, "%")}
+        <table class="data-table" style="margin-top:14px"><thead><tr><th>代表产品</th><th>规模</th><th>策略</th><th>风险</th></tr></thead><tbody>
+          ${o.portfolio.topProducts.map((p) => `<tr><td><strong>${escapeHtml(p.name)}</strong></td><td>${escapeHtml(p.scale)}</td><td>${escapeHtml(p.strategy)}</td><td><span class="status-badge ${riskBadge(p.risk) === "low" ? "done" : "pending"}">${escapeHtml(p.risk)}风险</span></td></tr>`).join("")}
+        </tbody></table>
+      </section>
+      <section class="section-card">
+        <div class="section-title-row"><div><span class="mini-label">区域分布</span><h3>在管产品 / 托管对接地</h3></div></div>
+        ${renderManagerBars(o.regions, " 只")}
+        <div class="empty-state small">区域分布反映在管产品托管对接所在地集中度，用于属地监管与现场尽调安排。</div>
+      </section>
+    </div>
+  `;
 }
 
 function renderManagerProfile() {
