@@ -1,0 +1,1449 @@
+{
+  "runId": "RUN-REGULATORY_D-20260624184315-941",
+  "skillId": "regulatory-decomposer",
+  "taskId": "990f2d424a481f6e80d6",
+  "sourceDocument": {
+    "filename": "parsed.txt",
+    "fileType": "txt",
+    "sha256": "36d51711319fb90f62d1d65f0107317634d283e57b281232d0d6084508c90ea8",
+    "textLength": 5402
+  },
+  "model": {
+    "provider": "deepseek",
+    "name": "deepseek-v4-flash",
+    "promptVersion": "regulatory-decomposer-v1.0"
+  },
+  "clauses": [
+    {
+      "clauseId": "C-001",
+      "clauseRef": "第一条",
+      "headingPath": [],
+      "originalText": "第一条  为规范境内企业境外放款业务，根据《中华人民共和国中国人民银行法》《中华人民共和国外汇管理条例》及企业境外直接投资有关法律法规，制定本办法。",
+      "position": {
+        "paragraphStart": 673,
+        "paragraphEnd": 748
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "制定"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-002",
+      "clauseRef": "第二条",
+      "headingPath": [],
+      "originalText": "第二条  本办法所称境内企业境外放款，是指境内非金融企业（以下简称放款人）按照合同约定的金额、利率、期限、用途等，由境内向符合条件的境外企业（以下简称借款人）提供资金跨境融通的行为。",
+      "position": {
+        "paragraphStart": 748,
+        "paragraphEnd": 840
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-003",
+      "clauseRef": "第三条",
+      "headingPath": [],
+      "originalText": "第三条  放款人开展境外放款应遵守国家法律法规和行业主管部门的规定，符合国家宏观调控要求。按照本办法办理境外放款登记、账户开立和使用、资金汇兑及收付等业务。",
+      "position": {
+        "paragraphStart": 840,
+        "paragraphEnd": 919
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-004",
+      "clauseRef": "第四条",
+      "headingPath": [],
+      "originalText": "第四条  中国人民银行及其分支机构、国家外汇局及其分局按职责分工对境外放款登记、账户开立和使用、资金汇兑及收付等实施监督管理。\n第二章   境外放款登记",
+      "position": {
+        "paragraphStart": 919,
+        "paragraphEnd": 996
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-005",
+      "clauseRef": "第五条",
+      "headingPath": [],
+      "originalText": "第五条  放款人与借款人签订境外放款协议后，在对借款人放款之前，到注册所在地国家外汇局分局申请办理登记。已登记的境外放款金额应在 2 年（含）内使用，超过 2 年的，其中未汇出部分自动失效。",
+      "position": {
+        "paragraphStart": 996,
+        "paragraphEnd": 1092
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记",
+              "注册"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-006",
+      "clauseRef": "第六条",
+      "headingPath": [],
+      "originalText": "第六条  放款人申请办理境外放款登记（含新办登记、变更登记、展期登记，下同）应符合以下条件： （一）放款人应依法注册成立 1 年（含）以上，有持续良好经营的记录，有健全的财务制度和内控制度，近 3 年无重大违法违规行为（依法注册成立不满 3 年的，成立以来无重大违法违规行为）。 （二）借款人应依法注册成立且有持续良好经营的记录，近 3 年无重大违法违规行为（依法注册成立不满 3 年的，成立以来无重大违法违规行为）。 （三）放款人与借款人具有直接或间接持股关系，或者由同一家母公司直接或间接持股。 （四）放款人境外放款余额未超过其境外放款余额上限。 （五）放款人对同一借款人的境外放款金额及余额与借款人的实际经营情况相符合，境外放款用途符合本办法",
+      "position": {
+        "paragraphStart": 1092,
+        "paragraphEnd": 1416
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "建立/设立",
+            "verbs": [
+              "成立"
+            ]
+          },
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记",
+              "注册"
+            ]
+          },
+          {
+            "category": "保存/归档",
+            "verbs": [
+              "记录"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-007",
+      "clauseRef": "第十四条",
+      "headingPath": [],
+      "originalText": "第十四条的规定。 （六）境外放款利率符合商业合理原则。 （七）境外放款期限符合商业合理原则，原则上应在 6 个月（含）至 5 年（含）之间。 （八）放款人存量境外放款（如有）本息已按期足额收回，或者本息虽未按期足额收回但具有正当理由（办理展期登记时除外）。申请办理登记的境外放款对应的借款人存量境外放款（如有）不存在逾期（办理展期登记时除外）。",
+      "position": {
+        "paragraphStart": 1416,
+        "paragraphEnd": 1589
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-008",
+      "clauseRef": "第七条",
+      "headingPath": [],
+      "originalText": "第七条  放款人应持以下材料向注册所在地国家外汇局分局申请办理境外放款登记： （一）书面申请，内容包括境外放款资金使用计划和还款计划、放款人和借款人经营情况、存量境外放款情况，承诺无重大违法违规行为以及资金来源、用途合规且不超出放款协议约定的用途范围等，并附《境外放款业务登记申请表》。 （二）放款人和借款人依法注册成立，以及放款人与借款人具有直接或间接持股关系、或者由同一家母公司直接或间接持股的证明材料。 （三）境外放款协议，内容包括但不限于放款金额、利率、期限、币种、还本付息方式、借款用途等。放款人通过依法设立且具有外汇业务资格的企业集团财务公司以委托贷款方式对借款人进行放款时，应提供放款人、借款人与财务公司签订的委托贷款协议。 （四）放款人最近一期经审计的财务报告、借款人最近一期财务报告。\n注册所在地国家外汇局分局对申请材料有疑议的，可要求放款人完善申请材料或作出书面解释说明。",
+      "position": {
+        "paragraphStart": 1589,
+        "paragraphEnd": 1986
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "建立/设立",
+            "verbs": [
+              "设立",
+              "成立"
+            ]
+          },
+          {
+            "category": "报送/报告",
+            "verbs": [
+              "报告"
+            ]
+          },
+          {
+            "category": "检查/审计",
+            "verbs": [
+              "审计"
+            ]
+          },
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记",
+              "注册"
+            ]
+          },
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "完善"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-009",
+      "clauseRef": "第八条",
+      "headingPath": [],
+      "originalText": "第八条  境外放款协议（金额、利率、期限等）发生变更，或者因放款人、借款人发生合并、分立、转股等原因导致主体变更的，放款人应持以下材料向注册所在地国家外汇局分局申请办理境外放款变更登记： （一）书面申请，详细说明变更事项及原因，并附《境外放款业务登记申请表》。 （二）变更后的境外放款协议。 （三）涉及境外放款金额变更时，需提供放款人最近一期经审计的财务报告及借款人最近一期财务报告等证明材料。 （四）境外放款主体变更时，应提交放款人、借款人合并、分立、转股等变更后仍符合本办法",
+      "position": {
+        "paragraphStart": 1986,
+        "paragraphEnd": 2225
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "报送/报告",
+            "verbs": [
+              "报告",
+              "提交"
+            ]
+          },
+          {
+            "category": "检查/审计",
+            "verbs": [
+              "审计"
+            ]
+          },
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记",
+              "注册"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-010",
+      "clauseRef": "第九条",
+      "headingPath": [],
+      "originalText": "第九条  境外放款已足额收回本息、或者办理境外放款登记后无资金汇出实际需求的，放款人可持书面申请及业务登记凭证等材料到为其办理境外放款业务的银行（以下简称经办行）办理境外放款注销登记。其他境外放款注销登记在注册所在地国家外汇局分局办理。",
+      "position": {
+        "paragraphStart": 2239,
+        "paragraphEnd": 2358
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记",
+              "注册"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-011",
+      "clauseRef": "第十条",
+      "headingPath": [],
+      "originalText": "第十条  境外放款实行人民币和外币（以下简称本外币）一体化宏观审慎管理。放款人境外放款余额不得超过其境外放款余额上限。\n境外放款余额上限 = 放款人最近一期经审计的所有者权益×宏观审慎调节系数。\n境外放款余额 = ∑放款人本外币境外放款余额＋∑放款人外币境外放款余额×币种转换因子。",
+      "position": {
+        "paragraphStart": 2358,
+        "paragraphEnd": 2500
+      },
+      "ruleTags": {
+        "obligationType": "限制性",
+        "regulatoryActions": [
+          {
+            "category": "检查/审计",
+            "verbs": [
+              "审计"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-012",
+      "clauseRef": "第十一条",
+      "headingPath": [],
+      "originalText": "第十一条  放款人作为担保人或者反担保人发生内保外贷履约形成的对外债权、以及其他形式的跨境担保履约形成的对外债权，纳入放款人境外放款余额管理。担保履约形成的对外债权余额与放款人境外放款余额之和原则上不得超过放款人境外放款余额上限。如超过境外放款余额上限，注册所在地国家外汇局分局可先为放款人办理担保履约对外债权登记，但在担保履约形成的对外债权余额与境外放款余额之和恢复到境外放款余额上限以内之前，不得为放款人办理新的境外放款登记。",
+      "position": {
+        "paragraphStart": 2500,
+        "paragraphEnd": 2716
+      },
+      "ruleTags": {
+        "obligationType": "限制性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记",
+              "注册"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-013",
+      "clauseRef": "第十二条",
+      "headingPath": [],
+      "originalText": "第十二条  放款人将存量境外放款转为股权投资等境外直接投资，应事先履行境外直接投资核准或备案手续，凭相关核准或备案文件到注册所在地国家外汇局分局办理境外放款变更（或注销）登记后，在银行办理境外直接投资登记（或变更）手续。\n放款人开展境外直接投资且经境外直接投资主管部门核准或备案以债权方式出资的，按照境外直接投资进行管理，可直接到银行办理境外直接投资登记手续；如债权出资涉及存量境外放款，应按照前款程序办理相关境外放款变更（或注销）登记及境外直接投资登记（或变更）手续。\n第三章   境外放款资金使用和管理",
+      "position": {
+        "paragraphStart": 2716,
+        "paragraphEnd": 2970
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "报送/报告",
+            "verbs": [
+              "备案"
+            ]
+          },
+          {
+            "category": "审批/核准",
+            "verbs": [
+              "核准"
+            ]
+          },
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记",
+              "注册"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-014",
+      "clauseRef": "第十三条",
+      "headingPath": [],
+      "originalText": "第十三条  放款人应使用自有资金（自有人民币、自有外币及自有人民币购汇资金，下同）开展境外放款业务，不得使用个人资金或利用自身债务融资为境外放款提供资金来源。",
+      "position": {
+        "paragraphStart": 2970,
+        "paragraphEnd": 3050
+      },
+      "ruleTags": {
+        "obligationType": "禁止性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-015",
+      "clauseRef": "第十四条",
+      "headingPath": [],
+      "originalText": "第十四条  境外放款资金应在境外放款协议约定的用途范围内使用，并遵守以下规定： （一）不得违反国家法律法规和国家宏观调控相关要求。 （二）不得直接或间接用于借款人经营范围之外。 （三）不得用于规避境外直接投资、证券投资等管理政策。 （四）不得违反反洗钱、反恐怖融资、反逃税的相关规定。",
+      "position": {
+        "paragraphStart": 3050,
+        "paragraphEnd": 3193
+      },
+      "ruleTags": {
+        "obligationType": "禁止性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-016",
+      "clauseRef": "第十五条",
+      "headingPath": [],
+      "originalText": "第十五条  放款人应按规定凭身份证明材料、境外放款业务登记凭证等材料在注册所在地国家外汇局分局辖区内银行开立境外放款专用账户（人民币或 / 和外汇账户）（以下简称境外放款专用账户），用于办理境外放款相关资金汇兑和收付。多笔境外放款可以共用一个境外放款专用账户。放款人也可使用已有境外放款专用账户办理境外放款相关资金汇兑和收付，无需开立新的专用账户。\n放款人已办理境外放款注销登记且已完成境外放款资金清收的，可注销对应的境外放款专用账户。",
+      "position": {
+        "paragraphStart": 3193,
+        "paragraphEnd": 3412
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记",
+              "注册"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-017",
+      "clauseRef": "第十六条",
+      "headingPath": [],
+      "originalText": "第十六条  境外放款专用账户收入范围：放款人境内资金账户划入的自有资金（人民币或 / 和外汇）；以自有人民币购汇用于境外放款的外汇资金；境外放款本息；同名境外放款专用账户内资金划入。专用账户支出范围：按照境外放款协议约定向借款人汇出放款资金（人民币或 / 和外汇）；汇往同名境外放款专用账户；划回对应的原划入资金的账户；符合规定的其他境内支出。",
+      "position": {
+        "paragraphStart": 3412,
+        "paragraphEnd": 3585
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-018",
+      "clauseRef": "第十七条",
+      "headingPath": [],
+      "originalText": "第十七条  以人民币登记的境外放款，原则上应以人民币放款和收回；以外币登记的境外放款，原则上应以外币放款和收回，外币币种之间可根据实际情况选择配置。",
+      "position": {
+        "paragraphStart": 3585,
+        "paragraphEnd": 3660
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-019",
+      "clauseRef": "第十八条",
+      "headingPath": [],
+      "originalText": "第十八条  同一笔境外放款原则上展期不得超过一次。借款人不得通过展期规避境外放款本息偿还义务。\n境外放款如需展期，放款人应在境外放款到期前至少 30 日向注册所在地国家外汇局分局申请办理展期登记。如境外放款发生全部或部分逾期，放款人不得直接或间接对发生逾期的借款人新增境外放款，办理该笔境外放款资金汇兑和收付的经办行应暂停对发生逾期的借款人新办境外放款资金汇出。",
+      "position": {
+        "paragraphStart": 3660,
+        "paragraphEnd": 3842
+      },
+      "ruleTags": {
+        "obligationType": "限制性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记",
+              "注册"
+            ]
+          },
+          {
+            "category": "限制/禁止",
+            "verbs": [
+              "暂停"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-020",
+      "clauseRef": "第十九条",
+      "headingPath": [],
+      "originalText": "第十九条  放款人应对境外放款资金使用的真实性、合规性负责，监督借款人对放款资金的使用，督促借款人按时偿还。境外放款收回金额不得超过境外放款本金及利息等合理收入之和。",
+      "position": {
+        "paragraphStart": 3842,
+        "paragraphEnd": 3926
+      },
+      "ruleTags": {
+        "obligationType": "限制性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-021",
+      "clauseRef": "第二十条",
+      "headingPath": [],
+      "originalText": "第二十条  经办行应对境外放款资金来源进行真实性、合规性尽职审查，对照国家外汇局资本项目信息系统中的境外放款相关登记信息对境外放款业务进行一致性审查，按规定办理资金汇兑和收付。\n经办行办理境外放款资金汇出时，应确保累计汇出金额未超过放款人登记的境外放款金额；办理境外放款项下资金汇回时，应审核汇入资金规模的合理性。\n第四章   监督管理与法律责任",
+      "position": {
+        "paragraphStart": 3926,
+        "paragraphEnd": 4100
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "检查/审计",
+            "verbs": [
+              "审查"
+            ]
+          },
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-022",
+      "clauseRef": "第二十一条",
+      "headingPath": [],
+      "originalText": "第二十一条  放款人发现借款人发生重大变更或出现逾期风险等异常情况应及时向注册所在地国家外汇局分局报告。经办行发现异常情况应及时向注册所在地国家外汇局分局报告。",
+      "position": {
+        "paragraphStart": 4100,
+        "paragraphEnd": 4181
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "报送/报告",
+            "verbs": [
+              "报告"
+            ]
+          },
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "注册"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-023",
+      "clauseRef": "第二十二条",
+      "headingPath": [],
+      "originalText": "第二十二条  放款人、经办行应按照相关规定，及时准确进行国际收支统计申报及相关账户、结售汇和人民币跨境收付信息管理系统（ RCPMIS ）数据的报送。",
+      "position": {
+        "paragraphStart": 4181,
+        "paragraphEnd": 4257
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "报送/报告",
+            "verbs": [
+              "报送"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-024",
+      "clauseRef": "第二十三条",
+      "headingPath": [],
+      "originalText": "第二十三条  中国人民银行及其分支机构、国家外汇局及其分局对境外放款业务进行统计监测，对异常或可疑情况实施核查或检查。放款人、借款人、经办行等相关主体应当配合中国人民银行及其分支机构、国家外汇局及其分局的监督检查，如实说明情况和提供相关材料，不得拒绝、阻碍和隐瞒。",
+      "position": {
+        "paragraphStart": 4257,
+        "paragraphEnd": 4390
+      },
+      "ruleTags": {
+        "obligationType": "禁止性",
+        "regulatoryActions": [
+          {
+            "category": "检查/审计",
+            "verbs": [
+              "检查",
+              "核查"
+            ]
+          },
+          {
+            "category": "监测/预警",
+            "verbs": [
+              "监测"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-025",
+      "clauseRef": "第二十四条",
+      "headingPath": [],
+      "originalText": "第二十四条  放款人有下列情形之一的，中国人民银行及其分支机构、国家外汇局及其分局依据《中华人民共和国中国人民银行法》《中华人民共和国外汇管理条例》等法律法规予以处罚： （一）未按规定办理境外放款相关登记的。 （二）未按规定提供有效材料或者提供材料不真实的。 （三）境外放款资金来源或资金使用不符合规定的。 （四）未按规定报送有关信息的。 （五）其他违反本办法规定的行为。",
+      "position": {
+        "paragraphStart": 4390,
+        "paragraphEnd": 4577
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "报送/报告",
+            "verbs": [
+              "报送"
+            ]
+          },
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-026",
+      "clauseRef": "第二十五条",
+      "headingPath": [],
+      "originalText": "第二十五条  经办行有下列情形之一的，中国人民银行及其分支机构、国家外汇局及其分局依据《中华人民共和国中国人民银行法》《中华人民共和国外汇管理条例》等法律法规予以处罚： （一）未按本办法",
+      "position": {
+        "paragraphStart": 4577,
+        "paragraphEnd": 4670
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-027",
+      "clauseRef": "第二十条",
+      "headingPath": [],
+      "originalText": "第二十条规定对境外放款业务进行审查的。 （二）未按规定办理资金汇兑和收付的。 （三）未按规定报送有关信息的。 （四）其他违反本办法规定的行为。\n第五章  附 则",
+      "position": {
+        "paragraphStart": 4670,
+        "paragraphEnd": 4751
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "报送/报告",
+            "verbs": [
+              "报送"
+            ]
+          },
+          {
+            "category": "检查/审计",
+            "verbs": [
+              "审查"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-028",
+      "clauseRef": "第二十六条",
+      "headingPath": [],
+      "originalText": "第二十六条  中国人民银行、国家外汇局可根据国际收支形势及国家宏观调控要求，对宏观审慎调节系数、币种转换因子等进行适时调整。",
+      "position": {
+        "paragraphStart": 4751,
+        "paragraphEnd": 4814
+      },
+      "ruleTags": {
+        "obligationType": "授权性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-029",
+      "clauseRef": "第二十七条",
+      "headingPath": [],
+      "originalText": "第二十七条  跨国公司本外币一体化资金池、跨国公司跨境资金集中运营项下境外放款，遵循跨国公司相关业务管理规定。",
+      "position": {
+        "paragraphStart": 4814,
+        "paragraphEnd": 4870
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-030",
+      "clauseRef": "第二十八条",
+      "headingPath": [],
+      "originalText": "第二十八条  企业集团财务公司以委托贷款方式办理境外放款业务，还应符合国家金融监管部门的相关规定。",
+      "position": {
+        "paragraphStart": 4870,
+        "paragraphEnd": 4920
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-031",
+      "clauseRef": "第二十九条",
+      "headingPath": [],
+      "originalText": "第二十九条  本办法由中国人民银行、国家外汇局负责解释。",
+      "position": {
+        "paragraphStart": 4920,
+        "paragraphEnd": 4949
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "high"
+    },
+    {
+      "clauseId": "C-032",
+      "clauseRef": "第三十条",
+      "headingPath": [],
+      "originalText": "第三十条  本办法自 2026 年 4 月 20 日起实施。《国家外汇管理局关于境内企业境外放款外汇管理有关问题的通知》（汇发〔 2009 〕 24 号）、《中国人民银行关于进一步明确境内企业人民币境外放款业务有关事项的通知》（银发〔 2016 〕 306 号）、《中国人民银行 国家外汇管理局关于调整境内企业境外放款宏观审慎调节系数的通知》（银发〔 2021 〕 2 号）同时废止。其他有关规定与本办法不一致的，以本办法为准。\n附1 参数设置.pdf\n附2 境外放款业务登记申请表.pdf\n相关链接\n中国人民银行 国家外汇管理局发布《境内企业境外放款管理办法》\n2017-04-26\n-->\n分享到：\n-->\n【大\n中\n小】 -->\n【打印】\n【关闭】\n联系我们 | 法律声明 | 网站地图 | 设为首页\n| 加入收藏\n国家外汇管理局主办 版权所有 授权转载 最佳分辨率:1280*768\n网站标识码bm74000001    京ICP备06017241号     京公网安备11040102700061",
+      "position": {
+        "paragraphStart": 4949,
+        "paragraphEnd": 5402
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "披露/公开",
+            "verbs": [
+              "发布"
+            ]
+          },
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "high"
+    }
+  ],
+  "fiveDimensions": {
+    "regulatoryIntent": {
+      "policyBackground": "为规范境内企业境外放款业务，维护外汇市场秩序，防范跨境资金流动风险。",
+      "regulatoryGoal": "规范境内企业境外放款行为，促进跨境资金有序流动，服务实体经济。",
+      "riskConcern": "境外放款可能涉及资本外逃、洗钱、逃税等风险，需加强真实性、合规性审查。",
+      "expectedEffect": "建立统一的本外币境外放款管理框架，实现宏观审慎管理，防止资金无序流出。",
+      "upperLevelLawBasis": [
+        "《中华人民共和国中国人民银行法》",
+        "《中华人民共和国外汇管理条例》",
+        "企业境外直接投资有关法律法规"
+      ],
+      "revisionHistory": [],
+      "regulatoryTrend": "宏观审慎管理，本外币一体化，强化事中事后监管。",
+      "judicialPractice": [],
+      "sourceClauseIds": [
+        "C-001",
+        "C-002",
+        "C-003",
+        "C-004",
+        "C-005",
+        "C-006",
+        "C-007",
+        "C-008",
+        "C-009",
+        "C-010",
+        "C-011",
+        "C-012",
+        "C-013",
+        "C-014",
+        "C-015",
+        "C-016",
+        "C-017",
+        "C-018",
+        "C-019",
+        "C-020",
+        "C-021",
+        "C-022",
+        "C-023",
+        "C-024",
+        "C-025",
+        "C-026",
+        "C-027",
+        "C-028",
+        "C-029",
+        "C-030",
+        "C-031",
+        "C-032"
+      ],
+      "needsReview": true
+    },
+    "regulatoryRequirements": [
+      {
+        "clauseId": "C-001",
+        "clauseRef": "第一条",
+        "originalExcerpt": "第一条  为规范境内企业境外放款业务，根据《中华人民共和国中国人民银行法》《中华人民共和国外汇管理条例》及企业境外直接投资有关法律法规，制定本办法。",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "中国人民银行、国家外汇局",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-002",
+        "clauseRef": "第二条",
+        "originalExcerpt": "第二条  本办法所称境内企业境外放款，是指境内非金融企业（以下简称放款人）按照合同约定的金额、利率、期限、用途等，由境内向符合条件的境外企业（以下简称借款人）提供资金跨境融通的行为。",
+        "obligationType": "一般性",
+        "action": "",
+        "subject": "无",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-003",
+        "clauseRef": "第三条",
+        "originalExcerpt": "第三条  放款人开展境外放款应遵守国家法律法规和行业主管部门的规定，符合国家宏观调控要求。按照本办法办理境外放款登记、账户开立和使用、资金汇兑及收付等业务。",
+        "obligationType": "程序性",
+        "action": "登记/注册",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-004",
+        "clauseRef": "第四条",
+        "originalExcerpt": "第四条  中国人民银行及其分支机构、国家外汇局及其分局按职责分工对境外放款登记、账户开立和使用、资金汇兑及收付等实施监督管理。",
+        "obligationType": "程序性",
+        "action": "登记/注册",
+        "subject": "中国人民银行及其分支机构、国家外汇局及其分局",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-005",
+        "clauseRef": "第五条",
+        "originalExcerpt": "第五条  放款人与借款人签订境外放款协议后，在对借款人放款之前，到注册所在地国家外汇局分局申请办理登记。已登记的境外放款金额应在 2 年（含）内使用，超过 2 年的，其中未汇出部分自动失效。",
+        "obligationType": "程序性",
+        "action": "登记/注册",
+        "subject": "放款人",
+        "deadline": "2年（含）内使用；申请登记在放款前",
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-006",
+        "clauseRef": "第六条",
+        "originalExcerpt": "第六条  放款人申请办理境外放款登记（含新办登记、变更登记、展期登记，下同）应符合以下条件： （一）放款人应依法注册成立 1 年（含）以上，有持续良好经营的记录，有健全的财务制度和内控制度，近 3 年无重大违法违规行为（依法注册成立不满 3 年的，成立以来无重大违法违规行为）。 （二）借款人应依法注册成立且有持续良好经营的记录，近 3 年无重大违法违规行为（依法注册成立不满 3 年的，成立以来无重大违法违规行为）。 （三）放款人与借款人具有直接或间接持股关系，或者由同一家母公司直接或间接持股。 （四）放款人境外放款余额未超过其境外放款余额上限。 （五）放款人对同一借款人的境外放款金额及余额与借款人的实际经营情况相符合，境外放款用途符合本办法第十四条的规定。 （六）境外放款利率符合商业合理原则。 （七）境外放款期限符合商业合理原则，原则上应在 6 个月（含）至 5 年（含）之间。 （八）放款人存量境外放款（如有）本息已按期足额收回，或者本息虽未按期足额收回但具有正当理由（办理展期登记时除外）。申请办理登记的境外放款对应的借款人存量境外放款（如有）不存在逾期（办理展期登记时除外）。",
+        "obligationType": "程序性",
+        "action": "登记/注册",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-007",
+        "clauseRef": "第十四条",
+        "originalExcerpt": "第十四条的规定。 （六）境外放款利率符合商业合理原则。 （七）境外放款期限符合商业合理原则，原则上应在 6 个月（含）至 5 年（含）之间。 （八）放款人存量境外放款（如有）本息已按期足额收回，或者本息虽未按期足额收回但具有正当理由（办理展期登记时除外）。申请办理登记的境外放款对应的借款人存量境外放款（如有）不存在逾期（办理展期登记时除外）。",
+        "obligationType": "程序性",
+        "action": "登记/注册",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-008",
+        "clauseRef": "第七条",
+        "originalExcerpt": "第七条  放款人应持以下材料向注册所在地国家外汇局分局申请办理境外放款登记： （一）书面申请，内容包括境外放款资金使用计划和还款计划、放款人和借款人经营情况、存量境外放款情况，承诺无重大违法违规行为以及资金来源、用途合规且不超出放款协议约定的用途范围等，并附《境外放款业务登记申请表》。 （二）放款人和借款人依法注册成立，以及放款人与借款人具有直接或间接持股关系、或者由同一家母公司直接或间接持股的证明材料。 （三）境外放款协议，内容包括但不限于放款金额、利率、期限、币种、还本付息方式、借款用途等。放款人通过依法设立且具有外汇业务资格的企业集团财务公司以委托贷款方式对借款人进行放款时，应提供放款人、借款人与财务公司签订的委托贷款协议。 （四）放款人最近一期经审计的财务报告、借款人最近一期财务报告。\n注册所在地国家外汇局分局对申请材料有疑议的，可要求放款人完善申请材料或作出书面解释说明。",
+        "obligationType": "程序性",
+        "action": "登记/注册",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-009",
+        "clauseRef": "第八条",
+        "originalExcerpt": "第八条  境外放款协议（金额、利率、期限等）发生变更，或者因放款人、借款人发生合并、分立、转股等原因导致主体变更的，放款人应持以下材料向注册所在地国家外汇局分局申请办理境外放款变更登记： （一）书面申请，详细说明变更事项及原因，并附《境外放款业务登记申请表》。 （二）变更后的境外放款协议。 （三）涉及境外放款金额变更时，需提供放款人最近一期经审计的财务报告及借款人最近一期财务报告等证明材料。 （四）境外放款主体变更时，应提交放款人、借款人合并、分立、转股等变更后仍符合本办法",
+        "obligationType": "程序性",
+        "action": "登记/注册",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-010",
+        "clauseRef": "第九条",
+        "originalExcerpt": "第九条  境外放款已足额收回本息、或者办理境外放款登记后无资金汇出实际需求的，放款人可持书面申请及业务登记凭证等材料到为其办理境外放款业务的银行（以下简称经办行）办理境外放款注销登记。其他境外放款注销登记在注册所在地国家外汇局分局办理。",
+        "obligationType": "程序性",
+        "action": "登记/注册",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-011",
+        "clauseRef": "第十条",
+        "originalExcerpt": "第十条  境外放款实行人民币和外币（以下简称本外币）一体化宏观审慎管理。放款人境外放款余额不得超过其境外放款余额上限。\n境外放款余额上限 = 放款人最近一期经审计的所有者权益×宏观审慎调节系数。\n境外放款余额 = ∑放款人本外币境外放款余额＋∑放款人外币境外放款余额×币种转换因子。",
+        "obligationType": "限制性",
+        "action": "检查/审计",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-012",
+        "clauseRef": "第十一条",
+        "originalExcerpt": "第十一条  放款人作为担保人或者反担保人发生内保外贷履约形成的对外债权、以及其他形式的跨境担保履约形成的对外债权，纳入放款人境外放款余额管理。担保履约形成的对外债权余额与放款人境外放款余额之和原则上不得超过放款人境外放款余额上限。如超过境外放款余额上限，注册所在地国家外汇局分局可先为放款人办理担保履约对外债权登记，但在担保履约形成的对外债权余额与境外放款余额之和恢复到境外放款余额上限以内之前，不得为放款人办理新的境外放款登记。",
+        "obligationType": "限制性",
+        "action": "登记/注册",
+        "subject": "放款人、国家外汇局分局",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-013",
+        "clauseRef": "第十二条",
+        "originalExcerpt": "第十二条  放款人将存量境外放款转为股权投资等境外直接投资，应事先履行境外直接投资核准或备案手续，凭相关核准或备案文件到注册所在地国家外汇局分局办理境外放款变更（或注销）登记后，在银行办理境外直接投资登记（或变更）手续。\n放款人开展境外直接投资且经境外直接投资主管部门核准或备案以债权方式出资的，按照境外直接投资进行管理，可直接到银行办理境外直接投资登记手续；如债权出资涉及存量境外放款，应按照前款程序办理相关境外放款变更（或注销）登记及境外直接投资登记（或变更）手续。",
+        "obligationType": "程序性",
+        "action": "登记/注册",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-014",
+        "clauseRef": "第十三条",
+        "originalExcerpt": "第十三条  放款人应使用自有资金（自有人民币、自有外币及自有人民币购汇资金，下同）开展境外放款业务，不得使用个人资金或利用自身债务融资为境外放款提供资金来源。",
+        "obligationType": "禁止性",
+        "action": "限制/禁止",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-015",
+        "clauseRef": "第十四条",
+        "originalExcerpt": "第十四条  境外放款资金应在境外放款协议约定的用途范围内使用，并遵守以下规定： （一）不得违反国家法律法规和国家宏观调控相关要求。 （二）不得直接或间接用于借款人经营范围之外。 （三）不得用于规避境外直接投资、证券投资等管理政策。 （四）不得违反反洗钱、反恐怖融资、反逃税的相关规定。",
+        "obligationType": "禁止性",
+        "action": "限制/禁止",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-016",
+        "clauseRef": "第十五条",
+        "originalExcerpt": "第十五条  放款人应按规定凭身份证明材料、境外放款业务登记凭证等材料在注册所在地国家外汇局分局辖区内银行开立境外放款专用账户（人民币或 / 和外汇账户）（以下简称境外放款专用账户），用于办理境外放款相关资金汇兑和收付。多笔境外放款可以共用一个境外放款专用账户。放款人也可使用已有境外放款专用账户办理境外放款相关资金汇兑和收付，无需开立新的专用账户。\n放款人已办理境外放款注销登记且已完成境外放款资金清收的，可注销对应的境外放款专用账户。",
+        "obligationType": "程序性",
+        "action": "登记/注册",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-017",
+        "clauseRef": "第十六条",
+        "originalExcerpt": "第十六条  境外放款专用账户收入范围：放款人境内资金账户划入的自有资金（人民币或 / 和外汇）；以自有人民币购汇用于境外放款的外汇资金；境外放款本息；同名境外放款专用账户内资金划入。专用账户支出范围：按照境外放款协议约定向借款人汇出放款资金（人民币或 / 和外汇）；汇往同名境外放款专用账户；划回对应的原划入资金的账户；符合规定的其他境内支出。",
+        "obligationType": "一般性",
+        "action": "",
+        "subject": "无",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-018",
+        "clauseRef": "第十七条",
+        "originalExcerpt": "第十七条  以人民币登记的境外放款，原则上应以人民币放款和收回；以外币登记的境外放款，原则上应以外币放款和收回，外币币种之间可根据实际情况选择配置。",
+        "obligationType": "程序性",
+        "action": "登记/注册",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-019",
+        "clauseRef": "第十八条",
+        "originalExcerpt": "第十八条  同一笔境外放款原则上展期不得超过一次。借款人不得通过展期规避境外放款本息偿还义务。\n境外放款如需展期，放款人应在境外放款到期前至少 30 日向注册所在地国家外汇局分局申请办理展期登记。如境外放款发生全部或部分逾期，放款人不得直接或间接对发生逾期的借款人新增境外放款，办理该笔境外放款资金汇兑和收付的经办行应暂停对发生逾期的借款人新办境外放款资金汇出。",
+        "obligationType": "限制性",
+        "action": "登记/注册",
+        "subject": "放款人、经办行",
+        "deadline": "展期登记应在到期前至少30日",
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-020",
+        "clauseRef": "第十九条",
+        "originalExcerpt": "第十九条  放款人应对境外放款资金使用的真实性、合规性负责，监督借款人对放款资金的使用，督促借款人按时偿还。境外放款收回金额不得超过境外放款本金及利息等合理收入之和。",
+        "obligationType": "限制性",
+        "action": "监测/预警",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-021",
+        "clauseRef": "第二十条",
+        "originalExcerpt": "第二十条  经办行应对境外放款资金来源进行真实性、合规性尽职审查，对照国家外汇局资本项目信息系统中的境外放款相关登记信息对境外放款业务进行一致性审查，按规定办理资金汇兑和收付。\n经办行办理境外放款资金汇出时，应确保累计汇出金额未超过放款人登记的境外放款金额；办理境外放款项下资金汇回时，应审核汇入资金规模的合理性。",
+        "obligationType": "程序性",
+        "action": "检查/审计",
+        "subject": "经办行",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-022",
+        "clauseRef": "第二十一条",
+        "originalExcerpt": "第二十一条  放款人发现借款人发生重大变更或出现逾期风险等异常情况应及时向注册所在地国家外汇局分局报告。经办行发现异常情况应及时向注册所在地国家外汇局分局报告。",
+        "obligationType": "一般性",
+        "action": "报送/报告",
+        "subject": "放款人、经办行",
+        "deadline": "及时",
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-023",
+        "clauseRef": "第二十二条",
+        "originalExcerpt": "第二十二条  放款人、经办行应按照相关规定，及时准确进行国际收支统计申报及相关账户、结售汇和人民币跨境收付信息管理系统（ RCPMIS ）数据的报送。",
+        "obligationType": "程序性",
+        "action": "报送/报告",
+        "subject": "放款人、经办行",
+        "deadline": "及时",
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-024",
+        "clauseRef": "第二十三条",
+        "originalExcerpt": "第二十三条  中国人民银行及其分支机构、国家外汇局及其分局对境外放款业务进行统计监测，对异常或可疑情况实施核查或检查。放款人、借款人、经办行等相关主体应当配合中国人民银行及其分支机构、国家外汇局及其分局的监督检查，如实说明情况和提供相关材料，不得拒绝、阻碍和隐瞒。",
+        "obligationType": "禁止性",
+        "action": "检查/审计",
+        "subject": "中国人民银行及分支机构、国家外汇局及分局",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-025",
+        "clauseRef": "第二十四条",
+        "originalExcerpt": "第二十四条  放款人有下列情形之一的，中国人民银行及其分支机构、国家外汇局及其分局依据《中华人民共和国中国人民银行法》《中华人民共和国外汇管理条例》等法律法规予以处罚： （一）未按规定办理境外放款相关登记的。 （二）未按规定提供有效材料或者提供材料不真实的。 （三）境外放款资金来源或资金使用不符合规定的。 （四）未按规定报送有关信息的。 （五）其他违反本办法规定的行为。",
+        "obligationType": "程序性",
+        "action": "报送/报告",
+        "subject": "放款人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-026",
+        "clauseRef": "第二十五条",
+        "originalExcerpt": "第二十五条  经办行有下列情形之一的，中国人民银行及其分支机构、国家外汇局及其分局依据《中华人民共和国中国人民银行法》《中华人民共和国外汇管理条例》等法律法规予以处罚： （一）未按本办法",
+        "obligationType": "一般性",
+        "action": "",
+        "subject": "经办行",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-027",
+        "clauseRef": "第二十条",
+        "originalExcerpt": "第二十条规定对境外放款业务进行审查的。 （二）未按规定办理资金汇兑和收付的。 （三）未按规定报送有关信息的。 （四）其他违反本办法规定的行为。\n第五章  附 则",
+        "obligationType": "程序性",
+        "action": "报送/报告",
+        "subject": "经办行",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-028",
+        "clauseRef": "第二十六条",
+        "originalExcerpt": "第二十六条  中国人民银行、国家外汇局可根据国际收支形势及国家宏观调控要求，对宏观审慎调节系数、币种转换因子等进行适时调整。",
+        "obligationType": "授权性",
+        "action": "制定/修订",
+        "subject": "中国人民银行、国家外汇局",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-029",
+        "clauseRef": "第二十七条",
+        "originalExcerpt": "第二十七条  跨国公司本外币一体化资金池、跨国公司跨境资金集中运营项下境外放款，遵循跨国公司相关业务管理规定。",
+        "obligationType": "一般性",
+        "action": "",
+        "subject": "无",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-030",
+        "clauseRef": "第二十八条",
+        "originalExcerpt": "第二十八条  企业集团财务公司以委托贷款方式办理境外放款业务，还应符合国家金融监管部门的相关规定。",
+        "obligationType": "一般性",
+        "action": "",
+        "subject": "企业集团财务公司",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-031",
+        "clauseRef": "第二十九条",
+        "originalExcerpt": "第二十九条  本办法由中国人民银行、国家外汇局负责解释。",
+        "obligationType": "一般性",
+        "action": "",
+        "subject": "中国人民银行、国家外汇局",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-032",
+        "clauseRef": "第三十条",
+        "originalExcerpt": "第三十条  本办法自 2026 年 4 月 20 日起实施。《国家外汇管理局关于境内企业境外放款外汇管理有关问题的通知》（汇发〔 2009 〕 24 号）、《中国人民银行关于进一步明确境内企业人民币境外放款业务有关事项的通知》（银发〔 2016 〕 306 号）、《中国人民银行 国家外汇管理局关于调整境内企业境外放款宏观审慎调节系数的通知》（银发〔 2021 〕 2 号）同时废止。其他有关规定与本办法不一致的，以本办法为准。",
+        "obligationType": "程序性",
+        "action": "披露/公开",
+        "subject": "中国人民银行、国家外汇局",
+        "deadline": "2026年4月20日",
+        "needsReview": true
+      }
+    ],
+    "applicableObjects": {
+      "direct": [
+        "境内非金融企业（放款人）"
+      ],
+      "indirect": [
+        "境外企业（借款人）",
+        "经办行（银行）",
+        "企业集团财务公司",
+        "中国人民银行及其分支机构",
+        "国家外汇局及其分局"
+      ],
+      "exempted": [],
+      "sourceClauseIds": [
+        "C-002",
+        "C-003",
+        "C-004",
+        "C-005",
+        "C-006",
+        "C-007",
+        "C-008",
+        "C-009",
+        "C-010",
+        "C-011",
+        "C-012",
+        "C-013",
+        "C-014",
+        "C-015",
+        "C-016",
+        "C-017",
+        "C-018",
+        "C-019",
+        "C-020",
+        "C-021",
+        "C-022",
+        "C-023",
+        "C-024",
+        "C-025",
+        "C-026",
+        "C-027",
+        "C-028",
+        "C-029",
+        "C-030"
+      ],
+      "needsReview": true
+    },
+    "operationalRequirements": [
+      "放款人应在签订境外放款协议后、放款前到注册所在地国家外汇局分局办理境外放款登记。",
+      "申请登记时需提交书面申请、身份及持股关系证明、境外放款协议、经审计的财务报告等材料。",
+      "已登记的境外放款金额应在2年内使用，未使用部分自动失效。",
+      "境外放款协议发生变更或主体变更时，应申请变更登记。",
+      "境外放款偿还或无需汇出时，应办理注销登记。",
+      "放款人应使用自有资金，不得使用个人资金或债务融资。",
+      "境外放款资金应在协议约定的用途内使用，遵守禁止性规定。",
+      "放款人应在银行开立境外放款专用账户，用于资金汇兑和收付。",
+      "放款人应按币种匹配原则进行资金收付。",
+      "放款人应监督借款人使用资金，督促按时偿还。",
+      "经办行应对资金来源进行真实性、合规性审查，并对照登记信息审核。",
+      "放款人和经办行应及时向外汇局报告异常情况。",
+      "放款人和经办行应按规定进行国际收支统计申报和数据报送。"
+    ],
+    "inspectionFocus": [
+      "境外放款是否按规定办理登记（新办、变更、展期、注销）。",
+      "放款人资格、借款人资格及关联关系是否符合要求。",
+      "境外放款余额是否超过上限。",
+      "境外放款资金来源是否合规（自有资金）。",
+      "境外放款资金使用是否在协议用途范围内，是否违反禁止性规定。",
+      "境外放款利率、期限是否商业合理。",
+      "放款人是否履行监督和催收义务。",
+      "经办行是否进行真实性、合规性审查。",
+      "是否及时准确报送相关信息。",
+      "是否存在规避境外直接投资、证券投资等管理政策的行为。"
+    ]
+  },
+  "review": {
+    "status": "pending",
+    "required": true,
+    "items": [
+      {
+        "targetType": "requirement",
+        "targetId": "C-001",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-002",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-003",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-004",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-005",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-006",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-007",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-008",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-009",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-010",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-011",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-012",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-013",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-014",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-015",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-016",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-017",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-018",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-019",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-020",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-021",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-022",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-023",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-024",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-025",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-026",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-027",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-028",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-029",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-030",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-031",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-032",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "regulatoryIntent",
+        "targetId": "regulatoryIntent",
+        "riskLevel": "medium",
+        "reason": "监管意图包含模型推理结论，须由合规人员确认。",
+        "decision": "pending"
+      }
+    ]
+  },
+  "artifacts": []
+}

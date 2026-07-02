@@ -1,0 +1,693 @@
+{
+  "runId": "RUN-REMEDIATION_-20260624185355-933",
+  "skillId": "remediation-implementation",
+  "taskId": "990f2d424a481f6e80d6",
+  "upstream": {
+    "gapRunId": "RUN-REGULATION_G-20260624184844-013"
+  },
+  "model": {
+    "provider": "deepseek",
+    "name": "deepseek-v4-pro",
+    "promptVersion": "remediation-implementation-v1.0"
+  },
+  "disclaimer": "AI 辅助草案，须经法律合规部门审查。",
+  "summary": {
+    "totalItems": 12,
+    "urgentCount": 7,
+    "controlPointCount": 12,
+    "policyDraftCount": 12
+  },
+  "items": [
+    {
+      "remediationId": "R-011",
+      "gapId": "G-011",
+      "externalBasis": "第十条",
+      "dimensions": {
+        "institution": {
+          "action": "新增《境外放款额度管理办法》，明确额度计算公式、余额监控、预警机制及调整流程。",
+          "type": "新增"
+        },
+        "process": {
+          "action": "新增境外放款额度计算、实时监控、预警触发及超限处置的端到端流程。",
+          "type": "新增"
+        },
+        "system": {
+          "action": "新增境外放款额度监控模块，实现与所有者权益数据对接、余额自动计算、预警通知及报表生成。",
+          "type": "新增",
+          "priority": "高"
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-011",
+          "controlType": "预防性",
+          "description": "系统自动计算境外放款余额，对比限额（所有者权益×宏观审慎调节系数），超限时阻断新放款申请并触发预警。"
+        }
+      },
+      "ownerDepartment": "国际业务部",
+      "priority": "紧急",
+      "plannedCompletionDate": "2026-08-01",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款额度管理办法",
+        "draftType": "新增制度",
+        "purpose": "规范境外放款额度管理，确保余额不得超过宏观审慎管理上限，实时监控并设置预警。",
+        "scope": "适用于本机构及下属子公司境外放款业务的额度计算、监控、调整及报告。",
+        "coreClauses": [
+          "境外放款余额的计算公式为：放款余额＝∑（已登记境外放款金额－已收回本息金额），余额上限＝所有者权益×宏观审慎调节系数。",
+          "应当建立实时监控系统，每日计算放款余额，并设置预警阈值（如上限的80%），触发预警后须暂停新增放款审批。",
+          "宏观审慎调节系数调整时，须在3个工作日内完成系统参数更新与通知。"
+        ],
+        "approvalPath": "国际业务部起草→风险管理部会签→合规部审查→分管行领导审批",
+        "effectiveArrangement": "自发布之日起实施，系统改造部分过渡期3个月。",
+        "regulatoryBasis": "第十条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    },
+    {
+      "remediationId": "R-012",
+      "gapId": "G-012",
+      "externalBasis": "第十一条",
+      "dimensions": {
+        "institution": {
+          "action": "修订《境外放款额度管理办法》，将担保履约形成的对外债权纳入余额管理，增加合并计算规则及超限禁办新登记机制。",
+          "type": "修订"
+        },
+        "process": {
+          "action": "新增担保履约债权识别、确认、纳入合并余额计算、超限暂停新放款登记的流程。",
+          "type": "新增"
+        },
+        "system": {
+          "action": "系统增加担保履约债权自动采集接口，实现与境外放款余额合并计算，超限时自动阻断新放款登记并通知相关岗位。",
+          "type": "新增",
+          "priority": "高"
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-012",
+          "controlType": "检测性",
+          "description": "担保履约发生时，系统自动获取对外债权信息，更新合并余额，当合并余额超过限额时，系统禁止办理新的境外放款登记。"
+        }
+      },
+      "ownerDepartment": "国际业务部",
+      "priority": "紧急",
+      "plannedCompletionDate": "2026-08-01",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款额度管理办法（修订要点）",
+        "draftType": "修订要点",
+        "purpose": "为确保担保履约形成的对外债权纳入统一额度管理，防范超限风险。",
+        "scope": "适用于原《境外放款额度管理办法》覆盖范围，补充担保履约相关条款。",
+        "coreClauses": [
+          "担保履约形成的对外债权金额应与境外放款余额合并计算，合并余额原则上不得超过上限。",
+          "合并余额超限期间，不得办理新的境外放款登记，直至余额恢复至上限以下。",
+          "担保履约发生后，相关部门应在2个工作日内准确录入债权信息，确保系统数据及时更新。"
+        ],
+        "approvalPath": "国际业务部提出修订→合规部审查→原审批人确认",
+        "effectiveArrangement": "发布修订版本后立即生效。",
+        "regulatoryBasis": "第十一条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    },
+    {
+      "remediationId": "R-014",
+      "gapId": "G-014",
+      "externalBasis": "第十三条",
+      "dimensions": {
+        "institution": {
+          "action": "新增《境外放款资金来源审核管理办法》，明确自有资金认定标准、审核流程及禁止情形。",
+          "type": "新增"
+        },
+        "process": {
+          "action": "新增放款前资金来源审核流程，包括证明材料收集、部门审核、系统校验等步骤。",
+          "type": "新增"
+        },
+        "system": {
+          "action": "系统新增资金来源识别模块，支持资金性质标记、自动化校验并拦截非自有资金放款。",
+          "type": "新增",
+          "priority": "高"
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-014",
+          "controlType": "预防性",
+          "description": "放款前必须通过系统验证资金来源为自有资金，禁止使用个人资金或债务融资资金，系统自动拒绝不合规申请。"
+        }
+      },
+      "ownerDepartment": "国际业务部",
+      "priority": "紧急",
+      "plannedCompletionDate": "2026-08-01",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款资金来源审核管理办法",
+        "draftType": "新增制度",
+        "purpose": "确保境外放款资金全部来源于自有资金，杜绝使用个人资金或债务融资资金。",
+        "scope": "适用于本机构所有境外放款业务的资金来源审核环节。",
+        "coreClauses": [
+          "放款人应当使用自有资金开展境外放款，自有资金指扣除债务融资后的净资产对应可动用资金。",
+          "申请放款时须提交资金证明文件（如审计报告、银行流水等），由国际业务部审核并出具合规意见。",
+          "禁止以任何形式使用个人资金、借贷资金或非法汇集资金充当境外放款来源。"
+        ],
+        "approvalPath": "国际业务部起草→财务部会签→合规部审查→分管行领导审批",
+        "effectiveArrangement": "自发布之日起施行。",
+        "regulatoryBasis": "第十三条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    },
+    {
+      "remediationId": "R-015",
+      "gapId": "G-015",
+      "externalBasis": "第十四条",
+      "dimensions": {
+        "institution": {
+          "action": "新增《境外放款资金用途管理规定》，明确用途审查标准、后续监控措施及违规处置。",
+          "type": "新增"
+        },
+        "process": {
+          "action": "新增放款前用途合规性审查、放款后定期报送资金使用证明、异常处置流程。",
+          "type": "新增"
+        },
+        "system": {
+          "action": "系统新增资金用途跟踪模块，与协议用途绑定，要求按期上传凭证并自动检测偏离。",
+          "type": "新增",
+          "priority": "高"
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-015",
+          "controlType": "预防性",
+          "description": "系统强制放款时选择协议约定用途分类，后续监控资金流向，若发现用途不符立即预警并暂停后续放款。"
+        }
+      },
+      "ownerDepartment": "国际业务部",
+      "priority": "紧急",
+      "plannedCompletionDate": "2026-08-01",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款资金用途管理规定",
+        "draftType": "新增制度",
+        "purpose": "确保境外放款资金严格用于协议约定用途，遵守宏观调控、经营范围及反洗钱等要求。",
+        "scope": "适用于本机构所有境外放款业务的资金用途监督与管理。",
+        "coreClauses": [
+          "放款资金不得违反国家宏观调控政策，不得用于借款人经营范围之外，不得规避投资或证券监管。",
+          "借款人应当按季报告资金使用情况，提供银行流水、采购合同等证明材料，国际业务部负责查验。",
+          "发现资金挪用或用途违规时，应立即暂停借款人新增放款，限期整改并追回资金。"
+        ],
+        "approvalPath": "国际业务部起草→合规部审查→风险总监审批",
+        "effectiveArrangement": "自发布之日起施行。",
+        "regulatoryBasis": "第十四条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    },
+    {
+      "remediationId": "R-019",
+      "gapId": "G-019",
+      "externalBasis": "第十八条",
+      "dimensions": {
+        "institution": {
+          "action": "新增《境外放款展期与逾期管理办法》，明确展期次数限制、申请时限、审批程序、逾期处置及黑名单机制。",
+          "type": "新增"
+        },
+        "process": {
+          "action": "新增展期申请、事前审查、审批、逾期标识、资金汇出阻断及黑名单管理流程。",
+          "type": "新增"
+        },
+        "system": {
+          "action": "系统增加展期控制功能，强制校验展期次数与距离到期日天数，逾期自动冻结借款人并暂停经办行资金汇出。",
+          "type": "新增",
+          "priority": "高"
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-019",
+          "controlType": "预防性",
+          "description": "系统控制同一笔境外放款展期不得超过一次，展期申请须在到期前至少30日提交，逾期借款人自动进入黑名单并禁止新增放款。"
+        }
+      },
+      "ownerDepartment": "国际业务部",
+      "priority": "紧急",
+      "plannedCompletionDate": "2026-08-01",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款展期与逾期管理办法",
+        "draftType": "新增制度",
+        "purpose": "规范境外放款展期管理，严格限制展期次数，落实逾期处置措施，防范信用及合规风险。",
+        "scope": "适用于本机构所有境外放款业务的展期申请、审批及逾期处理。",
+        "coreClauses": [
+          "同一笔境外放款原则上展期不超过一次；展期申请应于到期前至少30日提交，系统自动校验时限。",
+          "逾期借款人不得新增放款，经办行应立即暂停其后续资金汇出业务，并上报国际业务部。",
+          "逾期未还款的借款人应列入观察名单，连续两笔逾期则列入黑名单，不再受理新放款申请。"
+        ],
+        "approvalPath": "国际业务部起草→风险管理部会签→合规部审查→分管行领导审批",
+        "effectiveArrangement": "自发布之日起施行，系统控制功能在3个月内上线。",
+        "regulatoryBasis": "第十八条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    },
+    {
+      "remediationId": "R-020",
+      "gapId": "G-020",
+      "externalBasis": "第十九条",
+      "dimensions": {
+        "institution": {
+          "action": "新增《境外放款贷后管理制度》，明确资金使用跟踪、定期报告、风险预警及本息回收要求。",
+          "type": "新增"
+        },
+        "process": {
+          "action": "新增贷后检查计划生成、执行、报告、风险分类、本息催收等流程。",
+          "type": "新增"
+        },
+        "system": {
+          "action": "系统新增贷后管理模块，自动生成检查任务，支持现场检查记录、风险信号采集与预警。",
+          "type": "新增",
+          "priority": "高"
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-020",
+          "controlType": "检测性",
+          "description": "系统定期推送贷后检查任务，要求上传资金使用凭证，监控借款人经营状况，触发风险信号时自动提级审核。"
+        }
+      },
+      "ownerDepartment": "国际业务部",
+      "priority": "紧急",
+      "plannedCompletionDate": "2026-08-01",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款贷后管理制度",
+        "draftType": "新增制度",
+        "purpose": "加强境外放款贷后管理，确保放款人对资金使用真实性、合规性负责，监督借款人还款。",
+        "scope": "适用于本机构所有已发放的境外放款业务的贷后管理环节。",
+        "coreClauses": [
+          "放款人应当对境外放款资金使用的真实性与合规性承担监督责任，按季收集借款人财务报表及资金使用凭证。",
+          "应建立风险预警机制，对出现逾期、经营恶化、资金异常转移等情形及时上报并采取保全措施。",
+          "收回本金及收益合计不得超过放款本息总和及商业合理收益，超出部分应作为费用处理并报告。"
+        ],
+        "approvalPath": "国际业务部起草→风险管理部会签→合规部审查→分管行领导审批",
+        "effectiveArrangement": "自发布之日起施行。",
+        "regulatoryBasis": "第十九条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    },
+    {
+      "remediationId": "R-024",
+      "gapId": "G-024",
+      "externalBasis": "第二十三条",
+      "dimensions": {
+        "institution": {
+          "action": "新增《监管检查配合管理办法（境外放款）》，明确配合程序、信息提供范围、保密义务及违规责任。",
+          "type": "新增"
+        },
+        "process": {
+          "action": "新增监管检查应对流程，包括接收通知、组建配合小组、资料准备、汇报陪同、整改反馈等。",
+          "type": "新增"
+        },
+        "system": {
+          "action": "系统需实现监管要求材料的快速归档与调取功能，配合建立资料共享专区。",
+          "type": "新增",
+          "priority": "高"
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-024",
+          "controlType": "指导性",
+          "description": "建立监管检查应对预案，明确资料调取、联络人机制，确保及时完整提供材料，禁止拒绝、阻碍或隐瞒。"
+        }
+      },
+      "ownerDepartment": "合规部",
+      "priority": "紧急",
+      "plannedCompletionDate": "2026-08-01",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款监管检查配合管理办法",
+        "draftType": "新增制度",
+        "purpose": "规范本机构对央行及外汇局境外放款统计监测、核查检查的配合行为，确保依法配合。",
+        "scope": "适用于涉及境外放款业务的各级机构、部门及人员在接受监管检查时的行为。",
+        "coreClauses": [
+          "收到监管检查通知后，合规部须在1个工作日内组建配合小组，指定联络人，并按要求准备资料。",
+          "各相关部门应当如实提供情况、文件、数据，不得拖延、隐瞒或拒绝；提供信息应经合规部审核。",
+          "检查结束后，合规部应跟踪问题整改，形成整改报告并按时报送监管机构。"
+        ],
+        "approvalPath": "合规部起草→法律事务部会签→行长审批",
+        "effectiveArrangement": "自发布之日起施行。",
+        "regulatoryBasis": "第二十三条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    },
+    {
+      "remediationId": "R-003",
+      "gapId": "G-003",
+      "externalBasis": "第三条",
+      "dimensions": {
+        "institution": {
+          "action": "新增《境外放款业务管理办法》，统筹境外放款业务各环节操作流程及职责分工。",
+          "type": "新增"
+        },
+        "process": {
+          "action": "新增境外放款业务全流程，涵盖登记、账户开立、资金汇兑、收付等标准化操作程序。",
+          "type": "新增"
+        },
+        "system": {
+          "action": "系统新增境外放款业务全流程管理模块，支持业务流程线上化与数据留痕。",
+          "type": "新增",
+          "priority": "中"
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-003",
+          "controlType": "预防性",
+          "description": "系统固化业务流程节点，强制逐环节操作，未经合规岗确认不得进入下一环节。"
+        }
+      },
+      "ownerDepartment": "国际业务部",
+      "priority": "高",
+      "plannedCompletionDate": "2026-12-31",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款业务管理办法",
+        "draftType": "新增制度",
+        "purpose": "规范境外放款业务的全流程管理，确保合规操作，符合宏观调控及国家法律法规。",
+        "scope": "适用于本机构所有境外放款业务的申请、审批、登记、资金汇兑及收回等环节。",
+        "coreClauses": [
+          "开展境外放款业务须遵守国家法律法规及宏观调控要求，须先向外汇局办理登记，凭登记凭证办理后续业务。",
+          "应指定国际业务部作为境外放款业务归口管理部门，统一负责操作流程制定与监督。",
+          "各环节须留存操作记录，定期接受内部审计与合规检查。"
+        ],
+        "approvalPath": "国际业务部起草→合规部审查→风险管理部会签→分管行领导审批",
+        "effectiveArrangement": "自发布之日起实施，配套流程与系统在6个月内到位。",
+        "regulatoryBasis": "第三条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    },
+    {
+      "remediationId": "R-004",
+      "gapId": "G-004",
+      "externalBasis": "第四条",
+      "dimensions": {
+        "institution": {
+          "action": "修订《境外放款业务管理办法》，明确指定监管事务归口管理部门（合规部），并细化职责。",
+          "type": "修订"
+        },
+        "process": {
+          "action": "修订内部管理流程，明确合规部对监管沟通、信息报送、检查配合的统一组织职责。",
+          "type": "修订"
+        },
+        "system": {
+          "action": "不涉及：通过组织架构调整与制度修订即可满足，无需专项系统改造。",
+          "type": "不涉及",
+          "priority": ""
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-004",
+          "controlType": "预防性",
+          "description": "在制度中明确合规部为监管事务归口管理部门，相关文件由该部门审核后方可对外报送。"
+        }
+      },
+      "ownerDepartment": "合规部",
+      "priority": "高",
+      "plannedCompletionDate": "2026-12-31",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款业务管理办法（修订要点）",
+        "draftType": "修订要点",
+        "purpose": "在业务管理办法中补充监管归口管理部门，厘清职责，确保符合人民银行与外汇局分工监管要求。",
+        "scope": "适用于原《境外放款业务管理办法》的修订部分。",
+        "coreClauses": [
+          "合规部为本机构境外放款业务监管事务归口管理部门，负责与人民银行、外汇局的日常沟通与报告。",
+          "涉及监管检查、数据报送、政策咨询等事项须经由合规部统一对外，其他部门不得擅自答复。"
+        ],
+        "approvalPath": "合规部提出修订→国际业务部会签→行长审批",
+        "effectiveArrangement": "随制度修订版发布生效。",
+        "regulatoryBasis": "第四条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    },
+    {
+      "remediationId": "R-005",
+      "gapId": "G-005",
+      "externalBasis": "第五条",
+      "dimensions": {
+        "institution": {
+          "action": "新增《境外放款登记操作细则》，明确登记前置条件、时限、材料清单及后续管理（如2年有效期自动失效）。",
+          "type": "新增"
+        },
+        "process": {
+          "action": "新增放款前登记办理流程，包括协议审核、材料准备、系统录入、外汇局反馈跟踪等。",
+          "type": "新增"
+        },
+        "system": {
+          "action": "系统新增登记状态管理功能，自动计算登记有效期，到期未用余额标记失效并阻断资金汇出。",
+          "type": "新增",
+          "priority": "中"
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-005",
+          "controlType": "预防性",
+          "description": "系统强制放款前校验登记有效性，已登记金额应在2年内使用，超期未用部分由系统冻结。"
+        }
+      },
+      "ownerDepartment": "国际业务部",
+      "priority": "高",
+      "plannedCompletionDate": "2026-12-31",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款登记操作细则",
+        "draftType": "新增制度",
+        "purpose": "规范境外放款登记流程，确保放款前完成外汇局登记，并有效管理登记额度。",
+        "scope": "适用于本机构所有境外放款业务的登记环节。",
+        "coreClauses": [
+          "放款人在与借款人签订协议后、放款前，应当到外汇局办理境外放款额度登记，取得业务登记凭证。",
+          "已登记金额应在登记日起2年内使用；超期未使用的部分，系统将自动标记失效，并禁止基于该登记办理资金汇出。",
+          "国际业务部应建立登记台账，跟踪登记状态，并在到期前3个月提醒办理续期或注销。"
+        ],
+        "approvalPath": "国际业务部起草→合规部审查→分管行领导审批",
+        "effectiveArrangement": "自发布之日起施行。",
+        "regulatoryBasis": "第五条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    },
+    {
+      "remediationId": "R-006",
+      "gapId": "G-006",
+      "externalBasis": "第六条",
+      "dimensions": {
+        "institution": {
+          "action": "新增《境外放款业务准入与审查管理办法》，明确借款人及放款人准入标准、审查要点与资料清单。",
+          "type": "新增"
+        },
+        "process": {
+          "action": "新增借款人资格准入审查流程，包括背景调查、财务分析、合规审查、集体审议等步骤。",
+          "type": "新增"
+        },
+        "system": {
+          "action": "系统新增准入评估模块，嵌入准入条件清单，支持资料提交、评分与自动通过/拒绝逻辑。",
+          "type": "新增",
+          "priority": "中"
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-006",
+          "controlType": "预防性",
+          "description": "系统强制逐项通过准入条件检查（成立年限、经营记录、股权关系、余额未超限等），任一不满足则冻结申请。"
+        }
+      },
+      "ownerDepartment": "国际业务部",
+      "priority": "高",
+      "plannedCompletionDate": "2026-12-31",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款业务准入与审查管理办法",
+        "draftType": "新增制度",
+        "purpose": "建立严格的境外放款准入标准，确保借款人与放款人均符合监管条件，控制信用风险。",
+        "scope": "适用于本机构新办理的境外放款业务准入审查。",
+        "coreClauses": [
+          "放款人应依法注册成立1年以上、经营状况良好、财务及内控制度健全、无重大违法违规记录。",
+          "借款人应具备类似条件，且与放款人存在股权关联关系；放款余额不得超过经核实的所有者权益乘数上限。",
+          "新增放款时须提交经审计的财务报告、股权结构图、合规承诺函等材料，由审查委员会投票决定。"
+        ],
+        "approvalPath": "国际业务部起草→风险管理部会签→合规部审查→信贷审批委员会审批",
+        "effectiveArrangement": "自发布之日起施行。",
+        "regulatoryBasis": "第六条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    },
+    {
+      "remediationId": "R-007",
+      "gapId": "G-007",
+      "externalBasis": "第十四条",
+      "dimensions": {
+        "institution": {
+          "action": "修订《境外放款业务准入与审查管理办法》，细化利率与期限的合理区间标准，要求符合商业合理原则。",
+          "type": "修订"
+        },
+        "process": {
+          "action": "在准入审查流程中增加利率与期限合理性评估环节，要求提供市场比较依据。",
+          "type": "修订"
+        },
+        "system": {
+          "action": "系统新增利率期限校验规则，对照市场基准自动提醒审查人员关注异常条款。",
+          "type": "新增",
+          "priority": "中"
+        },
+        "control": {
+          "controlPointId": "KCP-NEW-007",
+          "controlType": "预防性",
+          "description": "放款利率与期限应在商业合理区间内（期限6个月至5年），系统自动校验并提示差异过大的申请。"
+        }
+      },
+      "ownerDepartment": "国际业务部",
+      "priority": "高",
+      "plannedCompletionDate": "2026-12-31",
+      "status": "待启动",
+      "policyDraft": {
+        "title": "境外放款业务准入与审查管理办法（修订要点）",
+        "draftType": "修订要点",
+        "purpose": "补充利率、期限的商业合理标准，确保境外放款定价与期限符合市场原则。",
+        "scope": "适用于原准入审查办法的修订条款。",
+        "coreClauses": [
+          "境外放款期限原则上应在6个月至5年之间，利率应参考国际市场同业拆借利率加合理利差确定。",
+          "对于偏离市场基准15%以上的利率或极长期限申请，须提供专项商业合理性说明，并经风险管理部审核。",
+          "存量放款本息存在逾期未收回且无正当理由的借款人，不得批准新增放款。"
+        ],
+        "approvalPath": "国际业务部提出修订→风险管理部会签→合规部审查→信贷审批委员会确认",
+        "effectiveArrangement": "随修订版发布生效。",
+        "regulatoryBasis": "第十四条",
+        "disclaimer": "AI 辅助草案，须经法律合规部门审查。"
+      },
+      "needsReview": true
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "required": true,
+    "items": [
+      {
+        "targetType": "remediation",
+        "targetId": "R-011",
+        "riskLevel": "high",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "remediation",
+        "targetId": "R-012",
+        "riskLevel": "high",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "remediation",
+        "targetId": "R-014",
+        "riskLevel": "high",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "remediation",
+        "targetId": "R-015",
+        "riskLevel": "high",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "remediation",
+        "targetId": "R-019",
+        "riskLevel": "high",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "remediation",
+        "targetId": "R-020",
+        "riskLevel": "high",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "remediation",
+        "targetId": "R-024",
+        "riskLevel": "high",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "remediation",
+        "targetId": "R-003",
+        "riskLevel": "medium",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "remediation",
+        "targetId": "R-004",
+        "riskLevel": "medium",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "remediation",
+        "targetId": "R-005",
+        "riskLevel": "medium",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "remediation",
+        "targetId": "R-006",
+        "riskLevel": "medium",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "remediation",
+        "targetId": "R-007",
+        "riskLevel": "medium",
+        "reason": "整改制度草案、系统改造、控制点建议须经法律合规人员复核。",
+        "decision": "pending"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "id": "ART-RUN-REMEDIATION_-20260624185355-933-json",
+      "name": "结构化数据（JSON）",
+      "type": "json",
+      "path": "data/skill_artifacts/RUN-REMEDIATION_-20260624185355-933/output.json",
+      "source": "本次执行结果",
+      "generatedAt": "2026-06-24T20:07:25+08:00"
+    },
+    {
+      "id": "ART-RUN-REMEDIATION_-20260624185355-933-md",
+      "name": "整改落地报告（文本）",
+      "type": "md",
+      "path": "data/skill_artifacts/RUN-REMEDIATION_-20260624185355-933/report.md",
+      "source": "本次执行结果",
+      "generatedAt": "2026-06-24T20:07:25+08:00"
+    },
+    {
+      "id": "ART-RUN-REMEDIATION_-20260624185355-933-html",
+      "name": "整改落地网页报告",
+      "type": "html",
+      "path": "data/skill_artifacts/RUN-REMEDIATION_-20260624185355-933/report.html",
+      "source": "本次执行结果",
+      "generatedAt": "2026-06-24T20:07:25+08:00"
+    },
+    {
+      "id": "ART-RUN-REMEDIATION_-20260624185355-933-docx",
+      "name": "整改落地文档报告",
+      "type": "docx",
+      "path": "data/skill_artifacts/RUN-REMEDIATION_-20260624185355-933/report.docx",
+      "source": "本次执行结果",
+      "generatedAt": "2026-06-24T20:07:25+08:00"
+    },
+    {
+      "id": "ART-RUN-REMEDIATION_-20260624185355-933-xlsx",
+      "name": "整改落地数据表格",
+      "type": "xlsx",
+      "path": "data/skill_artifacts/RUN-REMEDIATION_-20260624185355-933/data.xlsx",
+      "source": "本次执行结果",
+      "generatedAt": "2026-06-24T20:07:25+08:00"
+    }
+  ]
+}

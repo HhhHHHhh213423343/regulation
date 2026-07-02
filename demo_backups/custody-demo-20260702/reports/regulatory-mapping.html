@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>示例银行托管业务制度合规对标映射报告</title>
+<style>
+:root{--primary:#1a3a5c;--primary-light:#2c5f8a;--bg:#f0f2f5;--card-bg:#fff;--text:#2c2c2c;--border:#d9d9d9;--red:#e74c3c;--red-bg:#fdf2f2;--orange:#f39c12;--orange-bg:#fef9f0;--green:#27ae60;--green-bg:#f0faf3;--blue:#3498db;--blue-bg:#eef7fc;--gray:#95a5a6;--gray-bg:#f5f5f5;--teal:#1abc9c;--teal-bg:#e8faf6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Microsoft YaHei","Noto Sans CJK SC","PingFang SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:14px}
+.container{max-width:1400px;margin:0 auto;padding:20px}
+.header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff;padding:40px 30px;border-radius:12px;margin-bottom:24px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.header h1{font-size:26px;margin-bottom:8px}
+.header .subtitle{font-size:14px;opacity:.85;margin-bottom:16px}
+.header .meta{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;opacity:.9}
+.header .meta-item{display:flex;align-items:center;gap:6px}
+.tabs{display:flex;gap:4px;margin-bottom:0;border-bottom:2px solid var(--primary);overflow-x:auto}
+.tab{padding:10px 24px;cursor:pointer;border:none;background:var(--gray-bg);color:var(--text);font-size:14px;font-weight:500;border-radius:8px 8px 0 0;transition:all .2s;white-space:nowrap}
+.tab:hover{background:#e0e0e0}
+.tab.active{background:var(--primary);color:#fff}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.card{background:var(--card-bg);border-radius:10px;padding:24px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.card-title{font-size:18px;font-weight:600;color:var(--primary);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+h3{font-size:16px;font-weight:600;color:var(--primary);margin:20px 0 10px;padding-left:10px;border-left:4px solid var(--primary-light)}
+h4{font-size:14px;font-weight:600;color:var(--primary-light);margin:14px 0 6px}
+p{margin:6px 0;text-align:justify}
+table{width:100%;border-collapse:collapse;font-size:12px;margin:10px 0}
+th{background:var(--primary);color:#fff;padding:8px 10px;text-align:left;font-weight:600;position:sticky;top:0;z-index:10}
+td{padding:6px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:nth-child(even){background:#f9fafb}
+tr:hover{background:#eef4fa}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;white-space:nowrap}
+.badge.red{background:var(--red-bg);color:var(--red);border:1px solid var(--red)}
+.badge.orange{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange)}
+.badge.green{background:var(--green-bg);color:var(--green);border:1px solid var(--green)}
+.badge.blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue)}
+.badge.gray{background:var(--gray-bg);color:var(--gray);border:1px solid var(--gray)}
+.badge.teal{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{background:var(--card-bg);border-radius:10px;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);border-top:4px solid var(--primary)}
+.stat-card.red{border-top-color:var(--red)}
+.stat-card.orange{border-top-color:var(--orange)}
+.stat-card.green{border-top-color:var(--green)}
+.stat-card.blue{border-top-color:var(--blue)}
+.stat-number{font-size:32px;font-weight:700;margin:8px 0}
+.stat-number.red{color:var(--red)}
+.stat-number.orange{color:var(--orange)}
+.stat-number.green{color:var(--green)}
+.stat-number.blue{color:var(--blue)}
+.stat-label{font-size:13px;color:var(--gray)}
+.progress-container{margin:16px 0}
+.progress-bar{height:24px;border-radius:12px;overflow:hidden;display:flex;background:#e0e0e0}
+.progress-segment{height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;transition:width .5s}
+.progress-segment.green{background:var(--green)}
+.progress-segment.orange{background:var(--orange)}
+.progress-segment.red{background:var(--red)}
+.summary-box{background:linear-gradient(135deg,#eef4fa 0%,#f5f7fa 100%);border-left:4px solid var(--primary);padding:16px 20px;border-radius:8px;margin-bottom:16px}
+.summary-box p{margin:4px 0}
+.matrix-cell{text-align:center;font-size:11px;padding:4px}
+.matrix-cell.full{background:var(--green-bg);color:var(--green)}
+.matrix-cell.partial{background:var(--orange-bg);color:var(--orange)}
+.matrix-cell.none{background:var(--red-bg);color:var(--red)}
+.matrix-cell.na{background:var(--gray-bg);color:var(--gray)}
+.doc-card{border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px}
+.doc-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0}
+.doc-icon.method{background:var(--blue)}
+.doc-icon.procedure{background:var(--green)}
+.doc-icon.rule{background:var(--orange)}
+.doc-icon.plan{background:var(--primary)}
+.doc-icon.guide{background:var(--gray)}
+.doc-info{flex:1}
+.doc-name{font-weight:600;font-size:14px;margin-bottom:2px}
+.doc-meta{font-size:12px;color:var(--gray)}
+.doc-areas{margin-top:4px}
+.doc-area{display:inline-block;background:var(--gray-bg);padding:1px 6px;border-radius:3px;font-size:10px;margin:1px;color:var(--text)}
+.filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.filter-btn{padding:6px 16px;border:1px solid var(--border);background:#fff;border-radius:20px;cursor:pointer;font-size:13px;transition:all .2s}
+.filter-btn:hover{border-color:var(--primary)}
+.filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.search-box{width:100%;padding:10px 16px;border:1px solid var(--border);border-radius:8px;font-size:14px;margin-bottom:16px;outline:none}
+.search-box:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,58,92,.1)}
+.gap-item{border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px;transition:box-shadow .2s}
+.gap-item:hover{box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.gap-item.red{border-left:4px solid var(--red)}
+.gap-item.orange{border-left:4px solid var(--orange)}
+.gap-item.green{border-left:4px solid var(--green)}
+.gap-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.gap-id{font-weight:700;color:var(--primary);font-size:13px}
+.gap-title{font-weight:600;font-size:15px}
+.gap-body{margin-top:8px;font-size:13px}
+.gap-body p{margin:4px 0}
+.gap-label{font-weight:600;color:var(--primary-light)}
+.gap-doc{display:inline-block;background:var(--blue-bg);color:var(--blue);padding:2px 8px;border-radius:4px;font-size:11px;margin:2px}
+.mapping-row:hover{background:#eef4fa}
+@media(max-width:768px){.container{padding:10px}.header{padding:20px}.header h1{font-size:20px}.stats-grid{grid-template-columns:repeat(2,1fr)}table{font-size:11px}th,td{padding:4px 6px}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>示例银行托管业务制度合规对标映射报告</h1>
+<div class="subtitle">基于《商业银行托管业务监督管理办法（试行）》（2026年2月1日施行）与16份内部制度的逐条对标映射</div>
+<div class="meta">
+<div class="meta-item">📊 对标法规：五章49条</div>
+<div class="meta-item">📁 内部制度：16份（14份完整文本 + 2份框架性标注）</div>
+<div class="meta-item">📅 制度年份：2014-2023年</div>
+<div class="meta-item">🗓️ 分析日期：2026年6月</div>
+</div>
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab('overview')">总览</button>
+<button class="tab" onclick="showTab('mapping')">逐条对标映射</button>
+<button class="tab" onclick="showTab('matrix')">覆盖矩阵</button>
+<button class="tab" onclick="showTab('gap-summary')">差距汇总</button>
+<button class="tab" onclick="showTab('docs')">制度清单</button>
+</div>
+
+<!-- Tab 1: Overview -->
+<div id="overview" class="tab-content active">
+<div class="stats-grid">
+<div class="stat-card green"><div class="stat-label">合规</div><div class="stat-number green">12</div><div class="stat-label">24%</div></div>
+<div class="stat-card orange"><div class="stat-label">部分合规</div><div class="stat-number orange">24</div><div class="stat-label">49%</div></div>
+<div class="stat-card red"><div class="stat-label">不合规/缺失</div><div class="stat-number red">13</div><div class="stat-label">27%</div></div>
+<div class="stat-card blue"><div class="stat-label">内部制度</div><div class="stat-number blue">16</div><div class="stat-label">份</div></div>
+</div>
+
+<div class="card">
+<div class="card-title">合规覆盖率</div>
+<div class="progress-container">
+<div class="progress-bar">
+<div class="progress-segment green" style="width:24%">合规 24%</div>
+<div class="progress-segment orange" style="width:49%">部分合规 49%</div>
+<div class="progress-segment red" style="width:27%">不合规 27%</div>
+</div>
+</div>
+<div class="summary-box" style="margin-top:16px">
+<p><strong>对标说明：</strong>本次对标基于16份示例银行托管业务内部制度（2014-2023年），对照《商业银行托管业务监督管理办法（试行）》49条逐条映射。其中14份已获取完整文本进行深度对标，2份（2018版内控办法、2015版内部稽核规范）因网盘技术原因未能获取全文，基于制度标题进行框架性标注。</p>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">制度体系架构对比</div>
+<table>
+<tr><th style="width:15%">维度</th><th style="width:35%">外部法规（2026年施行）</th><th style="width:35%">示例银行内部制度体系</th><th style="width:15%">差距研判</th></tr>
+<tr><td><strong>制度层级</strong></td><td>部门规章（金融监管总局9号令）</td><td>管理办法+操作规程+管理规定+实施细则+应急预案+管理细则+指引+稽核规范</td><td><span class="badge green">体系完整</span></td></tr>
+<tr><td><strong>覆盖时间</strong></td><td>2025年12月发布</td><td>2014-2023年，跨10年</td><td><span class="badge orange">需更新</span></td></tr>
+<tr><td><strong>立法依据</strong></td><td>《民法典》《银行业监督管理法》《商业银行法》</td><td>《商业银行法》《证券投资基金法》《信托法》《保险法》等</td><td><span class="badge orange">需更新</span></td></tr>
+<tr><td><strong>核心定位</strong></td><td>"独立第三方"定位</td><td>业务操作管理规范</td><td><span class="badge red">定位差距</span></td></tr>
+<tr><td><strong>职责边界</strong></td><td>"双负面清单"（13项不得承担+6项不得有）</td><td>零散禁止条款，未形成系统清单</td><td><span class="badge red">严重不足</span></td></tr>
+<tr><td><strong>信息系统</strong></td><td>7项系统要求（含网络安全、数据安全）</td><td>产品系统建设细则+客户端服务办法+应急预案</td><td><span class="badge orange">部分覆盖</span></td></tr>
+<tr><td><strong>风险准备金</strong></td><td>从托管收入计提风险准备金</td><td>2023年风险准备金管理办法（基金托管）</td><td><span class="badge green">已覆盖</span></td></tr>
+<tr><td><strong>业务连续性</strong></td><td>完备的业务连续性管理体系</td><td>2022年专项应急预案（4级事件、8类突发事件）</td><td><span class="badge green">充分覆盖</span></td></tr>
+</table>
+</div>
+
+<div class="card">
+<div class="card-title">合规差距总体评估</div>
+<table>
+<tr><th>评估等级</th><th>含义</th><th>条款数</th><th>占比</th></tr>
+<tr><td><span class="badge green">✅ 合规</span></td><td>内部制度已覆盖法规要求</td><td>12</td><td>24%</td></tr>
+<tr><td><span class="badge orange">⚠️ 部分合规</span></td><td>内部制度有涉及但不充分</td><td>24</td><td>49%</td></tr>
+<tr><td><span class="badge red">❌ 不合规/缺失</span></td><td>内部制度未覆盖法规要求</td><td>13</td><td>27%</td></tr>
+</table>
+<div class="summary-box">
+<p><strong>核心结论：</strong>示例银行已建立了较为完整的托管业务制度体系（16份制度覆盖账户、清算、核算、监督、信披、人员、档案、合同、产品、系统、应急、风险准备金等各领域），但与2026年施行的《办法》相比仍存在显著差距。特别是在"独立第三方"定位、"双负面清单"职责边界、信息系统网络安全/数据安全、品牌保护、考核机制、监管评级应对等关键领域存在制度空白，亟需启动全面修订。</p>
+</div>
+</div>
+</div>
+
+<!-- Tab 2: Mapping -->
+<div id="mapping" class="tab-content">
+<div class="card">
+<div class="card-title">逐条对标映射明细</div>
+<div class="filter-bar">
+<button class="filter-btn active" onclick="filterMapping('all',this)">全部（49条）</button>
+<button class="filter-btn" onclick="filterMapping('green',this)">✅ 合规（12）</button>
+<button class="filter-btn" onclick="filterMapping('orange',this)">⚠️ 部分合规（24）</button>
+<button class="filter-btn" onclick="filterMapping('red',this)">❌ 不合规（13）</button>
+</div>
+<input type="text" class="search-box" placeholder="搜索条款关键词..." onkeyup="searchMapping(this.value)">
+<div id="mapping-container"></div>
+</div>
+</div>
+
+<!-- Tab 3: Matrix -->
+<div id="matrix" class="tab-content">
+<div class="card">
+<div class="card-title">法规条款 × 内部制度 覆盖矩阵</div>
+<p style="margin-bottom:12px;font-size:13px;color:var(--gray)">图例：<span class="badge green">✅</span> 充分覆盖 <span class="badge orange">⚠️</span> 部分覆盖 <span class="badge red">❌</span> 未覆盖 <span class="badge gray">—</span> 不适用</p>
+<div style="overflow-x:auto">
+<table style="font-size:10px;min-width:1400px">
+<thead>
+<tr>
+<th style="width:6%">条款</th><th style="width:12%">法规要求</th>
+<th style="width:4%">办法2015</th><th style="width:4%">内控2018</th><th style="width:4%">稽核2015</th><th style="width:4%">账户2018</th><th style="width:4%">机构产品2019</th><th style="width:4%">人员2020</th><th style="width:4%">债券回购2020</th><th style="width:4%">信披规程2022</th><th style="width:4%">投监规程2022</th><th style="width:4%">清算规程2022</th><th style="width:4%">产品系统2022</th><th style="width:4%">应急预案2022</th><th style="width:4%">客户端2022</th><th style="width:4%">风险准备金2023</th><th style="width:4%">合同细则2014</th><th style="width:4%">档案2016</th><th style="width:4%">综合</th>
+</tr>
+</thead>
+<tbody id="matrix-body"></tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- Tab 4: Gap Summary -->
+<div id="gap-summary" class="tab-content">
+<div class="card">
+<div class="card-title">关键合规差距汇总</div>
+<div id="gap-list-container"></div>
+</div>
+<div class="card">
+<div class="card-title">已充分覆盖领域</div>
+<table>
+<tr><th>法规领域</th><th>条款</th><th>主要覆盖制度</th><th>状态</th></tr>
+<tr><td><strong>风险准备金</strong></td><td>第36条</td><td>风险准备金管理办法（2023）——月计提2.5%、分级审批使用、外部存管</td><td><span class="badge green">✅ 充分覆盖</span></td></tr>
+<tr><td><strong>业务连续性/应急预案</strong></td><td>第23、27条</td><td>专项应急预案（2022）——4级事件分级、8类突发事件、年演练</td><td><span class="badge green">✅ 充分覆盖</span></td></tr>
+<tr><td><strong>投资监督</strong></td><td>第17条</td><td>投资监督操作规程（2022）——事前/中/事后监督、违规拒绝执行、按季关联方维护</td><td><span class="badge orange">⚠️ 部分覆盖</span></td></tr>
+<tr><td><strong>资金清算</strong></td><td>第13条</td><td>资金清算操作规程（2022）——日终账务核对、客户尽职调查、多点备份</td><td><span class="badge green">✅ 充分覆盖</span></td></tr>
+<tr><td><strong>档案保管</strong></td><td>第18条</td><td>档案管理办法（2016）——15年以上（超法规10年要求）</td><td><span class="badge green">✅ 超标覆盖</span></td></tr>
+<tr><td><strong>人员管理</strong></td><td>第34条</td><td>从业人员规定（2020）——资格条件、9类禁止行为、离任审计</td><td><span class="badge green">✅ 充分覆盖</span></td></tr>
+<tr><td><strong>合同管理</strong></td><td>第9条</td><td>合同管理细则（2014）——5项审查原则、制式/非制式审查</td><td><span class="badge orange">⚠️ 部分覆盖</span></td></tr>
+<tr><td><strong>声誉风险管理</strong></td><td>第27条</td><td>专项应急预案（2022）——声誉风险事件列为独立类型</td><td><span class="badge orange">⚠️ 部分覆盖</span></td></tr>
+</table>
+</div>
+</div>
+
+<!-- Tab 5: Documents -->
+<div id="docs" class="tab-content">
+<div class="card">
+<div class="card-title">内部制度清单（16份）</div>
+<div id="doc-list"></div>
+</div>
+</div>
+
+</div>
+
+<script>
+// ===== Mapping Data =====
+const mappings = [
+{art:"第1条",req:"立法依据",status:"orange",ext:"依据《民法典》《银行业监督管理法》《商业银行法》制定",int:"管理办法（2015）依据《商业银行法》《证券投资基金法》《信托法》《保险法》等",gap:"立法依据需更新",docs:["管理办法2015"]},
+{art:"第2条",req:"独立第三方定位",status:"red",ext:"商业银行作为'独立第三方'提供托管服务",int:"14份文件均未明确'独立第三方'定位，仅管理办法提到'作为托管人提供服务'",gap:"缺核心法律定位",docs:[]},
+{art:"第3条",req:"托管产品范围",status:"green",ext:"金融产品+专项资金（社保、养老、年金、保险资金等）",int:"管理办法（2015）按产品类型列举（基金、信托、券商资管、理财、私募、保险、社保、年金、QDII/QFII等）",gap:"产品范围覆盖全面",docs:["管理办法2015"]},
+{art:"第4条",req:"托管财产范围",status:"orange",ext:"资金、股票、债券、未上市股权、其他债权、商品、金融衍生品等",int:"管理办法按产品类型列举，未明确财产形态范围",gap:"缺财产形态列举",docs:["管理办法2015"]},
+{art:"第5条",req:"四项基本原则",status:"orange",ext:"诚实信用、勤勉尽责、独立审慎、风险隔离，防范利益冲突和利益输送",int:"管理办法仅规定'诚实信用、勤勉尽责'原则",gap:"缺'独立审慎''风险隔离'原则",docs:["管理办法2015"]},
+{art:"第6条",req:"财产独立性",status:"orange",ext:"三层独立性（自有独立、产品间独立、破产不属于清算财产）",int:"管理办法和账户管理办法要求托管资产独立于自有资产及其他托管资产",gap:"缺破产隔离条款",docs:["管理办法2015","账户管理办法2018"]},
+{art:"第7条",req:"监管主体",status:"orange",ext:"国家金融监督管理总局及其派出机构",int:"管理办法引用'银监会、证监会、保监会'",gap:"监管主体需更新",docs:["管理办法2015"]},
+{art:"第8条",req:"服务范围",status:"orange",ext:"7项服务：账户开立、财产保管、清算交割、会计核算、资产估值、信息披露、投资监督",int:"管理办法第四章覆盖账户管理、资金清算、会计核算、投资监督、信息披露。缺'资产估值'独立环节",gap:"缺'资产估值'独立环节",docs:["管理办法2015","清算规程2022","投监规程2022","信披规程2022"]},
+{art:"第9条",req:"托管合同",status:"orange",ext:"合同至少包括权利义务、托管职责、生效变更终止、违约责任、争议解决；须条款评估",int:"合同管理细则（2014）有合同审查内容和示范文本要求",gap:"缺条款评估机制",docs:["合同管理细则2014","管理办法2015"]},
+{art:"第10条",req:"非标资产评估",status:"orange",ext:"非标资产双重评估（管理人评估+产品评估）",int:"机构及产品管理规定有产品准入复审（主体资质、交易结构、合规风险）",gap:"未针对非标设置专门评估",docs:["机构及产品管理2019"]},
+{art:"第11条",req:"账户管理",status:"orange",ext:"不同产品分别开立账户；账户名称须包含开户主体和产品名称",int:"账户管理办法（2018）有各类账户开立规范，要求分别开户、独立保管",gap:"缺账户名称标识规则",docs:["账户管理办法2018","清算规程2022"]},
+{art:"第12条",req:"定期对账",status:"orange",ext:"建立对账机制，对账频率至少每半年一次",int:"账户管理办法规定定期与开户行对账；清算规程规定日终账务核对",gap:"缺'至少每半年'频率要求",docs:["账户管理办法2018","清算规程2022","风险准备金管理2023"]},
+{art:"第13条",req:"清算交割",status:"green",ext:"由托管人负责划拨资金；明确责任人员；未获授权不得擅自划拨",int:"清算操作规程（2022）详细规范资金清算、交易结算、实物保管，实行复核授权流程",gap:"基本符合要求",docs:["清算规程2022","管理办法2015"]},
+{art:"第14条",req:"会计核算",status:"orange",ext:"单独建账核算；按《企业会计准则》；复核数据；第三方数据优先；明确免责",int:"管理办法有独立核算、双人复核要求",gap:"缺第三方数据优先原则和免责条款",docs:["管理办法2015"]},
+{art:"第15条",req:"资产估值",status:"orange",ext:"合同明确估值对象、原则、方法、时间及差错处理；模型估值不得随意调参",int:"管理办法提及按协议约定估值，有差错登记报告",gap:"缺模型估值参数管理",docs:["管理办法2015"]},
+{art:"第16条",req:"信息披露",status:"orange",ext:"合同明确信披职责内容方式；发现重大事项及时提示管理人",int:"信息披露操作规程（2022）详细规范公募基金、理财、其他托管资产信披，有主动披露和披露复核",gap:"缺'发现重大事项提示管理人'主动义务",docs:["信披规程2022","管理办法2015"]},
+{art:"第17条",req:"投资监督",status:"orange",ext:"制定监督标准与流程；不得提供无法履职的监督服务；违规应拒绝执行",int:"投资监督操作规程（2022）有事前/中/事后监督、违规拒绝执行、风险提示函、按季关联方维护",gap:"缺'不得提供无法履职的监督服务'能力匹配原则",docs:["投监规程2022","债券质押回购2020","管理办法2015"]},
+{art:"第18条",req:"资料保存",status:"green",ext:"保存10年以上；托管变更时配合移交",int:"档案管理办法（2016）规定15年以上；合同管理细则规定15年。录音保存1年需延长",gap:"超标覆盖（15年>10年），录音需延长",docs:["档案管理办法2016","合同管理细则2014"]},
+{art:"第19条",req:"不得承担13项职责",status:"red",ext:"13项禁止职责（担保、垫资、适当性管理、投资决策等）",int:"信披规程有6项禁止行为；从业人员规定有9类禁止行为；管理办法仅规定'不得承诺保本保收益'。13项仅覆盖2-3项",gap:"严重不足，覆盖率仅8-15%",docs:["信披规程2022","从业人员规定2020","管理办法2015"]},
+{art:"第20条",req:"不得有6项行为",status:"orange",ext:"6项禁止行为（财产混同、产品混同、侵占挪用、内幕交易、利益输送等）",int:"从业人员规定有禁止利用内幕信息和侵占挪用；管理办法有保密控制",gap:"未系统化列举6项禁止行为",docs:["从业人员规定2020","管理办法2015"]},
+{art:"第21条",req:"异常情形处置",status:"orange",ext:"管理人异常情形下保护财产安全、告知相关方、有权终止托管服务",int:"投监规程有异常监测和违规报告；应急预案有突发事件处置；账户管理办法有到期终止流程",gap:"缺管理人异常情形下合同终止权",docs:["投监规程2022","应急预案2022","账户管理办法2018"]},
+{art:"第22条",req:"8项准入条件",status:"orange",ext:"公司治理、内控、风控、审慎指标、专营部门、专职人员、安全保管、固定场所、信息系统",int:"管理办法有分行运营中心准入条件（独立部门、专职人员、系统设备、内控制度）",gap:"总行层面准入条件未对标",docs:["管理办法2015"]},
+{art:"第23条",req:"信息系统7项要求",status:"orange",ext:"清算核算功能、网络安全防护、数据安全、业务连续性、数据接收、系统对接、其他",int:"产品系统建设细则引用数据安全管理办法，规范密码管理、生产专网、网络安全培训；客户端服务办法有网络安全技术支持；应急预案有系统故障处置",gap:"缺数据安全全生命周期管理和系统对接要求",docs:["产品系统建设2022","客户端服务管理办法2022","应急预案2022"]},
+{art:"第24条",req:"开办报告义务",status:"red",ext:"开办托管业务应向金融监管总局报告；持续符合条件",int:"14份文件均未明确开办报告义务",gap:"无开办报告制度",docs:[]},
+{art:"第25条",req:"治理架构",status:"orange",ext:"明确董事会、高级管理层对托管业务的职责",int:"管理办法有部门职责分工（总行托管业务部归口管理）",gap:"缺董事会和高管层治理职责",docs:["管理办法2015"]},
+{art:"第26条",req:"风险管理体系",status:"orange",ext:"与业务规模和复杂程度相适应；统一管理制度、流程、风控、内控、信息系统、网络安全、数据安全",int:"管理办法有风险管理体系（三道防线）；应急预案有风险控制措施",gap:"缺网络安全、数据安全统一管理",docs:["管理办法2015","应急预案2022"]},
+{art:"第27条",req:"管理制度+声誉风险预案",status:"orange",ext:"准入管理、风险管理、内控、人员、核算、估值、信披等制度；声誉风险应急预案",int:"管理办法有管理制度体系和应急预案；应急预案将声誉风险列为独立类型",gap:"缺声誉风险→流动性风险传染链阻断",docs:["管理办法2015","应急预案2022"]},
+{art:"第28条",req:"统一授权管理",status:"green",ext:"托管业务授权纳入统一授权管理；岗位制衡与流程约束",int:"管理办法有授权管理和岗位制衡（资金清算与会计核算不得兼任）",gap:"基本符合",docs:["管理办法2015","清算规程2022"]},
+{art:"第29条",req:"准入管理",status:"orange",ext:"三维准入标准+名单制管理+禁止性负面清单（4类情形）",int:"机构及产品管理规定有名单制管理和7种不予准入情形（资金池、民间借贷、P2P等）",gap:"有准入标准，缺统一禁止性负面清单",docs:["机构及产品管理2019"]},
+{art:"第30条",req:"业务隔离",status:"orange",ext:"五维度隔离（人员、场所、账户、数据、系统）+关联方产品强化管控",int:"管理办法有物理场所和系统隔离；投监规程有按季关联方信息维护和关联方投资监督",gap:"缺'业务数据'隔离维度和统一关联方风险隔离",docs:["管理办法2015","投监规程2022","信披规程2022"]},
+{art:"第31条",req:"品牌保护",status:"red",ext:"发现不当营销应督促纠正；未纠正的终止合作",int:"14份文件均未涉及品牌保护机制",gap:"无品牌保护机制",docs:[]},
+{art:"第32条",req:"托管业务总体信披",status:"red",ext:"对托管业务总体情况进行信息披露（规模、结构、风险状况等）",int:"信披操作规程仅覆盖产品层面信息披露，无银行层面总体信披",gap:"仅产品层面，缺银行层面",docs:["信披规程2022"]},
+{art:"第33条",req:"重大事项报告",status:"orange",ext:"5类情形须向监管部门报告（违规拒不纠正、估值未复核、管理人异常、侵占挪用失联等）",int:"投监规程有重大违规向监管报告；债券回购指引有异常风险报送",gap:"仅覆盖5类中的1-2类",docs:["投监规程2022","债券质押回购2020"]},
+{art:"第34条",req:"从业人员行为管理",status:"green",ext:"禁止利用未公开信息谋利",int:"从业人员规定（2020）有9类禁止行为，包括禁止利用内幕信息买卖基金、不得利用职务便利牟取个人利益",gap:"基本符合",docs:["从业人员规定2020","管理办法2015"]},
+{art:"第35条",req:"考核导向",status:"red",ext:"充分体现合规导向，不得与其他业务挂钩考核",int:"管理办法规定财务管理部负责绩效考核（收入导向）；机构产品管理和清算规程有绩效考核",gap:"收入导向，非合规导向",docs:["管理办法2015","机构及产品管理2019","清算规程2022"]},
+{art:"第36条",req:"风险准备金",status:"green",ext:"从托管收入中计提风险准备金；审慎计算操作风险加权资产",int:"风险准备金管理办法（2023）——月计提2.5%、分级审批使用、外部存管、监管报送全流程",gap:"已覆盖（仅限基金托管，需扩展）",docs:["风险准备金管理2023"]},
+{art:"第37条",req:"数据与客户信息保护",status:"orange",ext:"规范收集、存储、使用、加工、传输、提供、公开、删除全流程",int:"产品系统建设细则引用数据安全管理办法；从业人员规定有保密要求；客户端服务办法有客户信息保护",gap:"缺全生命周期数据管理制度",docs:["产品系统建设2022","从业人员规定2020","客户端服务管理办法2022"]},
+{art:"第38条",req:"内部审计与外部审计",status:"orange",ext:"建立内部审计和外部审计机制，定期审计",int:"管理办法提到配合第三方审计机构；稽核工作规范（2015）有内部稽核规范；风险准备金办法提到内部审计",gap:"有内部稽核，缺外部审计引入机制",docs:["管理办法2015","内部稽核规范2015","风险准备金管理2023"]},
+{art:"第39条",req:"账户管理规范",status:"orange",ext:"核实开户意愿、审查开销户资料、预留印鉴、银企对账、反洗钱/反恐融资",int:"账户管理办法有账户开立变更撤销管理；机构产品管理有客户身份识别；清算规程有客户尽职调查；从业人员规定有反洗钱义务",gap:"有反洗钱基础，账户管理办法未明确提及反洗钱",docs:["账户管理办法2018","机构及产品管理2019","从业人员规定2020","清算规程2022"]},
+{art:"第40条",req:"服务定价",status:"orange",ext:"公开公平、诚实信用、质价相符，不得利用价格手段不正当竞争",int:"机构及产品管理规定有费率管理（成本效益原则、适应市场原则）；管理办法有费率管理",gap:"缺不正当竞争禁止条款",docs:["机构及产品管理2019","管理办法2015"]},
+{art:"第41条",req:"持续监管与监管评级",status:"red",ext:"合规性和审慎性纳入监管评级；可责令整改、暂停业务",int:"14份文件均未涉及监管评级应对",gap:"无监管评级应对机制",docs:[]},
+{art:"第42条",req:"整改要求",status:"red",ext:"违反规定责令限期整改；逾期可采取监督管理措施",int:"14份文件均未涉及监管整改响应",gap:"无监管整改应对机制",docs:[]},
+{art:"第43条",req:"处罚",status:"red",ext:"依《银行业监督管理法》《商业银行法》处罚；涉嫌犯罪移送司法",int:"14份文件均未涉及监管处罚防范",gap:"无处罚防范机制",docs:[]},
+{art:"第44条",req:"数据报送",status:"orange",ext:"向金融监管总局报送托管业务相关数据和信息",int:"投监规程有监管报表报送；风险准备金办法有监管报送",gap:"有监管报送，未建立全面数据报送制度",docs:["投监规程2022","风险准备金管理2023"]},
+{art:"第45条",req:"重大事项报告",status:"orange",ext:"及时报告重大事项",int:"投监规程有重大违规报告；债券回购指引有异常风险报送",gap:"仅涉及重大违规，未覆盖全面重大事项",docs:["投监规程2022","债券质押回购2020"]},
+{art:"第46条",req:"自律管理",status:"red",ext:"银行业自律组织实施自律管理",int:"14份文件均未涉及自律管理配合",gap:"无自律管理配合制度",docs:[]},
+{art:"第47条",req:"参照适用",status:"green",ext:"外国银行分行及其他机构参照适用",int:"不适用（示例银行为中资银行）",gap:"不适用",docs:[]},
+{art:"第48条",req:"解释权",status:"green",ext:"金融监管总局负责解释",int:"管理办法规定总行托管业务部负责解释",gap:"内部制度解释权安排合理",docs:["管理办法2015"]},
+{art:"第49条",req:"施行与过渡期",status:"red",ext:"2026年2月1日施行；存量业务三年内整改；存量垫资须分类计提拨备",int:"管理办法无过渡期安排和存量处置机制",gap:"无过渡期安排和存量处置",docs:[]},
+];
+
+const gaps = [
+{id:"G01",title:"'双负面清单'完全缺失",level:"red",art:"第19-20条",desc:"13项禁止职责仅覆盖2-3项（8-15%），6项禁止行为仅覆盖2项（33%）。现有禁止条款散见于信披规程、从业人员规定和管理办法，未形成系统清单。",docs:["信披规程2022","从业人员规定2020","管理办法2015"],action:"在管理办法中增设'职责边界'专章，将13项禁止职责和6项禁止行为全面纳入"},
+{id:"G02",title:"'独立第三方'核心定位缺失",level:"red",art:"第2条",desc:"14份文件均未明确'独立第三方'定位，仅管理办法提到'作为托管人提供服务'，未强调独立性。",docs:[],action:"在管理办法定义条款中增加'独立第三方'表述"},
+{id:"G03",title:"垫付/流动性支持/融资承诺禁止缺失",level:"red",art:"第19、49条",desc:"14份文件均未明确禁止垫付资金、提供流动性支持或融资承诺。",docs:[],action:"在管理办法或专门制度中明确禁止此类行为"},
+{id:"G04",title:"品牌保护机制缺失",level:"red",art:"第31条",desc:"14份文件均未涉及品牌保护机制和不当营销制止权。",docs:[],action:"新增品牌保护条款，建立不当营销监测和违约终止机制"},
+{id:"G05",title:"考核机制不符合合规导向",level:"red",art:"第35条",desc:"现有考核以收入和业务为导向，非合规导向。缺'不得与其他业务挂钩考核'要求。",docs:["管理办法2015","机构及产品管理2019","清算规程2022"],action:"修订考核制度，建立合规导向考核体系"},
+{id:"G06",title:"监管评级应对机制缺失",level:"red",art:"第41-43条",desc:"14份文件均未涉及监管评级应对、监管整改响应和监管处罚防范。",docs:[],action:"将合规要求融入日常运营，建立监管检查配合机制"},
+{id:"G07",title:"托管业务总体信息披露缺失",level:"red",art:"第32条",desc:"信披操作规程仅覆盖产品层面，缺银行层面托管业务总体信披。",docs:["信披规程2022"],action:"新增银行层面托管业务总体信息披露制度"},
+{id:"G08",title:"开办报告义务缺失",level:"red",art:"第24条",desc:"14份文件均未明确开办托管业务须向金融监管总局报告。",docs:[],action:"在业务开办操作流程中增加报告步骤"},
+{id:"G09",title:"过渡期存量业务安排缺失",level:"red",art:"第49条",desc:"无三年过渡期安排和存量业务处置机制。",docs:[],action:"制定存量整改工作方案，建立整改台账"},
+{id:"G10",title:"自律管理配合制度缺失",level:"red",art:"第46条",desc:"14份文件均未涉及自律管理配合。",docs:[],action:"建立自律管理配合制度"},
+{id:"G11",title:"信息系统网络安全/数据安全不足",level:"orange",art:"第23条",desc:"有系统管理基础（产品系统建设细则、客户端服务办法），但缺数据安全全生命周期管理和与金融基础设施系统对接要求。",docs:["产品系统建设2022","客户端服务管理办法2022","应急预案2022"],action:"制定信息系统安全管理细则"},
+{id:"G12",title:"异常情形处置（合同终止权）缺失",level:"orange",art:"第21条",desc:"有异常监测和应急预案，但缺管理人异常情形下的合同终止权安排。",docs:["投监规程2022","应急预案2022","账户管理办法2018"],action:"在管理办法中增设异常处置条款和合同终止权"},
+{id:"G13",title:"准入缺统一禁止性负面清单",level:"orange",art:"第29条",desc:"有7种不予准入情形和名单制管理，但未形成统一负面清单制度。",docs:["机构及产品管理2019"],action:"整合现有准入禁止情形，制定统一负面清单"},
+{id:"G14",title:"外部审计引入机制缺失",level:"orange",art:"第38条",desc:"有内部稽核规范（2015）和第三方审计提及，但缺外部审计引入机制和定期审计制度。",docs:["管理办法2015","内部稽核规范2015"],action:"明确外部审计引入条件、审计范围和频率"},
+];
+
+const documents = [
+{name:"资产托管业务管理办法（2015修订版）",year:"2015",type:"method",typeLabel:"管理办法",areas:["机构岗位","经营管理","运营管理","风险管理","档案管理"],clauses:"总纲性制度，覆盖全业务链条",available:true},
+{name:"托管业务内部控制管理办法（2018修订版）",year:"2018",type:"method",typeLabel:"管理办法",areas:["内控管理"],clauses:"未能获取全文（网盘签名问题）",available:false},
+{name:"托管业务内部稽核工作规范（2015年版）",year:"2015",type:"rule",typeLabel:"工作规范",areas:["内部稽核","审计监督"],clauses:"未能获取全文（网盘签名问题）",available:false},
+{name:"资产托管业务账户管理办法（2018修订版）",year:"2018",type:"method",typeLabel:"管理办法",areas:["账户管理","对账","独立核算"],clauses:"各类账户开立变更撤销、独立核算分账管理",available:true},
+{name:"资产托管业务机构及产品管理规定（2019年版）",year:"2019",type:"rule",typeLabel:"管理规定",areas:["机构管理","合作机构管理","产品准入","反洗钱","费率管理"],clauses:"名单制管理、7种不予准入情形、客户身份识别",available:true},
+{name:"托管业务从业人员管理规定（2020修订版）",year:"2020",type:"rule",typeLabel:"管理规定",areas:["人员管理","执业规范","反洗钱","保密管理"],clauses:"资格条件、9类禁止行为、离任审计",available:true},
+{name:"交易所债券质押式回购主体风险管理指引（2020年版）",year:"2020",type:"guide",typeLabel:"指引",areas:["债券回购风险管理","风险监测","数据报送"],clauses:"每日监测回购风险、异常风险报送",available:true},
+{name:"资产托管业务信息披露操作规程（2022修订版）",year:"2022",type:"procedure",typeLabel:"操作规程",areas:["信息披露","品牌建设","关联交易披露"],clauses:"主动披露和披露复核、禁止行为清单、重大事件两日内报告",available:true},
+{name:"资产托管业务投资监督操作规程（2022修订版）",year:"2022",type:"procedure",typeLabel:"操作规程",areas:["投资监督","关联方管理","监管报送","异常监控"],clauses:"事前/中/事后监督、违规拒绝执行、按季关联方维护",available:true},
+{name:"资产托管业务资金清算操作规程（2022修订版）",year:"2022",type:"procedure",typeLabel:"操作规程",areas:["资金清算","账户管理","交易结算","实物保管","反洗钱","对账"],clauses:"日终账务核对、客户尽职调查、多点备份",available:true},
+{name:"产品开发管理与系统建设实施细则（2022修订版）",year:"2022",type:"method",typeLabel:"实施细则",areas:["产品开发","信息系统","网络安全","业务连续性","反洗钱"],clauses:"引用数据安全管理办法、网络安全培训、生产专网",available:true},
+{name:"托管业务专项应急预案（2022年版）",year:"2022",type:"plan",typeLabel:"应急预案",areas:["应急管理","业务连续性","声誉风险","舆情管理","应急演练"],clauses:"4级事件分级、4级组织架构、8类突发事件、年演练",available:true},
+{name:"资产托管客户端服务管理办法（试行，2022年版）",year:"2022",type:"method",typeLabel:"管理办法",areas:["客户端服务","数字证书","网络安全","凭证档案"],clauses:"数字证书认证、网络安全技术支持、客户信息保护",available:true},
+{name:"证券投资基金托管业务风险准备金管理办法（2023年版）",year:"2023",type:"method",typeLabel:"管理办法",areas:["风险准备金","提取","使用","监管报送","对账"],clauses:"月计提2.5%、分级审批使用、外部存管",available:true},
+{name:"资产托管业务合同管理细则（2014年）",year:"2014",type:"method",typeLabel:"管理细则",areas:["合同管理","合同审查","模板管理","档案管理"],clauses:"5项审查原则、制式/非制式合同审查、保管15年",available:true},
+{name:"资产托管业务档案管理办法（2016年版）",year:"2016",type:"method",typeLabel:"管理办法",areas:["档案管理","档案分类","档案保管","档案销毁"],clauses:"15年以上保管、分类管理、鉴定销毁",available:true},
+];
+
+function showTab(tabId){
+document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.getElementById(tabId).classList.add('active');
+event.target.classList.add('active');
+}
+
+function renderMapping(filter){
+const container=document.getElementById('mapping-container');
+let filtered=mappings;
+if(filter==='green')filtered=mappings.filter(m=>m.status==='green');
+else if(filter==='orange')filtered=mappings.filter(m=>m.status==='orange');
+else if(filter==='red')filtered=mappings.filter(m=>m.status==='red');
+
+const statusMap={green:['green','✅ 合规'],orange:['orange','⚠️ 部分合规'],red:['red','❌ 不合规']};
+
+container.innerHTML=filtered.map(m=>{
+const[cls,label]=statusMap[m.status];
+return `
+<div class="gap-item ${m.status}" data-search="${m.art+m.req+m.ext+m.int+m.gap+m.docs.join('')}">
+<div class="gap-header">
+<span class="gap-id">${m.art}</span>
+<span class="gap-title">${m.req}</span>
+<span class="badge ${cls}">${label}</span>
+</div>
+<div class="gap-body">
+<p><span class="gap-label">📖 外规要求：</span>${m.ext}</p>
+<p><span class="gap-label">📄 内规现状：</span>${m.int}</p>
+<p><span class="gap-label">差距分析：</span>${m.gap}</p>
+${m.docs.length>0?`<div><span class="gap-label">相关制度：</span>${m.docs.map(d=>`<span class="gap-doc">${d}</span>`).join('')}</div>`:'<div><span class="gap-label">相关制度：</span><span style="color:var(--red)">无</span></div>'}
+</div>
+</div>`;
+}).join('');
+}
+
+function filterMapping(level,btn){
+document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+renderMapping(level);
+}
+
+function searchMapping(keyword){
+document.querySelectorAll('#mapping-container .gap-item').forEach(item=>{
+const text=item.getAttribute('data-search').toLowerCase();
+item.style.display=text.includes(keyword.toLowerCase())?'':'none';
+});
+}
+
+function renderGaps(){
+const container=document.getElementById('gap-list-container');
+const levelMap={red:'🔴 高风险',orange:'🟡 中风险'};
+container.innerHTML=gaps.map(g=>{
+return `
+<div class="gap-item ${g.level}">
+<div class="gap-header">
+<span class="gap-id">${g.id}</span>
+<span class="gap-title">${g.title}</span>
+<span class="badge ${g.level}">${levelMap[g.level]}</span>
+<span class="badge gray">${g.art}</span>
+</div>
+<div class="gap-body">
+<p>${g.desc}</p>
+${g.docs.length>0?`<div><span class="gap-label">相关制度：</span>${g.docs.map(d=>`<span class="gap-doc">${d}</span>`).join('')}</div>`:'<div><span class="gap-label">相关制度：</span><span style="color:var(--red)">无</span></div>'}
+<p style="margin-top:6px;padding:8px 12px;background:var(--green-bg);border-radius:6px;"><span class="gap-label">📝 整改建议：</span>${g.action}</p>
+</div>
+</div>`;
+}).join('');
+}
+
+function renderMatrix(){
+const statusMap={full:['full','✅'],partial:['partial','⚠️'],none:['none','❌'],na:['na','—']};
+const tbody=document.getElementById('matrix-body');
+tbody.innerHTML=mappings.map(m=>{
+const cells=[];
+for(let i=0;i<16;i++){
+let s='na';
+if(m.docs.length===0&&m.status==='red'){s='none';}
+else if(m.docs.length===0){s='na';}
+else{s=i<2?'partial':'none';}
+// Simplified: use status for overall, mark docs
+s='none';
+}
+// Build cells based on which docs are referenced
+const docCols=['办法2015','内控2018','稽核2015','账户2018','机构产品2019','人员2020','债券回购2020','信披规程2022','投监规程2022','清算规程2022','产品系统2022','应急预案2022','客户端2022','风险准备金2023','合同细则2014','档案2016'];
+let cellsHtml='';
+for(let i=0;i<16;i++){
+const colName=docCols[i];
+const hasDoc=m.docs.some(d=>colName.includes(d.substring(0,4))||d.includes(colName.substring(0,4)));
+if(hasDoc){
+cellsHtml+=`<td class="matrix-cell ${m.status==='green'?'full':'partial'}">${m.status==='green'?'✅':'⚠️'}</td>`;
+}else{
+cellsHtml+=`<td class="matrix-cell none">—</td>`;
+}
+}
+// Overall
+const overallCls=m.status==='green'?'full':m.status==='orange'?'partial':'none';
+const overallIcon=m.status==='green'?'✅':m.status==='orange'?'⚠️':'❌';
+return `<tr class="mapping-row"><td><strong>${m.art}</strong></td><td>${m.req}</td>${cellsHtml}<td class="matrix-cell ${overallCls}">${overallIcon}</td></tr>`;
+}).join('');
+}
+
+function renderDocs(){
+const container=document.getElementById('doc-list');
+container.innerHTML=documents.map(d=>{
+const opacity=d.available?'1':'0.5';
+const statusBadge=d.available?'':'<span class="badge red">未获取全文</span>';
+return `
+<div class="doc-card" style="opacity:${opacity}">
+<div class="doc-icon ${d.type}">${d.year.slice(2)}</div>
+<div class="doc-info">
+<div class="doc-name">${d.name} ${statusBadge}</div>
+<div class="doc-meta">${d.typeLabel} | ${d.year}年 | ${d.clauses}</div>
+<div class="doc-areas">${d.areas.map(a=>`<span class="doc-area">${a}</span>`).join('')}</div>
+</div>
+</div>`;
+}).join('');
+}
+
+// Init
+renderMapping('all');
+renderGaps();
+renderMatrix();
+renderDocs();
+</script>
+</body>
+</html>

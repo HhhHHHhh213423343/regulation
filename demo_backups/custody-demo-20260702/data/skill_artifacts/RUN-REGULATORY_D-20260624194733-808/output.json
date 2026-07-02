@@ -1,0 +1,1752 @@
+{
+  "runId": "RUN-REGULATORY_D-20260624194733-808",
+  "skillId": "regulatory-decomposer",
+  "taskId": "6855485431f4fa6221b9",
+  "sourceDocument": {
+    "filename": "6855485431f4fa6221b9-regulatory-source.txt",
+    "fileType": "txt",
+    "sha256": "68ee60d4ba7ec609a86e6b32b37849b5c945fa094792272e2ce09bd3448a0b00",
+    "textLength": 2095
+  },
+  "model": {
+    "provider": "deepseek",
+    "name": "deepseek-v4-flash",
+    "promptVersion": "regulatory-decomposer-v1.0"
+  },
+  "clauses": [
+    {
+      "clauseId": "C-001",
+      "clauseRef": "段落0",
+      "headingPath": [],
+      "originalText": "中国人民银行令〔2026〕第4号（中国人民银行关于修改部分规章的决定)",
+      "position": {
+        "paragraphStart": 0,
+        "paragraphEnd": 0
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 35
+      }
+    },
+    {
+      "clauseId": "C-002",
+      "clauseRef": "段落1",
+      "headingPath": [],
+      "originalText": "中国人民银行令〔2026〕第4号（中国人民银行关于修改部分规章的决定)",
+      "position": {
+        "paragraphStart": 1,
+        "paragraphEnd": 1
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 35
+      }
+    },
+    {
+      "clauseId": "C-003",
+      "clauseRef": "段落82",
+      "headingPath": [],
+      "originalText": "无障碍浏览 English Version",
+      "position": {
+        "paragraphStart": 82,
+        "paragraphEnd": 82
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "未以句末标点结尾，疑似不完整",
+        "length": 21
+      }
+    },
+    {
+      "clauseId": "C-004",
+      "clauseRef": "段落208",
+      "headingPath": [],
+      "originalText": "| 我的位置: 条法司  >  条法司  >  部门规章",
+      "position": {
+        "paragraphStart": 208,
+        "paragraphEnd": 208
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "未以句末标点结尾，疑似不完整",
+        "length": 28
+      }
+    },
+    {
+      "clauseId": "C-005",
+      "clauseRef": "段落257",
+      "headingPath": [],
+      "originalText": "中国人民银行令〔2026〕第4号（中国人民银行关于修改部分规章的决定)",
+      "position": {
+        "paragraphStart": 257,
+        "paragraphEnd": 257
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 35
+      }
+    },
+    {
+      "clauseId": "C-006",
+      "clauseRef": "段落276",
+      "headingPath": [],
+      "originalText": "2026-05-22 17:30:00",
+      "position": {
+        "paragraphStart": 276,
+        "paragraphEnd": 276
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "未以句末标点结尾，疑似不完整",
+        "length": 19
+      }
+    },
+    {
+      "clauseId": "C-007",
+      "clauseRef": "段落295",
+      "headingPath": [],
+      "originalText": "《中国人民银行关于修改部分规章的决定》已经2026年中国人民银行第3次行务会议审议通过，现予发布，自2026年7月1日起实施。",
+      "position": {
+        "paragraphStart": 295,
+        "paragraphEnd": 295
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "披露/公开",
+            "verbs": [
+              "发布"
+            ]
+          },
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 63
+      }
+    },
+    {
+      "clauseId": "C-008",
+      "clauseRef": "段落301",
+      "headingPath": [],
+      "originalText": "中国人民银行关于修改部分规章的决定",
+      "position": {
+        "paragraphStart": 301,
+        "paragraphEnd": 301
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "标题/章节",
+        "length": 17
+      }
+    },
+    {
+      "clauseId": "C-009",
+      "clauseRef": "段落303",
+      "headingPath": [],
+      "originalText": "为加强金融法治建设，根据市场发展实际完善银行间市场制度，中国人民银行决定对三件部门规章的部分条款予以修改：",
+      "position": {
+        "paragraphStart": 303,
+        "paragraphEnd": 303
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改",
+              "完善"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "未以句末标点结尾，疑似不完整",
+        "length": 53
+      }
+    },
+    {
+      "clauseId": "C-010",
+      "clauseRef": "段落307",
+      "headingPath": [],
+      "originalText": "将第二条第二款修改为“本办法所称金融机构法人，包括政策性银行、商业银行及其他金融机构”。",
+      "position": {
+        "paragraphStart": 307,
+        "paragraphEnd": 307
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 44
+      }
+    },
+    {
+      "clauseId": "C-011",
+      "clauseRef": "段落309",
+      "headingPath": [],
+      "originalText": "将第二十六条中“中央结算公司”的表述修改为“债券中央存管机构”。",
+      "position": {
+        "paragraphStart": 309,
+        "paragraphEnd": 309
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 32
+      }
+    },
+    {
+      "clauseId": "C-012",
+      "clauseRef": "段落311",
+      "headingPath": [],
+      "originalText": "将第二十八条修改为“发行人应在金融债券发行前和存续期间履行信息披露义务。”",
+      "position": {
+        "paragraphStart": 311,
+        "paragraphEnd": 311
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "披露/公开",
+            "verbs": [
+              "披露"
+            ]
+          },
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 37
+      }
+    },
+    {
+      "clauseId": "C-013",
+      "clauseRef": "段落313",
+      "headingPath": [],
+      "originalText": "将第三十六条修改为“发行人应将相关信息披露文件提交至金融债券发行管理信息系统。金融债券发行管理信息系统由中国人民银行指定的服务支持机构负责维护。服务支持机构应同步将信息披露文件发送至债券中央存管机构等金融基础设施运营机构，并及时将违反信息披露规定的行为向中国人民银行报告并公告。",
+      "position": {
+        "paragraphStart": 313,
+        "paragraphEnd": 313
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "报送/报告",
+            "verbs": [
+              "报告",
+              "提交"
+            ]
+          },
+          {
+            "category": "披露/公开",
+            "verbs": [
+              "披露",
+              "公告"
+            ]
+          },
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "引号不配对，疑似截断",
+        "length": 139
+      }
+    },
+    {
+      "clauseId": "C-014",
+      "clauseRef": "段落315",
+      "headingPath": [],
+      "originalText": "“金融基础设施运营机构应通过官方网站及时、准确、完整披露发行人所提交信息。”",
+      "position": {
+        "paragraphStart": 315,
+        "paragraphEnd": 315
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "报送/报告",
+            "verbs": [
+              "提交"
+            ]
+          },
+          {
+            "category": "披露/公开",
+            "verbs": [
+              "披露"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 38
+      }
+    },
+    {
+      "clauseId": "C-015",
+      "clauseRef": "段落317",
+      "headingPath": [],
+      "originalText": "将第四十条中“托管机构”的表述修改为“债券中央存管机构”。",
+      "position": {
+        "paragraphStart": 317,
+        "paragraphEnd": 317
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 29
+      }
+    },
+    {
+      "clauseId": "C-016",
+      "clauseRef": "段落321",
+      "headingPath": [],
+      "originalText": "将第十五条、第十八条中“中央结算公司”的表述修改为“债券中央存管机构”。",
+      "position": {
+        "paragraphStart": 321,
+        "paragraphEnd": 321
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": [
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 36
+      }
+    },
+    {
+      "clauseId": "C-017",
+      "clauseRef": "段落325",
+      "headingPath": [],
+      "originalText": "将第五条修改为“本办法所称债券登记托管结算机构是指在银行间债券市场办理债券登记、托管和结算业务的法人。",
+      "position": {
+        "paragraphStart": 325,
+        "paragraphEnd": 325
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          },
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "引号不配对，疑似截断",
+        "length": 51
+      }
+    },
+    {
+      "clauseId": "C-018",
+      "clauseRef": "段落327",
+      "headingPath": [],
+      "originalText": "“中央国债登记结算有限责任公司、银行间市场清算所股份有限公司是中国人民银行指定的债券登记托管结算机构。”",
+      "position": {
+        "paragraphStart": 327,
+        "paragraphEnd": 327
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 52
+      }
+    },
+    {
+      "clauseId": "C-019",
+      "clauseRef": "段落329",
+      "headingPath": [],
+      "originalText": "将第六条修改为“中央国债登记结算有限责任公司和银行间市场清算所股份有限公司（以下统称债券中央存管机构）承担债券中央登记、存管及结算职能；柜台交易承办银行承担商业银行柜台记账式国债等债券二级托管职能。”",
+      "position": {
+        "paragraphStart": 329,
+        "paragraphEnd": 329
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          },
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 100
+      }
+    },
+    {
+      "clauseId": "C-020",
+      "clauseRef": "段落331",
+      "headingPath": [],
+      "originalText": "将第七条修改为“债券中央存管机构在债券登记、托管和结算业务中履行下列职能：",
+      "position": {
+        "paragraphStart": 331,
+        "paragraphEnd": 331
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          },
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "未以句末标点结尾，疑似不完整；引号不配对，疑似截断",
+        "length": 37
+      }
+    },
+    {
+      "clauseId": "C-021",
+      "clauseRef": "段落341",
+      "headingPath": [],
+      "originalText": "“（五）代理拨付债券兑付本息和相关收益资金；",
+      "position": {
+        "paragraphStart": 341,
+        "paragraphEnd": 341
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "引号不配对，疑似截断",
+        "length": 22
+      }
+    },
+    {
+      "clauseId": "C-022",
+      "clauseRef": "段落343",
+      "headingPath": [],
+      "originalText": "“（六）跨市场交易流通债券的总托管；",
+      "position": {
+        "paragraphStart": 343,
+        "paragraphEnd": 343
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "引号不配对，疑似截断",
+        "length": 18
+      }
+    },
+    {
+      "clauseId": "C-023",
+      "clauseRef": "段落345",
+      "headingPath": [],
+      "originalText": "“（七）提供债券等质押物的管理服务;",
+      "position": {
+        "paragraphStart": 345,
+        "paragraphEnd": 345
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "未以句末标点结尾，疑似不完整；引号不配对，疑似截断",
+        "length": 18
+      }
+    },
+    {
+      "clauseId": "C-024",
+      "clauseRef": "段落347",
+      "headingPath": [],
+      "originalText": "“（八）代理债券持有人向债券发行人依法行使债券权利；",
+      "position": {
+        "paragraphStart": 347,
+        "paragraphEnd": 347
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "引号不配对，疑似截断",
+        "length": 26
+      }
+    },
+    {
+      "clauseId": "C-025",
+      "clauseRef": "段落349",
+      "headingPath": [],
+      "originalText": "“（九）依法提供与债券登记、托管和结算相关的信息、查询、咨询、培训服务；",
+      "position": {
+        "paragraphStart": 349,
+        "paragraphEnd": 349
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          },
+          {
+            "category": "培训/教育",
+            "verbs": [
+              "培训"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "引号不配对，疑似截断",
+        "length": 36
+      }
+    },
+    {
+      "clauseId": "C-026",
+      "clauseRef": "段落351",
+      "headingPath": [],
+      "originalText": "“（十）监督柜台交易承办银行的二级托管业务；",
+      "position": {
+        "paragraphStart": 351,
+        "paragraphEnd": 351
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "引号不配对，疑似截断",
+        "length": 22
+      }
+    },
+    {
+      "clauseId": "C-027",
+      "clauseRef": "段落353",
+      "headingPath": [],
+      "originalText": "“（十一）中国人民银行规定的其他职能。”",
+      "position": {
+        "paragraphStart": 353,
+        "paragraphEnd": 353
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 20
+      }
+    },
+    {
+      "clauseId": "C-028",
+      "clauseRef": "段落355",
+      "headingPath": [],
+      "originalText": "将第九条、第十条、第十五条、第二十五条、第二十八条、第二十九条、第三十条、第三十二条中“债券登记托管结算机构”的表述修改为“债券中央存管机构”。",
+      "position": {
+        "paragraphStart": 355,
+        "paragraphEnd": 355
+      },
+      "ruleTags": {
+        "obligationType": "程序性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          },
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 72
+      }
+    },
+    {
+      "clauseId": "C-029",
+      "clauseRef": "段落357",
+      "headingPath": [],
+      "originalText": "将第十七条第二款修改为“债券登记托管结算机构应当按照中国人民银行有关规定和交易商协会、全国银行间同业拆借中心等建立信息和数据共享机制，共享有关统计信息及明细数据，有效支持宏观调控和穿透式监管”。",
+      "position": {
+        "paragraphStart": 357,
+        "paragraphEnd": 357
+      },
+      "ruleTags": {
+        "obligationType": "强制性",
+        "regulatoryActions": [
+          {
+            "category": "建立/设立",
+            "verbs": [
+              "建立"
+            ]
+          },
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          },
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 97
+      }
+    },
+    {
+      "clauseId": "C-030",
+      "clauseRef": "段落359",
+      "headingPath": [],
+      "originalText": "将第二十四条第一款修改为“一个投资者在一家债券中央存管机构只能开立一个自营账户，中国人民银行另有规定的除外”。",
+      "position": {
+        "paragraphStart": 359,
+        "paragraphEnd": 359
+      },
+      "ruleTags": {
+        "obligationType": "限制性",
+        "regulatoryActions": [
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 55
+      }
+    },
+    {
+      "clauseId": "C-031",
+      "clauseRef": "段落361",
+      "headingPath": [],
+      "originalText": "将第三十一条修改为“债券登记托管结算机构可依法为债券持有人提供债券质押登记服务，或依照法律法规对债券进行冻结。债券被质押和冻结时，债券登记托管结算机构应当在相应债券账户内加以明确标记，以表明债券权利受到限制。”",
+      "position": {
+        "paragraphStart": 361,
+        "paragraphEnd": 361
+      },
+      "ruleTags": {
+        "obligationType": "强制性",
+        "regulatoryActions": [
+          {
+            "category": "登记/注册",
+            "verbs": [
+              "登记"
+            ]
+          },
+          {
+            "category": "限制/禁止",
+            "verbs": [
+              "限制"
+            ]
+          },
+          {
+            "category": "制定/修订",
+            "verbs": [
+              "修改"
+            ]
+          }
+        ]
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 105
+      }
+    },
+    {
+      "clauseId": "C-032",
+      "clauseRef": "段落363",
+      "headingPath": [],
+      "originalText": "此外，对相关规章中的条文序号作相应调整。",
+      "position": {
+        "paragraphStart": 363,
+        "paragraphEnd": 363
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "标题/章节",
+        "length": 20
+      }
+    },
+    {
+      "clauseId": "C-033",
+      "clauseRef": "段落365",
+      "headingPath": [],
+      "originalText": "本决定自2026年7月1日起施行。",
+      "position": {
+        "paragraphStart": 365,
+        "paragraphEnd": 365
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "complete",
+        "reason": "原文完整",
+        "length": 17
+      }
+    },
+    {
+      "clauseId": "C-034",
+      "clauseRef": "段落406",
+      "headingPath": [],
+      "originalText": "法律声明 | 联系我们 | 设为首页 | 加入收藏 | 网站地图",
+      "position": {
+        "paragraphStart": 406,
+        "paragraphEnd": 406
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "未以句末标点结尾，疑似不完整",
+        "length": 32
+      }
+    },
+    {
+      "clauseId": "C-035",
+      "clauseRef": "段落411",
+      "headingPath": [],
+      "originalText": "京ICP备05073439号 网站标识码：bm25000001 京公网安备 11010202000016号",
+      "position": {
+        "paragraphStart": 411,
+        "paragraphEnd": 411
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "未以句末标点结尾，疑似不完整",
+        "length": 53
+      }
+    },
+    {
+      "clauseId": "C-036",
+      "clauseRef": "段落414",
+      "headingPath": [],
+      "originalText": "网站主办单位：中国人民银行办公厅　最佳分辨率：1024*768",
+      "position": {
+        "paragraphStart": 414,
+        "paragraphEnd": 414
+      },
+      "ruleTags": {
+        "obligationType": "一般性",
+        "regulatoryActions": []
+      },
+      "splitConfidence": "low",
+      "integrity": {
+        "status": "review_required",
+        "reason": "未以句末标点结尾，疑似不完整",
+        "length": 31
+      }
+    }
+  ],
+  "fiveDimensions": {
+    "regulatoryIntent": {
+      "policyBackground": "为加强金融法治建设，根据市场发展实际完善银行间市场制度",
+      "regulatoryGoal": "规范银行间债券市场信息披露、登记托管结算等行为，提升市场透明度",
+      "riskConcern": "信息披露不充分、术语不统一、机构职能定位不清、数据共享不足等风险",
+      "expectedEffect": "促进债券市场平稳健康发展，支持宏观调控和穿透式监管",
+      "upperLevelLawBasis": [],
+      "revisionHistory": [],
+      "regulatoryTrend": "强化中央存管机构职能，统一监管术语，完善信息披露和共享机制",
+      "judicialPractice": [],
+      "sourceClauseIds": [
+        "C-007",
+        "C-009",
+        "C-010",
+        "C-011",
+        "C-012",
+        "C-013",
+        "C-014",
+        "C-015",
+        "C-016",
+        "C-017",
+        "C-018",
+        "C-019",
+        "C-020",
+        "C-021",
+        "C-022",
+        "C-023",
+        "C-024",
+        "C-025",
+        "C-026",
+        "C-027",
+        "C-028",
+        "C-029",
+        "C-030",
+        "C-031",
+        "C-032",
+        "C-033"
+      ],
+      "needsReview": true
+    },
+    "regulatoryRequirements": [
+      {
+        "clauseId": "C-007",
+        "clauseRef": "段落295",
+        "originalExcerpt": "《中国人民银行关于修改部分规章的决定》已经2026年中国人民银行第3次行务会议审议通过，现予发布，自2026年7月1日起实施。",
+        "obligationType": "一般性",
+        "action": "披露/公开",
+        "subject": "中国人民银行",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-010",
+        "clauseRef": "段落307",
+        "originalExcerpt": "将第二条第二款修改为“本办法所称金融机构法人，包括政策性银行、商业银行及其他金融机构”。",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第二条第二款",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-011",
+        "clauseRef": "段落309",
+        "originalExcerpt": "将第二十六条中“中央结算公司”的表述修改为“债券中央存管机构”。",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第二十六条",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-012",
+        "clauseRef": "段落311",
+        "originalExcerpt": "将第二十八条修改为“发行人应在金融债券发行前和存续期间履行信息披露义务。”",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第二十八条",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-012",
+        "clauseRef": "段落311",
+        "originalExcerpt": "将第二十八条修改为“发行人应在金融债券发行前和存续期间履行信息披露义务。”",
+        "obligationType": "强制性",
+        "action": "披露/公开",
+        "subject": "发行人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-013",
+        "clauseRef": "段落313",
+        "originalExcerpt": "将第三十六条修改为“发行人应将相关信息披露文件提交至金融债券发行管理信息系统。金融债券发行管理信息系统由中国人民银行指定的服务支持机构负责维护。服务支持机构应同步将信息披露文件发送至债券中央存管机构等金融基础设施运营机构，并及时将违反信息披露规定的行为向中国人民银行报告并公告。",
+        "obligationType": "强制性",
+        "action": "报送/报告",
+        "subject": "发行人",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-013",
+        "clauseRef": "段落313",
+        "originalExcerpt": "将第三十六条修改为“发行人应将相关信息披露文件提交至金融债券发行管理信息系统。金融债券发行管理信息系统由中国人民银行指定的服务支持机构负责维护。服务支持机构应同步将信息披露文件发送至债券中央存管机构等金融基础设施运营机构，并及时将违反信息披露规定的行为向中国人民银行报告并公告。",
+        "obligationType": "强制性",
+        "action": "报送/报告",
+        "subject": "服务支持机构",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-013",
+        "clauseRef": "段落313",
+        "originalExcerpt": "将第三十六条修改为“发行人应将相关信息披露文件提交至金融债券发行管理信息系统。金融债券发行管理信息系统由中国人民银行指定的服务支持机构负责维护。服务支持机构应同步将信息披露文件发送至债券中央存管机构等金融基础设施运营机构，并及时将违反信息披露规定的行为向中国人民银行报告并公告。",
+        "obligationType": "强制性",
+        "action": "披露/公开",
+        "subject": "服务支持机构",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-013",
+        "clauseRef": "段落313",
+        "originalExcerpt": "将第三十六条修改为“发行人应将相关信息披露文件提交至金融债券发行管理信息系统。金融债券发行管理信息系统由中国人民银行指定的服务支持机构负责维护。服务支持机构应同步将信息披露文件发送至债券中央存管机构等金融基础设施运营机构，并及时将违反信息披露规定的行为向中国人民银行报告并公告。",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第三十六条",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-014",
+        "clauseRef": "段落315",
+        "originalExcerpt": "“金融基础设施运营机构应通过官方网站及时、准确、完整披露发行人所提交信息。”",
+        "obligationType": "强制性",
+        "action": "披露/公开",
+        "subject": "金融基础设施运营机构",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-015",
+        "clauseRef": "段落317",
+        "originalExcerpt": "将第四十条中“托管机构”的表述修改为“债券中央存管机构”。",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第四十条",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-016",
+        "clauseRef": "段落321",
+        "originalExcerpt": "将第十五条、第十八条中“中央结算公司”的表述修改为“债券中央存管机构”。",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第十五条、第十八条",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-017",
+        "clauseRef": "段落325",
+        "originalExcerpt": "将第五条修改为“本办法所称债券登记托管结算机构是指在银行间债券市场办理债券登记、托管和结算业务的法人。",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第五条",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-018",
+        "clauseRef": "段落327",
+        "originalExcerpt": "“中央国债登记结算有限责任公司、银行间市场清算所股份有限公司是中国人民银行指定的债券登记托管结算机构。”",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第五条（新增内容）",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-019",
+        "clauseRef": "段落329",
+        "originalExcerpt": "将第六条修改为“中央国债登记结算有限责任公司和银行间市场清算所股份有限公司（以下统称债券中央存管机构）承担债券中央登记、存管及结算职能；柜台交易承办银行承担商业银行柜台记账式国债等债券二级托管职能。”",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第六条",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-019",
+        "clauseRef": "段落329",
+        "originalExcerpt": "将第六条修改为“中央国债登记结算有限责任公司和银行间市场清算所股份有限公司（以下统称债券中央存管机构）承担债券中央登记、存管及结算职能；柜台交易承办银行承担商业银行柜台记账式国债等债券二级托管职能。”",
+        "obligationType": "强制性",
+        "action": "登记/注册",
+        "subject": "债券中央存管机构",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-020",
+        "clauseRef": "段落331",
+        "originalExcerpt": "将第七条修改为“债券中央存管机构在债券登记、托管和结算业务中履行下列职能：",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第七条",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-021",
+        "clauseRef": "段落341",
+        "originalExcerpt": "“（五）代理拨付债券兑付本息和相关收益资金；",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第七条第五项",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-022",
+        "clauseRef": "段落343",
+        "originalExcerpt": "“（六）跨市场交易流通债券的总托管；",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第七条第六项",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-023",
+        "clauseRef": "段落345",
+        "originalExcerpt": "“（七）提供债券等质押物的管理服务;",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第七条第七项",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-024",
+        "clauseRef": "段落347",
+        "originalExcerpt": "“（八）代理债券持有人向债券发行人依法行使债券权利；",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第七条第八项",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-025",
+        "clauseRef": "段落349",
+        "originalExcerpt": "“（九）依法提供与债券登记、托管和结算相关的信息、查询、咨询、培训服务；",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第七条第九项",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-025",
+        "clauseRef": "段落349",
+        "originalExcerpt": "“（九）依法提供与债券登记、托管和结算相关的信息、查询、咨询、培训服务；",
+        "obligationType": "强制性",
+        "action": "培训/教育",
+        "subject": "债券中央存管机构",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-026",
+        "clauseRef": "段落351",
+        "originalExcerpt": "“（十）监督柜台交易承办银行的二级托管业务；",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第七条第十项",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-027",
+        "clauseRef": "段落353",
+        "originalExcerpt": "“（十一）中国人民银行规定的其他职能。”",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第七条第十一项",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-028",
+        "clauseRef": "段落355",
+        "originalExcerpt": "将第九条、第十条、第十五条、第二十五条、第二十八条、第二十九条、第三十条、第三十二条中“债券登记托管结算机构”的表述修改为“债券中央存管机构”。",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第九条、第十条等八条",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-029",
+        "clauseRef": "段落357",
+        "originalExcerpt": "将第十七条第二款修改为“债券登记托管结算机构应当按照中国人民银行有关规定和交易商协会、全国银行间同业拆借中心等建立信息和数据共享机制，共享有关统计信息及明细数据，有效支持宏观调控和穿透式监管”。",
+        "obligationType": "强制性",
+        "action": "建立/设立",
+        "subject": "债券登记托管结算机构",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-029",
+        "clauseRef": "段落357",
+        "originalExcerpt": "将第十七条第二款修改为“债券登记托管结算机构应当按照中国人民银行有关规定和交易商协会、全国银行间同业拆借中心等建立信息和数据共享机制，共享有关统计信息及明细数据，有效支持宏观调控和穿透式监管”。",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第十七条第二款",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-030",
+        "clauseRef": "段落359",
+        "originalExcerpt": "将第二十四条第一款修改为“一个投资者在一家债券中央存管机构只能开立一个自营账户，中国人民银行另有规定的除外”。",
+        "obligationType": "限制性",
+        "action": "限制/禁止",
+        "subject": "投资者",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-030",
+        "clauseRef": "段落359",
+        "originalExcerpt": "将第二十四条第一款修改为“一个投资者在一家债券中央存管机构只能开立一个自营账户，中国人民银行另有规定的除外”。",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第二十四条第一款",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-031",
+        "clauseRef": "段落361",
+        "originalExcerpt": "将第三十一条修改为“债券登记托管结算机构可依法为债券持有人提供债券质押登记服务，或依照法律法规对债券进行冻结。债券被质押和冻结时，债券登记托管结算机构应当在相应债券账户内加以明确标记，以表明债券权利受到限制。”",
+        "obligationType": "登记/注册",
+        "action": "登记/注册",
+        "subject": "债券登记托管结算机构",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-031",
+        "clauseRef": "段落361",
+        "originalExcerpt": "将第三十一条修改为“债券登记托管结算机构可依法为债券持有人提供债券质押登记服务，或依照法律法规对债券进行冻结。债券被质押和冻结时，债券登记托管结算机构应当在相应债券账户内加以明确标记，以表明债券权利受到限制。”",
+        "obligationType": "限制性",
+        "action": "限制/禁止",
+        "subject": "债券登记托管结算机构",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-031",
+        "clauseRef": "段落361",
+        "originalExcerpt": "将第三十一条修改为“债券登记托管结算机构可依法为债券持有人提供债券质押登记服务，或依照法律法规对债券进行冻结。债券被质押和冻结时，债券登记托管结算机构应当在相应债券账户内加以明确标记，以表明债券权利受到限制。”",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "第三十一条",
+        "deadline": null,
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-032",
+        "clauseRef": "段落363",
+        "originalExcerpt": "此外，对相关规章中的条文序号作相应调整。",
+        "obligationType": "一般性",
+        "action": "制定/修订",
+        "subject": "相关规章条文序号",
+        "deadline": null,
+        "needsReview": true
+      }
+    ],
+    "applicableObjects": {
+      "direct": [
+        "发行人（金融债券发行人）",
+        "金融机构法人（包括政策性银行、商业银行及其他金融机构）",
+        "债券登记托管结算机构（债券中央存管机构）",
+        "柜台交易承办银行",
+        "投资者",
+        "金融基础设施运营机构",
+        "服务支持机构（金融债券发行管理信息系统维护机构）"
+      ],
+      "indirect": [
+        "交易商协会",
+        "全国银行间同业拆借中心"
+      ],
+      "exempted": [],
+      "sourceClauseIds": [
+        "C-007",
+        "C-009",
+        "C-010",
+        "C-011",
+        "C-012",
+        "C-013",
+        "C-014",
+        "C-015",
+        "C-016",
+        "C-017",
+        "C-018",
+        "C-019",
+        "C-020",
+        "C-021",
+        "C-022",
+        "C-023",
+        "C-024",
+        "C-025",
+        "C-026",
+        "C-027",
+        "C-028",
+        "C-029",
+        "C-030",
+        "C-031",
+        "C-032",
+        "C-033"
+      ],
+      "needsReview": true
+    },
+    "operationalRequirements": [
+      {
+        "clauseId": "C-012",
+        "requirement": "发行人应在金融债券发行前和存续期间履行信息披露义务",
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-013",
+        "requirement": "发行人应将信息披露文件提交至金融债券发行管理信息系统；服务支持机构应同步发送至债券中央存管机构等，并报告违规行为及公告",
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-014",
+        "requirement": "金融基础设施运营机构应通过官方网站及时、准确、完整披露发行人所提交信息",
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-019",
+        "requirement": "债券中央存管机构承担债券中央登记、存管及结算职能；柜台交易承办银行承担二级托管职能",
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-025",
+        "requirement": "债券中央存管机构应依法提供与债券登记、托管和结算相关的信息、查询、咨询、培训服务",
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-029",
+        "requirement": "债券登记托管结算机构应按照有关规定建立信息和数据共享机制，共享统计信息及明细数据",
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-030",
+        "requirement": "投资者在一家债券中央存管机构只能开立一个自营账户",
+        "needsReview": true
+      },
+      {
+        "clauseId": "C-031",
+        "requirement": "债券登记托管结算机构应依法提供债券质押登记服务或依法冻结债券，并在账户内明确标记",
+        "needsReview": true
+      }
+    ],
+    "inspectionFocus": [
+      "发行人信息披露是否及时、准确、完整",
+      "服务支持机构是否按要求同步发送信息披露文件并向中国人民银行报告违规行为",
+      "金融基础设施运营机构是否通过官方网站及时、准确、完整披露信息",
+      "债券登记托管结算机构是否按规定建立数据共享机制并共享信息",
+      "投资者账户开立是否符合一个投资者在一家债券中央存管机构只能开立一个自营账户的规定",
+      "债券质押和冻结是否在相应债券账户内明确标记",
+      "债券中央存管机构是否依法提供培训等服务",
+      "相关金融机构是否按照新术语（债券中央存管机构）执行"
+    ]
+  },
+  "review": {
+    "status": "pending",
+    "required": true,
+    "items": [
+      {
+        "targetType": "requirement",
+        "targetId": "C-007",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-010",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-011",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-012",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-012",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-013",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-013",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-013",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-013",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-014",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-015",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-016",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-017",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-018",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-019",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-019",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-020",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-021",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-022",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-023",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-024",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-025",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-025",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-026",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-027",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-028",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-029",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-029",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-030",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-030",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-031",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-031",
+        "riskLevel": "high",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-031",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "requirement",
+        "targetId": "C-032",
+        "riskLevel": "medium",
+        "reason": "模型生成监管要求，需人工复核；强制/禁止/限制性条款默认高优先级。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "regulatoryIntent",
+        "targetId": "regulatoryIntent",
+        "riskLevel": "medium",
+        "reason": "监管意图包含模型推理结论，须由合规人员确认。",
+        "decision": "pending"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "id": "ART-RUN-REGULATORY_D-20260624194733-808-json",
+      "name": "结构化数据（JSON）",
+      "type": "json",
+      "path": "data/skill_artifacts/RUN-REGULATORY_D-20260624194733-808/output.json",
+      "source": "本次执行结果",
+      "generatedAt": "2026-06-24T20:07:25+08:00"
+    },
+    {
+      "id": "ART-RUN-REGULATORY_D-20260624194733-808-md",
+      "name": "监管解读报告（文本）",
+      "type": "md",
+      "path": "data/skill_artifacts/RUN-REGULATORY_D-20260624194733-808/report.md",
+      "source": "本次执行结果",
+      "generatedAt": "2026-06-24T20:07:25+08:00"
+    },
+    {
+      "id": "ART-RUN-REGULATORY_D-20260624194733-808-html",
+      "name": "监管解读网页报告",
+      "type": "html",
+      "path": "data/skill_artifacts/RUN-REGULATORY_D-20260624194733-808/report.html",
+      "source": "本次执行结果",
+      "generatedAt": "2026-06-24T20:07:25+08:00"
+    },
+    {
+      "id": "ART-RUN-REGULATORY_D-20260624194733-808-docx",
+      "name": "监管解读文档报告",
+      "type": "docx",
+      "path": "data/skill_artifacts/RUN-REGULATORY_D-20260624194733-808/report.docx",
+      "source": "本次执行结果",
+      "generatedAt": "2026-06-24T20:07:25+08:00"
+    },
+    {
+      "id": "ART-RUN-REGULATORY_D-20260624194733-808-xlsx",
+      "name": "监管解读数据表格",
+      "type": "xlsx",
+      "path": "data/skill_artifacts/RUN-REGULATORY_D-20260624194733-808/data.xlsx",
+      "source": "本次执行结果",
+      "generatedAt": "2026-06-24T20:07:25+08:00"
+    }
+  ]
+}

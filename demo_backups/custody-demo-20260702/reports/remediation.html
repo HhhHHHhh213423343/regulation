@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>整改落地与内化制度方案</title>
+    <style>
+      :root {
+        --navy: #17233b;
+        --blue: #2f6fed;
+        --red: #d94a38;
+        --orange: #d9822b;
+        --green: #178f65;
+        --purple: #7556d9;
+        --gold: #b88a2a;
+        --bg: #f3f6f9;
+        --panel: #fff;
+        --ink: #111827;
+        --muted: #667085;
+        --line: #d9e0e8;
+        font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      .hero {
+        padding: 34px 42px;
+        background:
+          linear-gradient(135deg, rgba(23, 35, 59, 0.96), rgba(43, 61, 94, 0.94)),
+          #17233b;
+        color: #fff;
+      }
+
+      .badge {
+        display: inline-flex;
+        min-height: 24px;
+        padding: 0 9px;
+        border-radius: 5px;
+        align-items: center;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .badge.red {
+        background: var(--red);
+      }
+
+      .badge.orange {
+        background: var(--orange);
+      }
+
+      .badge.green {
+        background: var(--green);
+      }
+
+      .badge.blue {
+        background: var(--blue);
+      }
+
+      .badge.purple {
+        background: var(--purple);
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: #f1c45b;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 900px;
+        margin-bottom: 16px;
+        font-size: 34px;
+        line-height: 1.18;
+      }
+
+      .hero p {
+        max-width: 980px;
+        margin-bottom: 0;
+        color: rgba(255, 255, 255, 0.76);
+        line-height: 1.8;
+      }
+
+      .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .stats-grid,
+      .dimension-grid,
+      .draft-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        margin-bottom: 18px;
+      }
+
+      .stat,
+      .card,
+      .dimension,
+      .draft-card,
+      .timeline-item {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: 0 12px 30px rgba(20, 32, 52, 0.08);
+      }
+
+      .stat {
+        min-height: 112px;
+        padding: 18px;
+      }
+
+      .stat strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 30px;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .card {
+        margin-bottom: 18px;
+        padding: 20px;
+      }
+
+      .card h2 {
+        margin-bottom: 14px;
+        font-size: 22px;
+      }
+
+      .card p,
+      .dimension p,
+      .draft-card p,
+      td {
+        color: var(--muted);
+        line-height: 1.68;
+      }
+
+      .dimension-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .dimension {
+        padding: 18px;
+        border-top: 4px solid var(--blue);
+      }
+
+      .dimension:nth-child(2) {
+        border-top-color: var(--green);
+      }
+
+      .dimension:nth-child(3) {
+        border-top-color: var(--purple);
+      }
+
+      .dimension:nth-child(4) {
+        border-top-color: var(--orange);
+      }
+
+      .dimension h3,
+      .draft-card h3 {
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+
+      th,
+      td {
+        padding: 12px 10px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: #eef2f7;
+        color: var(--navy);
+        font-weight: 900;
+      }
+
+      .draft-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .draft-card {
+        padding: 18px;
+      }
+
+      .draft-card ul {
+        margin: 10px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 12px;
+      }
+
+      .timeline-item {
+        padding: 16px 18px;
+        display: grid;
+        grid-template-columns: 190px minmax(0, 1fr);
+        gap: 18px;
+      }
+
+      .timeline-date {
+        color: var(--red);
+        font-weight: 900;
+      }
+
+      .timeline-title {
+        margin-bottom: 6px;
+        color: var(--navy);
+        font-weight: 900;
+      }
+
+      .footer {
+        padding: 24px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      @media (max-width: 980px) {
+        .stats-grid,
+        .dimension-grid,
+        .draft-grid,
+        .timeline-item {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <p class="eyebrow">Remediation Implementation</p>
+      <h1>整改落地与内化制度方案</h1>
+      <p>
+        基于 Gap 分析结果，将监管差距转化为制度、流程、系统、控制点四维整改方案，
+        并形成制度草案、SOP、系统改造清单和 KCP 控制点。生成结果须经法律合规部门审查后正式发布。
+      </p>
+    </header>
+
+    <main class="container">
+      <section class="stats-grid" aria-label="整改统计">
+        <div class="stat"><strong style="color: var(--red)">6</strong><span>紧急高风险事项</span></div>
+        <div class="stat"><strong style="color: var(--blue)">2</strong><span>新增制度草案</span></div>
+        <div class="stat"><strong style="color: var(--orange)">14</strong><span>修订条款建议</span></div>
+        <div class="stat"><strong style="color: var(--purple)">3</strong><span>系统改造项</span></div>
+        <div class="stat"><strong style="color: var(--green)">8</strong><span>新增控制点</span></div>
+      </section>
+
+      <section class="card">
+        <h2>四维整改总览</h2>
+        <div class="dimension-grid">
+          <article class="dimension">
+            <h3>制度</h3>
+            <p>新增《双存管机构并行运行操作规程》和《债券登记托管数据分类分级保护办法》，同步修订存量管理办法和合同模板。</p>
+            <span class="badge blue">Policy Draft</span>
+          </article>
+          <article class="dimension">
+            <h3>流程</h3>
+            <p>新增双通道登记托管流程、统一信息平台报送流程、存量合同补充协议流程，并形成 SOP。</p>
+            <span class="badge green">SOP</span>
+          </article>
+          <article class="dimension">
+            <h3>系统</h3>
+            <p>完成存管机构名称字典更新、上清所接口适配、托管数据校验模块和报送平台对接评估。</p>
+            <span class="badge purple">System Impact</span>
+          </article>
+          <article class="dimension">
+            <h3>控制点</h3>
+            <p>新增 C-NEW-001 至 C-NEW-008 控制点，覆盖合同签署、数据互认、披露确认、清算路径和每日站会。</p>
+            <span class="badge orange">KCP</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>紧急整改事项清单</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Gap</th>
+              <th>整改动作</th>
+              <th>牵头部门</th>
+              <th>控制点</th>
+              <th>截止时间</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge red">G-001</span></td>
+              <td>更新全部涉及登记托管机构名称的制度、合同和流程模板。</td>
+              <td>托管业务部 / 法律合规部</td>
+              <td>C-NEW-001 合同签署前验证存管机构名称</td>
+              <td>2026-06-12</td>
+            </tr>
+            <tr>
+              <td><span class="badge red">G-002</span></td>
+              <td>制定双存管机构并行运行操作规程，明确数据互认和信息共享机制。</td>
+              <td>托管业务部 / 运营管理部</td>
+              <td>C-NEW-002 双通道数据每日自动比对</td>
+              <td>2026-06-17</td>
+            </tr>
+            <tr>
+              <td><span class="badge red">G-003</span></td>
+              <td>对接存管机构统一信息平台，建立报送和披露双重确认流程。</td>
+              <td>信息科技部 / 托管业务部</td>
+              <td>C-NEW-003 披露前双重确认</td>
+              <td>2026-06-24</td>
+            </tr>
+            <tr>
+              <td><span class="badge red">G-009</span></td>
+              <td>将资金清算从单一通道升级为中债登/上清所双通道。</td>
+              <td>运营管理部</td>
+              <td>C-NEW-004 清算前验证路径与合同一致</td>
+              <td>2026-06-27</td>
+            </tr>
+            <tr>
+              <td><span class="badge red">G-010</span></td>
+              <td>新增登记托管数据完整性、准确性、及时性三重校验流程。</td>
+              <td>托管业务部 / 信息科技部</td>
+              <td>C-NEW-005 三重校验通过方可确认</td>
+              <td>2026-06-29</td>
+            </tr>
+            <tr>
+              <td><span class="badge red">G-013</span></td>
+              <td>成立合规衔接专项组，建立每日站会和倒排计划。</td>
+              <td>法律合规部</td>
+              <td>C-NEW-006 专项组每日站会+进度看板</td>
+              <td>2026-07-01</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2>新增制度草案摘要</h2>
+        <div class="draft-grid">
+          <article class="draft-card">
+            <h3>《双存管机构并行运行操作规程》</h3>
+            <p>制定目的：明确中债登和上清所双存管机构并行运行下的职责分工、数据互认、清算路径和异常处理。</p>
+            <ul>
+              <li>适用范围：银行间债券发行、登记、托管、清算、信息披露相关业务。</li>
+              <li>核心条款：双通道选择、数据互认、每日比对、差异处理、应急切换。</li>
+              <li>外规依据：PBOC令〔2026〕第4号第三条第四款。</li>
+            </ul>
+          </article>
+          <article class="draft-card">
+            <h3>《债券登记托管数据分类分级保护办法》</h3>
+            <p>制定目的：建立托管数据核心、重要、一般三级分类分级保护体系，强化加密、访问控制和审计追踪。</p>
+            <ul>
+              <li>适用范围：登记托管数据、结算数据、报送数据、系统日志和客户资料。</li>
+              <li>核心条款：数据分级、权限矩阵、脱敏规则、留痕审计、泄露应急。</li>
+              <li>外规依据：PBOC令〔2026〕第4号第三条第六款。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>分阶段整改行动计划</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">D+0 ～ D+2</div>
+            <div>
+              <div class="timeline-title">专项组成立与修订清单确认</div>
+              <p>托管业务、法务、风险、运营、科技四部门组建专项组，确认制度和系统改造优先级。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">D+3 ～ D+7</div>
+            <div>
+              <div class="timeline-title">核心制度修订与新增制度起草</div>
+              <p>完成存管机构称谓、双通道流程、三重校验条款修订，形成两项新增制度初稿。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">D+8 ～ D+14</div>
+            <div>
+              <div class="timeline-title">跨部门会签与系统改造</div>
+              <p>完成制度会签，推进上清所接口适配、报送平台对接、托管数据校验模块开发。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">D+15 ～ D+20</div>
+            <div>
+              <div class="timeline-title">合同更新、培训与试运行</div>
+              <p>更新合同模板，开展全员培训，选择存量产品进行双通道全流程试运行。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">D+21</div>
+            <div>
+              <div class="timeline-title">正式切换与首日运行监控</div>
+              <p>所有新发行产品按双存管机构制度运行，专项组全天监控异常事件并即时响应。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      外规内化整改落地专家 · @skill:remediation-implementation · AI辅助生成，须经法律合规部门审查
+    </footer>
+  </body>
+</html>

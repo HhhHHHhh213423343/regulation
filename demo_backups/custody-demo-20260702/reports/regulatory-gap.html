@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>示例银行托管业务制度合规差距分析报告（完善版）</title>
+<style>
+:root {
+  --primary: #1a3a5c;
+  --primary-light: #2c5f8a;
+  --bg: #f0f2f5;
+  --card-bg: #ffffff;
+  --text: #2c2c2c;
+  --border: #d9d9d9;
+  --red: #e74c3c;
+  --red-bg: #fdf2f2;
+  --orange: #f39c12;
+  --orange-bg: #fef9f0;
+  --green: #27ae60;
+  --green-bg: #f0faf3;
+  --blue: #3498db;
+  --blue-bg: #eef7fc;
+  --gray: #95a5a6;
+  --gray-bg: #f5f5f5;
+  --purple: #9b59b6;
+  --purple-bg: #f8f0fb;
+  --teal: #1abc9c;
+  --teal-bg: #e8faf6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Microsoft YaHei", "Noto Sans CJK SC", "PingFang SC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 14px;
+}
+.container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+.header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: white; padding: 40px 30px; border-radius: 12px; margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.header h1 { font-size: 26px; margin-bottom: 8px; }
+.header .subtitle { font-size: 14px; opacity: 0.85; margin-bottom: 16px; }
+.header .meta { display: flex; gap: 24px; flex-wrap: wrap; font-size: 13px; opacity: 0.9; }
+.header .meta-item { display: flex; align-items: center; gap: 6px; }
+.tabs { display: flex; gap: 4px; margin-bottom: 0; border-bottom: 2px solid var(--primary); overflow-x: auto; }
+.tab {
+  padding: 10px 24px; cursor: pointer; border: none; background: var(--gray-bg);
+  color: var(--text); font-size: 14px; font-weight: 500; border-radius: 8px 8px 0 0;
+  transition: all 0.2s; white-space: nowrap;
+}
+.tab:hover { background: #e0e0e0; }
+.tab.active { background: var(--primary); color: white; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.card {
+  background: var(--card-bg); border-radius: 10px; padding: 24px; margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.card-title {
+  font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 16px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--border);
+}
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--card-bg); border-radius: 10px; padding: 20px; text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 4px solid var(--primary);
+}
+.stat-card.red { border-top-color: var(--red); }
+.stat-card.orange { border-top-color: var(--orange); }
+.stat-card.green { border-top-color: var(--green); }
+.stat-card.blue { border-top-color: var(--blue); }
+.stat-card.purple { border-top-color: var(--purple); }
+.stat-card.teal { border-top-color: var(--teal); }
+.stat-number { font-size: 32px; font-weight: 700; margin: 8px 0; }
+.stat-number.red { color: var(--red); }
+.stat-number.orange { color: var(--orange); }
+.stat-number.green { color: var(--green); }
+.stat-number.blue { color: var(--blue); }
+.stat-number.purple { color: var(--purple); }
+.stat-number.teal { color: var(--teal); }
+.stat-label { font-size: 13px; color: var(--gray); }
+.progress-container { margin: 16px 0; }
+.progress-bar { height: 24px; border-radius: 12px; overflow: hidden; display: flex; background: #e0e0e0; }
+.progress-segment { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: white; transition: width 0.5s; }
+.progress-segment.green { background: var(--green); }
+.progress-segment.orange { background: var(--orange); }
+.progress-segment.red { background: var(--red); }
+.progress-legend { display: flex; gap: 20px; margin-top: 8px; font-size: 12px; }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 8px; }
+th { background: var(--primary); color: white; padding: 10px 12px; text-align: left; font-weight: 600; position: sticky; top: 0; z-index: 10; }
+td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:nth-child(even) { background: #f9fafb; }
+tr:hover { background: #eef4fa; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.badge.red { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); }
+.badge.orange { background: var(--orange-bg); color: var(--orange); border: 1px solid var(--orange); }
+.badge.green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
+.badge.blue { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue); }
+.badge.gray { background: var(--gray-bg); color: var(--gray); border: 1px solid var(--gray); }
+.badge.purple { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple); }
+.badge.teal { background: var(--teal-bg); color: var(--teal); border: 1px solid var(--teal); }
+.filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.filter-btn { padding: 6px 16px; border: 1px solid var(--border); background: white; border-radius: 20px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+.filter-btn:hover { border-color: var(--primary); }
+.filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+.gap-item { border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; transition: box-shadow 0.2s; }
+.gap-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.gap-item.red { border-left: 4px solid var(--red); }
+.gap-item.orange { border-left: 4px solid var(--orange); }
+.gap-item.green { border-left: 4px solid var(--green); }
+.gap-item.gray { border-left: 4px solid var(--gray); }
+.gap-item.purple { border-left: 4px solid var(--purple); }
+.gap-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.gap-id { font-weight: 700; color: var(--primary); font-size: 13px; }
+.gap-title { font-weight: 600; font-size: 15px; }
+.gap-body { margin-top: 8px; font-size: 13px; }
+.gap-body p { margin: 6px 0; }
+.gap-label { font-weight: 600; color: var(--primary-light); }
+.gap-section { padding: 8px 12px; border-radius: 6px; margin: 4px 0; }
+.gap-section.ext { background: var(--blue-bg); border-left: 3px solid var(--blue); }
+.gap-section.int { background: var(--teal-bg); border-left: 3px solid var(--teal); }
+.gap-section.exe { background: var(--green-bg); border-left: 3px solid var(--green); }
+.gap-docs { margin-top: 8px; }
+.gap-doc { display: inline-block; background: var(--blue-bg); color: var(--blue); padding: 2px 8px; border-radius: 4px; font-size: 11px; margin: 2px; }
+.matrix-cell { text-align: center; font-size: 11px; padding: 4px; }
+.matrix-cell.full { background: var(--green-bg); color: var(--green); }
+.matrix-cell.partial { background: var(--orange-bg); color: var(--orange); }
+.matrix-cell.none { background: var(--red-bg); color: var(--red); }
+.matrix-cell.na { background: var(--gray-bg); color: var(--gray); }
+.timeline { position: relative; padding-left: 30px; }
+.timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+.timeline-item { position: relative; margin-bottom: 20px; padding-left: 20px; }
+.timeline-item::before { content: ''; position: absolute; left: -24px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); }
+.timeline-date { font-size: 12px; color: var(--gray); }
+.timeline-title { font-weight: 600; color: var(--primary); margin: 4px 0; }
+.timeline-content { font-size: 13px; }
+.doc-card { border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 12px; }
+.doc-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: white; flex-shrink: 0; }
+.doc-icon.method { background: var(--blue); }
+.doc-icon.procedure { background: var(--green); }
+.doc-icon.rule { background: var(--orange); }
+.doc-icon.plan { background: var(--primary); }
+.doc-icon.guide { background: var(--gray); }
+.doc-info { flex: 1; }
+.doc-name { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.doc-meta { font-size: 12px; color: var(--gray); }
+.doc-areas { margin-top: 4px; }
+.doc-area { display: inline-block; background: var(--gray-bg); padding: 1px 6px; border-radius: 3px; font-size: 10px; margin: 1px; color: var(--text); }
+.search-box { width: 100%; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; margin-bottom: 16px; outline: none; }
+.search-box:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,58,92,0.1); }
+.summary-box { background: linear-gradient(135deg, #eef4fa 0%, #f5f7fa 100%); border-left: 4px solid var(--primary); padding: 16px 20px; border-radius: 8px; margin-bottom: 16px; }
+.summary-box p { margin: 4px 0; }
+@media (max-width: 768px) { .container { padding: 10px; } .header { padding: 20px; } .header h1 { font-size: 20px; } .stats-grid { grid-template-columns: repeat(2, 1fr); } table { font-size: 12px; } th, td { padding: 6px 8px; } }
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+  <h1>示例银行托管业务制度合规差距分析报告（完善版）</h1>
+  <div class="subtitle">基于《商业银行托管业务监督管理办法（试行）》（2026年2月1日施行）与14份内部制度的深度对标 · 区分制度型差距与执行型要求</div>
+  <div class="meta">
+    <div class="meta-item">📊 对标法规：五章49条</div>
+    <div class="meta-item">📁 内部制度：14份（2014-2023年）</div>
+    <div class="meta-item">🔍 识别差距：25项（制度型17项 + 执行型5项 + 混合型3项）</div>
+    <div class="meta-item">📅 分析日期：2026年6月</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('dashboard')">总览仪表板</button>
+  <button class="tab" onclick="showTab('gap-list')">差距清单</button>
+  <button class="tab" onclick="showTab('classification')">差距分类说明</button>
+  <button class="tab" onclick="showTab('matrix')">对标矩阵</button>
+  <button class="tab" onclick="showTab('docs')">制度清单</button>
+  <button class="tab" onclick="showTab('timeline')">整改路线图</button>
+</div>
+
+<!-- Tab 1: Dashboard -->
+<div id="dashboard" class="tab-content active">
+  <div class="stats-grid">
+    <div class="stat-card blue"><div class="stat-label">制度型差距</div><div class="stat-number blue">17</div><div class="stat-label">须修订制度文件</div></div>
+    <div class="stat-card green"><div class="stat-label">执行型要求</div><div class="stat-number green">5</div><div class="stat-label">执行层面落实即可</div></div>
+    <div class="stat-card purple"><div class="stat-label">混合型</div><div class="stat-number purple">3</div><div class="stat-label">部分制度+部分执行</div></div>
+    <div class="stat-card red"><div class="stat-label">高风险</div><div class="stat-number red">8</div><div class="stat-label">须优先整改</div></div>
+    <div class="stat-card orange"><div class="stat-label">中风险</div><div class="stat-number orange">12</div><div class="stat-label">需补充完善</div></div>
+    <div class="stat-card green"><div class="stat-label">低风险/已覆盖</div><div class="stat-number green">5</div><div class="stat-label">小幅修订或已达标</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">差距类型分类说明</div>
+    <div class="summary-box">
+      <p><strong>制度型差距（须落实在制度文件中）</strong>：涉及职责边界界定、权利义务配置、禁止性规定等基础性制度安排，必须通过制度修订或新增来落实，不能仅靠执行层面注意。</p>
+      <p><strong>执行型要求（执行层面落实即可）</strong>：现有制度已有基本框架，差距在于执行频率、执行力度或操作细节。无需新设制度，仅需在日常经营中加强执行管控、完善操作流程或开展专项排查。</p>
+      <p><strong>混合型（部分需制度修订 + 部分属执行层面）</strong>：既有制度层面的缺失需要修订制度，也有执行层面的要求需要在操作中落实。</p>
+    </div>
+    <table>
+      <thead><tr><th style="width:12%">差距类型</th><th style="width:8%">数量</th><th style="width:30%">典型特征</th><th style="width:30%">代表差距</th><th style="width:20%">整改方式</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge blue">制度型</span></td><td>17</td><td>涉及职责边界、禁止性规定、权利义务等基础制度安排，外规有明确条款要求而内规缺失或严重不足</td><td>双负面清单、品牌保护、考核机制、独立第三方定位</td><td>修订/新增制度文件</td></tr>
+        <tr><td><span class="badge green">执行型</span></td><td>5</td><td>现有制度已有基本框架或机制，差距在于执行频率、执行力度或操作细节，外规要求可通过执行管控落实</td><td>过渡期存量排查、对账频率、反洗钱执行、监管评级应对、开办报告</td><td>执行层面加强管控</td></tr>
+        <tr><td><span class="badge purple">混合型</span></td><td>3</td><td>既有制度层面的缺失（需修订条款），也有执行层面的要求（需操作落实）</td><td>信息系统安全、重大事项报告、声誉风险预案</td><td>制度修订+执行落实</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">合规覆盖率（基于14份制度体系）</div>
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-segment green" style="width: 24%;">合规 24%</div>
+        <div class="progress-segment orange" style="width: 49%;">部分合规 49%</div>
+        <div class="progress-segment red" style="width: 27%;">不合规 27%</div>
+      </div>
+    </div>
+    <div class="progress-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>合规（12条）</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div>部分合规（24条）</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>不合规/缺失（13条）</div>
+    </div>
+  </div>
+</div>
+
+<!-- Tab 2: Gap List -->
+<div id="gap-list" class="tab-content">
+  <div class="card">
+    <div class="card-title">差距清单（25项）</div>
+    <div class="summary-box">
+      <p><strong>筛选说明：</strong>可按差距类型（制度型/执行型/混合型）和风险等级筛选。每项差距均标注外规要求、内规现状和差距类型。</p>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterGaps('all', this)">全部（25）</button>
+      <button class="filter-btn" onclick="filterGaps('type-policy', this)">📋 制度型（17）</button>
+      <button class="filter-btn" onclick="filterGaps('type-exec', this)">⚙️ 执行型（5）</button>
+      <button class="filter-btn" onclick="filterGaps('type-hybrid', this)">🔀 混合型（3）</button>
+      <span style="border-left:1px solid #ddd;margin:0 4px;"></span>
+      <button class="filter-btn" onclick="filterGaps('red', this)">🔴 高风险（8）</button>
+      <button class="filter-btn" onclick="filterGaps('orange', this)">🟡 中风险（12）</button>
+      <button class="filter-btn" onclick="filterGaps('green', this)">🟢 低风险/已覆盖（5）</button>
+    </div>
+    <input type="text" class="search-box" placeholder="搜索差距关键词..." onkeyup="searchGaps(this.value)">
+    <div id="gap-list-container"></div>
+  </div>
+</div>
+
+<!-- Tab 3: Classification -->
+<div id="classification" class="tab-content">
+  <div class="card">
+    <div class="card-title">差距分类详细说明</div>
+    <div class="summary-box">
+      <p><strong>分类原则：</strong>作为内控管理专家，并非所有合规差距都需要通过修订制度来解决。有些差距属于<strong>执行层面</strong>的要求——现有制度已有基本框架，仅需在日常经营中加强执行即可。将执行型要求误判为制度型差距，会导致过度修订制度、增加制度冗余、降低制度执行效率。</p>
+    </div>
+    <h3 style="color:var(--blue);margin:16px 0 8px;">📋 制度型差距（17项）——须修订制度文件</h3>
+    <table>
+      <thead><tr><th>编号</th><th>差距</th><th>分类理由</th></tr></thead>
+      <tbody>
+        <tr><td>H01</td><td>双负面清单缺失</td><td>涉及职责边界和禁止性规定的基础制度安排，外规第19-20条为强制性条款，必须在制度中明确列举并转化为合同条款</td></tr>
+        <tr><td>H02</td><td>信息系统安全/数据安全</td><td>外规第23条7项要求具有明确制度标准，现有制度仅有零散系统管理要求，须制定专项安全管理细则</td></tr>
+        <tr><td>H05</td><td>异常情形处置（合同终止权）</td><td>合同终止权属于权利义务配置，须在制度和合同模板中明确约定</td></tr>
+        <tr><td>H06</td><td>品牌保护机制</td><td>外规第31条赋予品牌保护权和强制终止权，须在制度中建立机制并在合同中约定</td></tr>
+        <tr><td>H07</td><td>监管报告制度</td><td>外规第33条列举5类报告情形，须在制度中明确报告路径、时限和责任人</td></tr>
+        <tr><td>H08</td><td>托管业务总体信披</td><td>外规第32条要求银行层面总体信披，现有制度仅覆盖产品层面，须新增制度安排</td></tr>
+        <tr><td>H09</td><td>考核机制合规导向</td><td>外规第35条"不得挂钩考核"为强制性规定，须修订现有考核制度</td></tr>
+        <tr><td>M01</td><td>独立第三方定位</td><td>外规第2条核心法律定位，须在制度定义条款中明确</td></tr>
+        <tr><td>M02</td><td>业务原则缺失</td><td>外规第5条四项原则须在制度总则中体现</td></tr>
+        <tr><td>M03</td><td>破产隔离条款</td><td>财产独立性三层要求须在制度中明确</td></tr>
+        <tr><td>M05</td><td>非标资产专项评估</td><td>外规第10条双重评估要求须在准入制度中设置专项条款</td></tr>
+        <tr><td>M06</td><td>第三方数据优先原则</td><td>外规第14条数据使用原则须在核算制度中明确</td></tr>
+        <tr><td>M07</td><td>投资监督能力匹配</td><td>外规第17条"不得提供无法履职的监督服务"须在制度中明确为操作原则</td></tr>
+        <tr><td>M08</td><td>统一禁止性负面清单</td><td>现有7种不予准入情形分散于产品管理规定，须整合为统一负面清单制度</td></tr>
+        <tr><td>M12</td><td>外部审计机制</td><td>外规第38条要求建立外部审计机制，须在制度中明确引入条件和频率</td></tr>
+        <tr><td>M14</td><td>不正当竞争禁止</td><td>外规第40条定价规范须在制度中补充禁止性条款</td></tr>
+        <tr><td>L05</td><td>合同必备条款清单</td><td>外规第9条合同必备条款须在合同管理制度中明确列举</td></tr>
+      </tbody>
+    </table>
+    <h3 style="color:var(--green);margin:24px 0 8px;">⚙️ 执行型要求（5项）——执行层面落实即可，无需修订制度</h3>
+    <table>
+      <thead><tr><th>编号</th><th>差距</th><th>分类理由</th><th>执行层面措施</th></tr></thead>
+      <tbody>
+        <tr><td>H04</td><td>过渡期存量业务安排</td><td>三年过渡期是监管给出的整改时间窗口，不是一项需要制定的制度。存量业务排查、整改计划属于项目管理范畴，不须单独制定制度</td><td>①制定存量整改工作方案（非制度文件）；②建立整改台账；③按计划推进存量合同到期切换</td></tr>
+        <tr><td>H10</td><td>监管评级应对</td><td>监管评级是监管机构对银行的评估，银行无法通过制定制度来"应对"。关键是在日常经营中确保合规，配合监管检查</td><td>①将法规合规要求融入日常运营；②建立监管检查配合机制；③定期开展合规自查</td></tr>
+        <tr><td>H11</td><td>开办报告义务</td><td>开办报告是一次性行政程序，不是持续性制度安排。银行在开办新业务时按监管要求报告即可</td><td>①在开办新托管业务类型时向金融监管总局报告；②将报告要求纳入业务开办操作流程</td></tr>
+        <tr><td>M04</td><td>对账频率</td><td>现有账户管理办法已有对账机制，资金清算规程已有日终账务核对。差距仅在于未明确"至少每半年"频率，可在执行中落实</td><td>①在日常对账操作中确保至少每半年完成一轮全面对账；②在对账操作SOP中补充频率要求</td></tr>
+        <tr><td>M13</td><td>反洗钱执行</td><td>现有机构产品管理、从业人员规定、资金清算规程已有反洗钱要求（客户身份识别、尽职调查、禁止参与洗钱）。差距仅在于账户管理办法未明确提及反洗钱，但实际操作中已执行</td><td>①在账户开立操作中落实反洗钱审查；②确保账户管理与反洗钱制度衔接</td></tr>
+      </tbody>
+    </table>
+    <h3 style="color:var(--purple);margin:24px 0 8px;">🔀 混合型（3项）——部分制度修订 + 部分执行落实</h3>
+    <table>
+      <thead><tr><th>编号</th><th>差距</th><th>制度层面（需修订）</th><th>执行层面（需落实）</th></tr></thead>
+      <tbody>
+        <tr><td>H02</td><td>信息系统安全</td><td>须新增数据安全专项制度条款和系统对接管理要求</td><td>网络安全防护、业务连续性演练等可在现有应急预案和系统管理制度框架下加强执行</td></tr>
+        <tr><td>M09</td><td>业务隔离（数据维度+关联方）</td><td>须在制度中补充"业务数据"隔离维度和关联方产品专项管控条款</td><td>关联方识别、关联交易监测等可在现有投资监督规程框架下加强执行</td></tr>
+        <tr><td>M10</td><td>声誉风险→流动性风险预案</td><td>须在应急预案制度中增设声誉风险→流动性风险传染链阻断机制条款</td><td>声誉风险监测、舆情管控等可在现有应急预案框架下加强演练和执行</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Tab 4: Matrix -->
+<div id="matrix" class="tab-content">
+  <div class="card">
+    <div class="card-title">法规条款 × 内部制度 覆盖矩阵</div>
+    <p style="margin-bottom:12px;font-size:13px;color:var(--gray);">图例：<span class="badge green">✅</span> 充分覆盖  <span class="badge orange">⚠️</span> 部分覆盖  <span class="badge red">❌</span> 未覆盖  <span class="badge gray">—</span> 不适用</p>
+    <div style="overflow-x:auto;">
+    <table id="matrix-table" style="font-size:11px;min-width:1200px;">
+      <thead>
+        <tr>
+          <th style="width:8%">条款</th><th style="width:15%">法规要求</th>
+          <th style="width:5%">办法2015</th><th style="width:5%">内控2018</th><th style="width:5%">账户2018</th><th style="width:5%">机构产品2019</th><th style="width:5%">人员2020</th><th style="width:5%">债券回购2020</th><th style="width:5%">信披规程2022</th><th style="width:5%">投监规程2022</th><th style="width:5%">清算规程2022</th><th style="width:5%">产品系统2022</th><th style="width:5%">应急预案2022</th><th style="width:5%">客户端2022</th><th style="width:5%">风险准备金2023</th><th style="width:5%">合同细则2014</th><th style="width:5%">档案2016</th><th style="width:5%">综合</th>
+        </tr>
+      </thead>
+      <tbody id="matrix-body"></tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- Tab 5: Documents -->
+<div id="docs" class="tab-content">
+  <div class="card">
+    <div class="card-title">内部制度清单（14份）</div>
+    <div id="doc-list"></div>
+  </div>
+</div>
+
+<!-- Tab 6: Timeline -->
+<div id="timeline" class="tab-content">
+  <div class="card">
+    <div class="card-title">整改实施路线图（区分制度型与执行型）</div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2026年2月前（法规施行前）</div>
+        <div class="timeline-title">P0 紧急行动</div>
+        <div class="timeline-content">
+          <p><strong>⚙️ 执行型：</strong>存量业务全面摸底排查（排查垫资/流动性支持/融资承诺）→ 制定整改工作方案（非制度文件）</p>
+          <p><strong>📋 制度型：</strong>"双负面清单"制度条款制定；托管合同模板修订</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026年2月 - 5月</div>
+        <div class="timeline-title">P0 紧急制度修订</div>
+        <div class="timeline-content">
+          <p><strong>📋 制度型：</strong>异常处置机制（合同终止权）；品牌保护机制；"独立第三方"定位；立法依据更新</p>
+          <p><strong>⚙️ 执行型：</strong>开办报告义务落实（新业务开办时报告）</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026年5月 - 8月</div>
+        <div class="timeline-title">P1 核心制度建设</div>
+        <div class="timeline-content">
+          <p><strong>📋 制度型：</strong>信息系统安全管理细则（数据安全+系统对接）；准入统一负面清单；监管报告制度（5类情形）；关联方风险隔离条款</p>
+          <p><strong>🔀 混合型：</strong>风险准备金制度扩展至全托管业务；关联方风险隔离（制度+执行）</p>
+          <p><strong>⚙️ 执行型：</strong>监管评级应对——日常合规管控融入运营</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026年8月 - 12月</div>
+        <div class="timeline-title">P2 操作规范完善</div>
+        <div class="timeline-content">
+          <p><strong>📋 制度型：</strong>考核机制调整（合规导向）；外部审计引入机制；不正当竞争禁止条款；合同必备条款清单</p>
+          <p><strong>🔀 混合型：</strong>声誉风险→流动性风险预案（制度条款+演练执行）</p>
+          <p><strong>⚙️ 执行型：</strong>对账频率——确保至少每半年；反洗钱——账户管理环节落实</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026年12月 - 2027年6月</div>
+        <div class="timeline-title">P3 全面制度更新</div>
+        <div class="timeline-content">
+          <p><strong>📋 制度型：</strong>2015版管理办法全面修订；托管业务总体信披制度；业务原则补充；破产隔离条款；非标资产专项评估；第三方数据优先原则；投资监督能力匹配原则</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2027年1月 - 2029年1月</div>
+        <div class="timeline-title">P4 存量整改完成</div>
+        <div class="timeline-content">
+          <p><strong>⚙️ 执行型：</strong>存量不合规业务整改/清退/合同重签；存量垫资风险分类和拨备计提；三年过渡期合规验收</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">整改工作量评估（区分制度型与执行型）</div>
+    <table>
+      <thead><tr><th>类型</th><th>整改事项</th><th>工作量</th><th>牵头部门</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge blue">制度型</span></td><td>17项制度修订/新增</td><td>约400小时</td><td>托管业务部、法律合规部</td></tr>
+        <tr><td><span class="badge purple">混合型</span></td><td>3项制度+执行</td><td>约100小时+系统升级</td><td>托管业务部、信息科技部</td></tr>
+        <tr><td><span class="badge green">执行型</span></td><td>5项执行管控措施</td><td>约80小时（不含存量排查）</td><td>托管业务部</td></tr>
+        <tr><td><span class="badge green">执行型</span></td><td>存量业务整改（三年）</td><td>持续（项目管理）</td><td>托管业务部、风险管理部</td></tr>
+        <tr><td><strong>合计</strong></td><td>—</td><td><strong>约580小时 + 系统升级 + 存量整改</strong></td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<script>
+const gaps = [
+  // ===== 制度型差距 =====
+  {id:"H01",title:"\"双负面清单\"完全缺失",level:"red",gapType:"policy",article:"第19-20条",status:"不合规",
+   external_reg:"外规第19条列举13项不得承担职责（含担保、垫资、适当性管理、投资决策等），第20条列举6项不得有行为（财产混同、侵占挪用、内幕交易、利益输送等），为强制性禁止条款。",
+   internal_reg:"内规现状：信息披露操作规程（2022）第九条有6项禁止行为（虚假记载、误导性陈述等）；从业人员规定（2020）有9类禁止行为；管理办法（2015）仅规定'不得承诺保本、收益或分担投资损失'。13项禁止职责仅覆盖2-3项。",
+   gap:"系统性负面清单缺失，托管职责边界不清晰",
+   risk:"法律风险、声誉风险",
+   docs:["信息披露操作规程2022","从业人员规定2020","管理办法2015"],
+   recommendation:"在管理办法中增设'职责边界'专章，将13项禁止职责和6项禁止行为全面纳入；修订合同模板增加免责条款。",
+   policy_reason:"涉及职责边界和禁止性规定的基础制度安排，外规为强制性条款，必须落实在制度文件和合同模板中，不能仅靠执行注意。"},
+  {id:"H02",title:"信息系统网络安全/数据安全不足",level:"red",gapType:"hybrid",article:"第23条",status:"不合规",
+   external_reg:"外规第23条要求信息系统至少符合7项要求：清算核算功能、网络安全防护、数据安全措施、业务连续性管理、数据安全接收、与交易场所系统对接、其他。",
+   internal_reg:"内规现状：产品开发与系统建设细则（2022）引用《信息系统数据安全管理办法》并规范系统安全使用（密码管理、生产专网、网络安全培训）；客户端服务管理办法（2022）规定网络安全技术支持和数字证书认证；专项应急预案（2022）有信息系统故障处置。但缺数据安全全生命周期管理、与金融基础设施系统对接要求。",
+   gap:"有系统管理基础，缺数据安全专项制度和系统对接要求",
+   risk:"操作风险、合规风险",
+   docs:["产品开发与系统建设2022","客户端服务管理办法2022","专项应急预案2022"],
+   recommendation:"制定《托管业务信息系统安全管理细则》，覆盖数据安全全生命周期和系统对接管理；网络安全防护和业务连续性可在现有框架下加强执行。",
+   policy_reason:"制度层面：须新增数据安全专项制度条款和系统对接管理要求。执行层面：网络安全防护、业务连续性演练可在现有应急预案框架下加强执行。"},
+  {id:"H04",title:"过渡期存量业务安排",level:"red",gapType:"exec",article:"第49条",status:"不合规",
+   external_reg:"外规第49条：存量业务三年内整改完成；已垫付资金的须风险分类+计提拨备+计提资本。",
+   internal_reg:"内规现状：14份文件均无过渡期安排。但过渡期安排本质上是监管给出的整改时间窗口，不是需要制定的持续性制度。",
+   gap:"无过渡期整改方案",
+   risk:"合规风险、流动性风险",
+   docs:[],
+   recommendation:"制定存量整改工作方案（项目管理文件，非制度文件）；建立整改台账；按计划推进。存量垫资须按风险分类要求计提拨备。",
+   policy_reason:"三年过渡期是监管给出的整改时间窗口，属于项目管理范畴，不须单独制定制度。存量业务排查、整改计划、台账管理均通过执行层面落实。关键是在日常经营中按计划推进存量整改。"},
+  {id:"H05",title:"异常情形处置（合同终止权）",level:"orange",gapType:"policy",article:"第21条",status:"部分合规",
+   external_reg:"外规第21条：管理人拒不履行合同、被取消资格、被解散撤销等情形下，应保护财产安全、告知相关方，有权按合同终止托管服务。",
+   internal_reg:"内规现状：投资监督操作规程（2022）有异常监测和违规报告机制；专项应急预案（2022）有突发事件处置全流程；账户管理办法（2018）有到期终止流程。但仍缺管理人异常情形下的合同终止权制度安排。",
+   gap:"有异常监测，缺合同终止权",
+   risk:"操作风险、法律风险",
+   docs:["投资监督操作规程2022","专项应急预案2022","账户管理办法2018"],
+   recommendation:"在管理办法中增设异常情形处置条款，明确4类异常情形、应急处置措施和合同终止权；在合同模板中约定异常终止条件。",
+   policy_reason:"合同终止权属于权利义务配置，须在制度和合同模板中明确约定，不能仅靠执行注意。"},
+  {id:"H06",title:"品牌保护机制缺失",level:"red",gapType:"policy",article:"第31条",status:"不合规",
+   external_reg:"外规第31条：发现产品管理人或销售机构借助托管银行品牌、声誉开展不当营销宣传的，应督促纠正；未纠正的按合同约定终止合作。",
+   internal_reg:"内规现状：14份文件均未涉及品牌保护机制和不当营销制止权。信息披露操作规程提到品牌建设职责，但无品牌保护机制。",
+   gap:"无品牌保护机制",
+   risk:"声誉风险",
+   docs:[],
+   recommendation:"新增品牌保护条款，建立不当营销监测、督促纠正和违约终止机制；在合同模板中约定禁止不当营销条款。",
+   policy_reason:"外规赋予品牌保护权和强制终止权，须在制度中建立机制并在合同中约定，属于权利义务配置。"},
+  {id:"H07",title:"监管报告制度不完整",level:"red",gapType:"hybrid",article:"第33条",status:"不合规",
+   external_reg:"外规第33条列举5类须向监管部门报告的情形：①管理人违规投资拒不纠正；②发布未经复核的估值结果；③管理人拒不履行合同/被取消资格/被解散撤销；④管理人侵占挪用或失联；⑤其他。",
+   internal_reg:"内规现状：投资监督操作规程（2022）有重大违规向监管报告机制；债券质押回购指引（2020）有异常风险报送。但未覆盖法规5类情形（缺估值未复核报告、管理人失联报告等）。",
+   gap:"仅覆盖5类中的1-2类",
+   risk:"合规风险",
+   docs:["投资监督操作规程2022","债券质押回购风险管理2020"],
+   recommendation:"制度层面：在管理办法中新增5类报告情形条款。执行层面：在日常投监和运营中落实报告义务。",
+   policy_reason:"制度层面：须在制度中明确5类报告情形、路径和时限。执行层面：具体报告行为在日常运营中落实。"},
+  {id:"H08",title:"托管业务总体信息披露缺失",level:"red",gapType:"policy",article:"第32条",status:"不合规",
+   external_reg:"外规第32条：商业银行应按企业会计准则、监管规定对托管业务总体情况进行信息披露（规模、结构、风险状况等）。",
+   internal_reg:"内规现状：信息披露操作规程（2022）仅覆盖产品层面信息披露（公募基金、理财、其他托管资产），无银行层面托管业务总体信披制度。",
+   gap:"仅产品层面，缺银行层面",
+   risk:"合规风险",
+   docs:["信息披露操作规程2022"],
+   recommendation:"新增银行层面托管业务总体信息披露制度安排，明确披露内容、频率和审核流程。",
+   policy_reason:"外规要求银行层面总体信披，与产品层面信披是不同维度，须新增制度安排。"},
+  {id:"H09",title:"考核机制不符合合规导向",level:"red",gapType:"policy",article:"第35条",status:"不合规",
+   external_reg:"外规第35条：考核评价应当充分体现合规导向，不得将托管业务与其他业务挂钩考核。",
+   internal_reg:"内规现状：管理办法（2015）规定财务管理部负责绩效考核（收入导向）；机构及产品管理规定（2019）有绩效考核内容；资金清算规程（2022）有绩效考核。均以收入和业务为导向，非合规导向。",
+   gap:"收入导向，非合规导向",
+   risk:"合规风险、操作风险",
+   docs:["管理办法2015","机构及产品管理2019","资金清算操作规程2022"],
+   recommendation:"修订考核制度，建立以合规指标为核心的考核体系，明确不得与其他业务挂钩。",
+   policy_reason:"'不得挂钩考核'为强制性规定，须修订现有考核制度，属于基础制度安排。"},
+  {id:"H10",title:"监管评级应对",level:"red",gapType:"exec",article:"第41-43条",status:"不合规",
+   external_reg:"外规第41-43条：托管业务合规性和审慎性纳入监管评级；不符合的可责令整改、暂停业务；违规依《银行业监督管理法》处罚。",
+   internal_reg:"内规现状：14份文件均未涉及监管评级应对。但监管评级是监管机构对银行的评估，银行无法通过制定制度来'应对'。",
+   gap:"无监管应对机制",
+   risk:"合规风险",
+   docs:[],
+   recommendation:"将法规合规要求融入日常运营和内控流程；建立监管检查配合机制；定期开展合规自查。无需单独制定监管评级应对制度。",
+   policy_reason:"监管评级是监管机构对银行的评估结果，不是银行可以'制定制度来应对'的事项。关键是在日常经营中确保合规操作、配合监管检查。应将合规要求融入现有内控流程，而非新建制度。"},
+  {id:"H11",title:"开办报告义务",level:"red",gapType:"exec",article:"第24条",status:"不合规",
+   external_reg:"外规第24条：商业银行开办托管业务，应当向国家金融监督管理总局或其派出机构报告。",
+   internal_reg:"内规现状：14份文件均未明确开办报告义务。但开办报告是一次性行政程序，不是持续性制度安排。",
+   gap:"无开办报告制度",
+   risk:"合规风险",
+   docs:[],
+   recommendation:"在开办新托管业务类型时向金融监管总局报告；将报告要求纳入业务开办操作流程（SOP），无需单独制定制度。",
+   policy_reason:"开办报告是一次性行政程序（开办时报告一次），不是需要持续性执行的制度安排。在业务开办操作流程中增加报告步骤即可。"},
+  {id:"M01",title:"\"独立第三方\"核心定位缺失",level:"orange",gapType:"policy",article:"第2条",status:"部分合规",
+   external_reg:"外规第2条：商业银行作为\"独立第三方\"提供托管服务。",
+   internal_reg:"内规现状：14份文件均未明确'独立第三方'定位。管理办法（2015）定义托管为'作为托管人提供服务'，未强调独立性。",
+   gap:"缺核心法律定位",
+   risk:"法律风险",
+   docs:["管理办法2015"],
+   recommendation:"在管理办法定义条款中增加'独立第三方'表述，在业务原则中体现独立性要求。",
+   policy_reason:"核心法律定位须在制度定义条款中明确。"},
+  {id:"M02",title:"业务原则缺少\"独立审慎\"\"风险隔离\"",level:"orange",gapType:"policy",article:"第5条",status:"部分合规",
+   external_reg:"外规第5条：诚实信用、勤勉尽责、独立审慎、风险隔离，防范利益冲突和利益输送。",
+   internal_reg:"内规现状：管理办法（2015）第五条仅规定'诚实信用、勤勉尽责'原则。",
+   gap:"缺2项核心原则",
+   risk:"合规风险",
+   docs:["管理办法2015"],
+   recommendation:"补充'独立审慎''风险隔离'原则和'防范利益冲突和利益输送'表述。",
+   policy_reason:"业务原则属于制度总则的基础条款，须在制度中明确。"},
+  {id:"M03",title:"财产独立性未覆盖破产隔离",level:"orange",gapType:"policy",article:"第6条",status:"部分合规",
+   external_reg:"外规第6条：三层独立性——与自有财产独立、产品间独立、破产时不属于清算财产。",
+   internal_reg:"内规现状：管理办法（2015）和账户管理办法（2018）均要求托管资产独立于自有资产及其他托管资产，覆盖前两层。",
+   gap:"缺破产隔离条款",
+   risk:"法律风险",
+   docs:["管理办法2015","账户管理办法2018"],
+   recommendation:"补充'商业银行破产清算时托管财产不属于清算财产'条款。",
+   policy_reason:"破产隔离是法定财产独立性要求，须在制度中明确。"},
+  {id:"M04",title:"对账频率",level:"orange",gapType:"exec",article:"第12条",status:"部分合规",
+   external_reg:"外规第12条：建立对账机制，定期核对资金头寸、证券明细、净值等，对账频率至少每半年一次。",
+   internal_reg:"内规现状：账户管理办法（2018）规定定期与开户行对账；资金清算操作规程（2022）规定日终账务核对。已有对账机制，仅未明确'至少每半年'频率。",
+   gap:"缺频率标准",
+   risk:"操作风险",
+   docs:["账户管理办法2018","资金清算操作规程2022"],
+   recommendation:"在对账操作SOP中补充'至少每半年一次'频率要求。无需修订管理办法层面制度。",
+   policy_reason:"现有制度已有对账机制框架，差距仅在于频率标准。可在对账操作流程（SOP/操作手册）中补充频率要求，无需上升到管理办法层面修订。"},
+  {id:"M05",title:"非标资产托管评估不充分",level:"orange",gapType:"policy",article:"第10条",status:"部分合规",
+   external_reg:"外规第10条：投资范围含非标资产时，须双重评估——管理人评估（资本实力、公司治理、合规管理、风控、信披、市场影响力）+ 产品评估（交易结构、投资标的、退出方式、估值方法）。",
+   internal_reg:"内规现状：机构及产品管理规定（2019）有产品准入复审（主体资质、交易结构、合规风险），但未针对非标资产设置专门评估维度。",
+   gap:"未针对非标设置专门评估",
+   risk:"操作风险",
+   docs:["机构及产品管理2019"],
+   recommendation:"在准入管理制度中增设非标资产托管专项评估条款，明确双重评估维度。",
+   policy_reason:"外规要求双重评估须在准入制度中设置专项条款。"},
+  {id:"M06",title:"会计核算缺第三方数据优先原则",level:"orange",gapType:"policy",article:"第14条",status:"部分合规",
+   external_reg:"外规第14条：可从第三方获取可靠数据的应主要使用第三方数据；无法获取的须在合同中约定数据来源和免责情形。",
+   internal_reg:"内规现状：管理办法（2015）有独立核算、双人复核要求，未明确第三方数据优先原则。",
+   gap:"缺第三方数据优先原则",
+   risk:"操作风险",
+   docs:["管理办法2015"],
+   recommendation:"在核算制度中补充第三方数据优先使用原则和数据来源免责条款。",
+   policy_reason:"数据使用原则和免责条款须在制度和合同中明确。"},
+  {id:"M07",title:"投资监督缺能力匹配原则",level:"orange",gapType:"policy",article:"第17条",status:"部分合规",
+   external_reg:"外规第17条：不得提供或承诺提供无法有效履职的投资监督服务（能力匹配原则）；违规应拒绝执行。",
+   internal_reg:"内规现状：投资监督操作规程（2022）已有拒绝执行违规指令机制和风险提示函，有较完善的监督流程，但缺'不得提供无法履职的监督服务'能力匹配原则。",
+   gap:"缺能力匹配原则",
+   risk:"合规风险",
+   docs:["投资监督操作规程2022"],
+   recommendation:"在投资监督制度中增加能力匹配评估机制，明确不得承诺超出能力范围的监督服务。",
+   policy_reason:"能力匹配原则须在制度中明确为操作准则。"},
+  {id:"M08",title:"准入缺统一禁止性负面清单",level:"orange",gapType:"policy",article:"第29条",status:"部分合规",
+   external_reg:"外规第29条：制定禁止性负面清单（4类情形：违法违规产品、管理人无资质、管理人无法展业、其他），不得托管纳入清单的产品。",
+   internal_reg:"内规现状：机构及产品管理规定（2019）有7种不予准入情形（资金池、民间借贷、P2P等），有名单制管理和集中审议机制。但未形成统一负面清单制度。",
+   gap:"有准入标准，未形成统一负面清单",
+   risk:"合规风险",
+   docs:["机构及产品管理2019"],
+   recommendation:"整合现有7种不予准入情形，制定统一禁止性负面清单，建立动态调整机制。",
+   policy_reason:"负面清单属于准入制度的基础安排，须在制度中统一明确。"},
+  {id:"M09",title:"业务隔离缺数据维度和关联方管控",level:"orange",gapType:"hybrid",article:"第30条",status:"部分合规",
+   external_reg:"外规第30条：五维度隔离（人员、场所、账户、数据、系统）+关联方产品强化信披和风险隔离。",
+   internal_reg:"内规现状：管理办法（2015）有物理场所和系统隔离（独立运营场所、门禁制度、内外网分离）；投资监督操作规程（2022）有按季收集关联方信息和关联方投资监督；信息披露规程（2022）有关联交易披露要求。缺'业务数据'隔离维度和统一关联方风险隔离制度。",
+   gap:"缺数据隔离和统一关联方风险隔离",
+   risk:"操作风险、合规风险",
+   docs:["投资监督操作规程2022","信息披露操作规程2022","管理办法2015"],
+   recommendation:"制度层面：在管理办法中补充'业务数据'隔离维度和关联方产品专项管控条款。执行层面：关联方识别和关联交易监测可在现有投监规程框架下加强执行。",
+   policy_reason:"制度层面：须补充'业务数据'隔离条款。执行层面：关联方识别和关联交易监测可在现有框架下加强执行。"},
+  {id:"M10",title:"声誉风险→流动性风险专项预案",level:"orange",gapType:"hybrid",article:"第27条第2款",status:"部分合规",
+   external_reg:"外规第27条第2款：为防止声誉风险演变为流动性风险，应及时制定并实施应急预案，应对极端风险情形。",
+   internal_reg:"内规现状：专项应急预案（2022）将声誉风险事件列为独立突发事件类型，有舆情监测和处置流程。管理办法（2015）有声誉风险定义。但仍缺声誉风险→流动性风险传染链阻断机制。",
+   gap:"有声誉风险处置，缺→流动性风险阻断",
+   risk:"流动性风险",
+   docs:["专项应急预案2022","管理办法2015"],
+   recommendation:"制度层面：在应急预案中增设声誉风险→流动性风险传染链阻断条款。执行层面：加强声誉风险监测和舆情管控演练。",
+   policy_reason:"制度层面：须增设传染链阻断机制条款。执行层面：监测和演练可在现有框架下加强。"},
+  {id:"M12",title:"外部审计机制",level:"orange",gapType:"policy",article:"第38条",status:"部分合规",
+   external_reg:"外规第38条：建立内部审计和外部审计机制，定期审计业务经营和风险管理情况。",
+   internal_reg:"内规现状：管理办法（2015）提到配合第三方审计机构开展审计；风险准备金管理办法（2023）提到内部审计。缺外部审计引入机制和定期审计制度安排。",
+   gap:"有提及，缺制度性安排",
+   risk:"合规风险",
+   docs:["管理办法2015","风险准备金管理2023"],
+   recommendation:"在制度中明确外部审计引入条件、审计范围、审计频次和选聘流程。",
+   policy_reason:"外部审计机制须在制度中明确引入条件和频率。"},
+  {id:"M13",title:"反洗钱执行",level:"orange",gapType:"exec",article:"第39条",status:"部分合规",
+   external_reg:"外规第39条：对预留印鉴、银企对账、撤销账户、反洗钱和反恐怖融资实施规范管理。",
+   internal_reg:"内规现状：机构及产品管理规定（2019）有客户身份识别和受益所有人识别；从业人员规定（2020）有反洗钱义务；资金清算规程（2022）有客户尽职调查。账户管理办法（2018）未明确提及反洗钱，但实际操作中已执行。",
+   gap:"有反洗钱基础，账户管理办法未明确提及",
+   risk:"合规风险",
+   docs:["机构及产品管理2019","从业人员规定2020","资金清算操作规程2022"],
+   recommendation:"在账户开立操作中落实反洗钱审查；确保账户管理与反洗钱制度衔接。无需修订账户管理办法层面制度。",
+   policy_reason:"现有制度体系已有较完善的反洗钱要求（客户身份识别、尽职调查、禁止参与洗钱），差距仅在于账户管理办法未明确提及反洗钱。但实际操作中账户开立已执行反洗钱审查，属于执行层面衔接问题，无需修订制度。"},
+  {id:"M14",title:"定价缺不正当竞争禁止",level:"orange",gapType:"policy",article:"第40条",status:"部分合规",
+   external_reg:"外规第40条：遵循公开公平、诚实信用、质价相符原则，不得利用价格手段开展不正当竞争。",
+   internal_reg:"内规现状：机构及产品管理规定（2019）有费率管理（成本效益原则、适应市场原则）；管理办法（2015）有费率管理。缺不正当竞争禁止条款。",
+   gap:"有定价原则，缺不正当竞争禁止",
+   risk:"合规风险",
+   docs:["机构及产品管理2019","管理办法2015"],
+   recommendation:"在定价管理制度中补充不正当竞争禁止条款。",
+   policy_reason:"禁止性条款须在制度中明确。"},
+  {id:"L01",title:"立法依据需更新",level:"green",gapType:"policy",article:"第1条",status:"部分合规",
+   external_reg:"外规第1条：依据《民法典》《银行业监督管理法》《商业银行法》制定。",
+   internal_reg:"内规现状：管理办法（2015）依据《商业银行法》《证券投资基金法》《信托法》《保险法》等。",
+   gap:"法律依据需更新",
+   risk:"低",
+   docs:["管理办法2015"],
+   recommendation:"修订立法依据，增加《民法典》《银行业监督管理法》。",
+   policy_reason:"立法依据属于制度总则必备条款。"},
+  {id:"L02",title:"托管财产范围未明确列举",level:"green",gapType:"policy",article:"第4条",status:"部分合规",
+   external_reg:"外规第4条：列举资金、股票、债券、未上市股权、其他债权、商品、金融衍生品等。",
+   internal_reg:"内规现状：管理办法（2015）按产品类型列举，未明确财产形态范围。",
+   gap:"缺财产形态列举",
+   risk:"低",
+   docs:["管理办法2015"],
+   recommendation:"补充托管财产形态完整列举。",
+   policy_reason:"定义条款属于制度基础内容。"},
+  {id:"L03",title:"监管主体需更新",level:"green",gapType:"policy",article:"第7条",status:"部分合规",
+   external_reg:"外规第7条：国家金融监督管理总局及其派出机构实施监督管理。",
+   internal_reg:"内规现状：管理办法（2015）引用'银监会、证监会、保监会'。",
+   gap:"监管主体名称过时",
+   risk:"低",
+   docs:["管理办法2015"],
+   recommendation:"全面更新监管主体名称为'国家金融监督管理总局'。",
+   policy_reason:"监管主体引用属于制度必备内容。"},
+  {id:"L04",title:"资料保存期限（已超标覆盖）",level:"green",gapType:"policy",article:"第18条",status:"合规",
+   external_reg:"外规第18条：保存10年以上。",
+   internal_reg:"内规现状：档案管理办法（2016）规定合同档案、运营档案保存十五年以上；合同管理细则（2014）规定保管15年。均超过法规10年要求。录音资料保存1年需延长。",
+   gap:"录音保存期限需延长",
+   risk:"低",
+   docs:["档案管理办法2016","合同管理细则2014"],
+   recommendation:"将录音资料保存期限从1年延长至10年以上。",
+   policy_reason:"保管期限属于制度规定，但现有制度已超标覆盖（15年>10年），仅需微调录音期限。"},
+  {id:"L05",title:"合同必备条款清单不完整",level:"green",gapType:"policy",article:"第9条",status:"部分合规",
+   external_reg:"外规第9条：合同至少包括权利义务、托管职责、生效变更终止、违约责任、争议解决；须条款评估。",
+   internal_reg:"内规现状：合同管理细则（2014）有合同审查内容（签约主体、合法合规性、权利义务、运营条款）和示范文本要求。",
+   gap:"有合同管理，缺条款评估机制",
+   risk:"低",
+   docs:["合同管理细则2014"],
+   recommendation:"制定合同必备条款清单和条款评估机制。",
+   policy_reason:"合同管理属于制度层面安排。"},
+];
+
+const documents = [
+  {name:"资产托管业务管理办法（2015修订版）",year:"2015",type:"method",typeLabel:"管理办法",areas:["机构岗位","经营管理","运营管理","风险管理","档案管理"],clauses:"总纲性制度，覆盖全业务链条"},
+  {name:"托管业务内部控制管理办法（2018修订版）",year:"2018",type:"method",typeLabel:"管理办法",areas:["内控管理"],clauses:"未能获取全文"},
+  {name:"资产托管业务账户管理办法（2018修订版）",year:"2018",type:"method",typeLabel:"管理办法",areas:["账户管理","对账","独立核算"],clauses:"各类账户开立变更撤销、独立核算分账管理"},
+  {name:"资产托管业务机构及产品管理规定（2019年版）",year:"2019",type:"rule",typeLabel:"管理规定",areas:["机构管理","合作机构管理","产品准入","反洗钱","费率管理"],clauses:"名单制管理、7种不予准入情形、客户身份识别"},
+  {name:"托管业务从业人员管理规定（2020修订版）",year:"2020",type:"rule",typeLabel:"管理规定",areas:["人员管理","执业规范","反洗钱","保密管理"],clauses:"资格条件、9类禁止行为、离任审计"},
+  {name:"交易所债券质押式回购主体风险管理指引（2020年版）",year:"2020",type:"guide",typeLabel:"指引",areas:["债券回购风险管理","风险监测","数据报送"],clauses:"每日监测回购风险、异常风险报送"},
+  {name:"资产托管业务信息披露操作规程（2022修订版）",year:"2022",type:"procedure",typeLabel:"操作规程",areas:["信息披露","品牌建设","关联交易披露"],clauses:"主动披露和披露复核、禁止行为清单、重大事件两日内报告"},
+  {name:"资产托管业务投资监督操作规程（2022修订版）",year:"2022",type:"procedure",typeLabel:"操作规程",areas:["投资监督","关联方管理","监管报送","异常监控"],clauses:"事前/中/事后监督、违规拒绝执行、按季关联方维护"},
+  {name:"资产托管业务资金清算操作规程（2022修订版）",year:"2022",type:"procedure",typeLabel:"操作规程",areas:["资金清算","账户管理","交易结算","实物保管","反洗钱","对账"],clauses:"日终账务核对、客户尽职调查、多点备份"},
+  {name:"产品开发管理与系统建设实施细则（2022修订版）",year:"2022",type:"method",typeLabel:"实施细则",areas:["产品开发","信息系统","网络安全","业务连续性","反洗钱","品牌建设"],clauses:"引用数据安全管理办法、网络安全培训、生产专网"},
+  {name:"托管业务专项应急预案（2022年版）",year:"2022",type:"plan",typeLabel:"应急预案",areas:["应急管理","业务连续性","声誉风险","舆情管理","应急演练"],clauses:"4级事件分级、4级组织架构、8类突发事件、年演练"},
+  {name:"资产托管客户端服务管理办法（试行，2022年版）",year:"2022",type:"method",typeLabel:"管理办法",areas:["客户端服务","数字证书","网络安全","凭证档案"],clauses:"数字证书认证、网络安全技术支持、客户信息保护"},
+  {name:"证券投资基金托管业务风险准备金管理办法（2023年版）",year:"2023",type:"method",typeLabel:"管理办法",areas:["风险准备金","提取","使用","监管报送","对账"],clauses:"月计提2.5%、分级审批使用、外部存管"},
+  {name:"资产托管业务合同管理细则（2014年）",year:"2014",type:"method",typeLabel:"管理细则",areas:["合同管理","合同审查","模板管理","档案管理"],clauses:"5项审查原则、制式/非制式合同审查、保管15年"},
+];
+
+function showTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function renderGaps(filter) {
+  const container = document.getElementById('gap-list-container');
+  let filtered = gaps;
+  if (filter === 'red') filtered = gaps.filter(g => g.level === 'red');
+  else if (filter === 'orange') filtered = gaps.filter(g => g.level === 'orange');
+  else if (filter === 'green') filtered = gaps.filter(g => g.level === 'green');
+  else if (filter === 'type-policy') filtered = gaps.filter(g => g.gapType === 'policy');
+  else if (filter === 'type-exec') filtered = gaps.filter(g => g.gapType === 'exec');
+  else if (filter === 'type-hybrid') filtered = gaps.filter(g => g.gapType === 'hybrid');
+
+  const typeMap = {policy:['blue','📋 制度型'],exec:['green','⚙️ 执行型'],hybrid:['purple','🔀 混合型']};
+  const levelMap = {red:'🔴 高风险',orange:'🟡 中风险',green:'🟢 低风险/已覆盖'};
+  const badgeLevelMap = {red:'red',orange:'orange',green:'green'};
+
+  container.innerHTML = filtered.map(g => {
+    const [typeCls, typeLabel] = typeMap[g.gapType];
+    return `
+    <div class="gap-item ${g.level}" data-search="${g.title + g.external_reg + g.internal_reg + g.gap + g.recommendation + g.gapType}">
+      <div class="gap-header">
+        <span class="gap-id">${g.id}</span>
+        <span class="gap-title">${g.title}</span>
+        <span class="badge ${typeCls}">${typeLabel}</span>
+        <span class="badge ${badgeLevelMap[g.level]}">${levelMap[g.level]}</span>
+        <span class="badge gray">${g.article}</span>
+      </div>
+      <div class="gap-body">
+        <div class="gap-section ext">
+          <p><span class="gap-label">📖 外规要求：</span>${g.external_reg}</p>
+        </div>
+        <div class="gap-section int">
+          <p><span class="gap-label">📄 内规现状：</span>${g.internal_reg}</p>
+        </div>
+        <p><span class="gap-label">差距定义：</span>${g.gap}</p>
+        <p><span class="gap-label">风险类型：</span>${g.risk}</p>
+        ${g.docs.length > 0 ? `<div class="gap-docs"><span class="gap-label">相关制度：</span>${g.docs.map(d => `<span class="gap-doc">${d}</span>`).join('')}</div>` : '<div class="gap-docs"><span class="gap-label">相关制度：</span><span style="color:var(--red)">无</span></div>'}
+        <div class="gap-section exe">
+          <p><span class="gap-label">📝 整改建议：</span>${g.recommendation}</p>
+        </div>
+        <p style="margin-top:6px;font-size:12px;color:var(--gray);"><span class="gap-label">分类理由：</span>${g.policy_reason}</p>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterGaps(level, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGaps(level);
+}
+
+function searchGaps(keyword) {
+  const items = document.querySelectorAll('.gap-item');
+  items.forEach(item => {
+    const text = item.getAttribute('data-search').toLowerCase();
+    item.style.display = text.includes(keyword.toLowerCase()) ? '' : 'none';
+  });
+}
+
+function renderMatrix() {
+  const clauses = [
+    {art:"第2条",req:"独立第三方定位",cov:["none","none","none","none","none","none","none","none","none","none","none","none","none","none","partial","none","none"]},
+    {art:"第5条",req:"四项基本原则",cov:["partial","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"]},
+    {art:"第6条",req:"财产独立性",cov:["partial","none","partial","none","none","none","none","none","none","none","none","none","none","none","none","none","none"]},
+    {art:"第9条",req:"托管合同",cov:["partial","none","none","none","none","none","none","none","none","none","none","none","none","none","partial","none","none"]},
+    {art:"第10条",req:"非标资产评估",cov:["none","none","none","partial","none","none","none","none","none","none","none","none","none","none","none","none","none"]},
+    {art:"第12条",req:"定期对账",cov:["none","none","partial","none","none","none","none","none","full","none","none","none","none","partial","none","none","none"]},
+    {art:"第17条",req:"投资监督",cov:["partial","none","none","none","none","partial","none","full","none","none","none","none","none","none","none","none","none"]},
+    {art:"第19-20条",req:"双负面清单",cov:["partial","none","partial","partial","partial","none","partial","partial","none","none","none","none","none","none","none","none","none"]},
+    {art:"第21条",req:"异常处置",cov:["partial","none","partial","none","none","partial","none","partial","partial","none","full","none","none","none","none","none","none"]},
+    {art:"第23条",req:"信息系统安全",cov:["partial","none","none","none","partial","none","none","none","none","full","full","partial","none","none","none","none","none"]},
+    {art:"第27条",req:"声誉风险预案",cov:["partial","none","none","none","none","none","none","none","none","none","full","none","none","none","none","none","none"]},
+    {art:"第29条",req:"准入负面清单",cov:["none","none","none","partial","none","none","none","none","none","none","none","none","none","none","none","none","none"]},
+    {art:"第30条",req:"业务隔离",cov:["partial","none","none","none","none","none","partial","partial","none","none","none","none","none","none","none","none","none"]},
+    {art:"第31条",req:"品牌保护",cov:["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"]},
+    {art:"第32条",req:"总体信披",cov:["none","none","none","none","none","none","partial","none","none","none","none","none","none","none","none","none","none"]},
+    {art:"第33条",req:"重大事项报告",cov:["none","none","none","none","none","partial","none","partial","none","none","none","none","none","none","none","none","none"]},
+    {art:"第35条",req:"考核合规导向",cov:["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"]},
+    {art:"第36条",req:"风险准备金",cov:["none","none","none","none","none","none","none","none","none","none","none","none","full","none","none","none","none"]},
+    {art:"第37条",req:"数据保护",cov:["none","none","none","none","partial","none","none","none","none","partial","none","partial","none","none","none","none","none"]},
+    {art:"第38条",req:"外部审计",cov:["partial","none","none","none","partial","none","none","none","none","none","none","none","none","partial","none","none","none"]},
+    {art:"第39条",req:"反洗钱",cov:["none","none","none","partial","partial","none","none","none","partial","partial","none","none","none","none","none","none","none"]},
+    {art:"第40条",req:"定价规范",cov:["partial","none","none","partial","none","none","none","none","none","none","none","none","none","none","none","none","none"]},
+    {art:"第41-43条",req:"监管评级应对",cov:["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"]},
+    {art:"第49条",req:"过渡期安排",cov:["none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none","none"]},
+  ];
+  const statusMap = {full:['full','✅'],partial:['partial','⚠️'],none:['none','❌']};
+  const tbody = document.getElementById('matrix-body');
+  tbody.innerHTML = clauses.map(c => {
+    const cells = c.cov.map(s => {
+      const [cls,icon] = statusMap[s] || statusMap['none'];
+      return `<td class="matrix-cell ${cls}">${icon}</td>`;
+    }).join('');
+    const hasFull = c.cov.includes('full');
+    const hasPartial = c.cov.includes('partial');
+    const allNone = c.cov.every(s => s === 'none');
+    let overallCls, overallIcon;
+    if (allNone) { overallCls='none'; overallIcon='❌'; }
+    else if (hasFull && !hasPartial) { overallCls='full'; overallIcon='✅'; }
+    else if (hasFull) { overallCls='partial'; overallIcon='⚠️'; }
+    else { overallCls='partial'; overallIcon='⚠️'; }
+    return `<tr><td><strong>${c.art}</strong></td><td>${c.req}</td>${cells}<td class="matrix-cell ${overallCls}">${overallIcon}</td></tr>`;
+  }).join('');
+}
+
+function renderDocs() {
+  const container = document.getElementById('doc-list');
+  container.innerHTML = documents.map(d => `
+    <div class="doc-card">
+      <div class="doc-icon ${d.type}">${d.year.slice(2)}</div>
+      <div class="doc-info">
+        <div class="doc-name">${d.name}</div>
+        <div class="doc-meta">${d.typeLabel} | ${d.year}年 | ${d.clauses}</div>
+        <div class="doc-areas">${d.areas.map(a => `<span class="doc-area">${a}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+renderGaps('all');
+renderMatrix();
+renderDocs();
+</script>
+</body>
+</html>

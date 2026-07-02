@@ -1,0 +1,787 @@
+{
+  "runId": "RUN-REGULATORY_M-20260624184430-613",
+  "skillId": "regulatory-mapping",
+  "taskId": "990f2d424a481f6e80d6",
+  "upstream": {
+    "decomposerRunId": "RUN-REGULATORY_D-20260624184315-941"
+  },
+  "internalPolicy": {
+    "filename": "内部制度.docx",
+    "sha256": "e69c1d8cb22cbeb39f660c9ab189d8b8e2ad1d7392f1a49d9004bc635c7f1ae4",
+    "clauseCount": 277
+  },
+  "model": {
+    "provider": "deepseek",
+    "name": "deepseek-v4-flash",
+    "promptVersion": "regulatory-mapping-v1.0"
+  },
+  "engineNotes": [
+    "V1 候选筛选使用 BM25 + 关键词信号；BGE 语义信号未启用（降级）。映射确认由 DeepSeek 在候选集合内完成。"
+  ],
+  "summary": {
+    "totalRequirements": 30,
+    "mappedCount": 0,
+    "reviewRequiredCount": 30,
+    "internalClauseCount": 277,
+    "coverageRate": 0.0
+  },
+  "mappings": [
+    {
+      "requirementId": "C-001",
+      "externalClauseRef": "第一条",
+      "externalRequirement": "为规范境内企业境外放款业务，根据《中华人民共和国中国人民银行法》《中华人民共和国外汇管理条例》及企业境外直接投资有关法律法规，制定本办法。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-002",
+      "externalClauseRef": "第二条",
+      "externalRequirement": "本办法所称境内企业境外放款，是指境内非金融企业（以下简称放款人）按照合同约定的金额、利率、期限、用途等，由境内向符合条件的境外企业（以下简称借款人）提供资金跨境融通的行为。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-003",
+      "externalClauseRef": "第三条",
+      "externalRequirement": "放款人开展境外放款应遵守国家法律法规和行业主管部门的规定，符合国家宏观调控要求。按照本办法办理境外放款登记、账户开立和使用、资金汇兑及收付等业务。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-004",
+      "externalClauseRef": "第四条",
+      "externalRequirement": "中国人民银行及其分支机构、国家外汇局及其分局按职责分工对境外放款登记、账户开立和使用、资金汇兑及收付等实施监督管理。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-005",
+      "externalClauseRef": "第五条",
+      "externalRequirement": "放款人与借款人签订境外放款协议后，在对借款人放款之前，到注册所在地国家外汇局分局申请办理登记。已登记的境外放款金额应在 2 年（含）内使用，超过 2 年的，其中未汇出部分自动失效。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-006",
+      "externalClauseRef": "第六条",
+      "externalRequirement": "放款人申请办理境外放款登记（含新办登记、变更登记、展期登记，下同）应符合以下条件： （一）放款人应依法注册成立 1 年（含）以上...",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-007",
+      "externalClauseRef": "第十四条",
+      "externalRequirement": "第十四条的规定。 （六）境外放款利率符合商业合理原则。 （七）境外放款期限符合商业合理原则，原则上应在 6 个月（含）至 5 年（含）之间。 （八）放款人存量境外放款（如有）本息已按期足额收回...",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-008",
+      "externalClauseRef": "第七条",
+      "externalRequirement": "放款人应持以下材料向注册所在地国家外汇局分局申请办理境外放款登记： （一）书面申请...",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-009",
+      "externalClauseRef": "第八条",
+      "externalRequirement": "境外放款协议（金额、利率、期限等）发生变更...应持以下材料向注册所在地国家外汇局分局申请办理境外放款变更登记...",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-010",
+      "externalClauseRef": "第九条",
+      "externalRequirement": "境外放款已足额收回本息...放款人可持书面申请及业务登记凭证等材料到经办行办理境外放款注销登记。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-011",
+      "externalClauseRef": "第十条",
+      "externalRequirement": "境外放款实行人民币和外币一体化宏观审慎管理。放款人境外放款余额不得超过其境外放款余额上限。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-012",
+      "externalClauseRef": "第十一条",
+      "externalRequirement": "放款人作为担保人或者反担保人发生内保外贷履约形成的对外债权...纳入放款人境外放款余额管理。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-013",
+      "externalClauseRef": "第十二条",
+      "externalRequirement": "放款人将存量境外放款转为股权投资等境外直接投资，应事先履行境外直接投资核准或备案手续...",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-014",
+      "externalClauseRef": "第十三条",
+      "externalRequirement": "放款人应使用自有资金（自有人民币、自有外币及自有人民币购汇资金）开展境外放款业务，不得使用个人资金或利用自身债务融资为境外放款提供资金来源。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-015",
+      "externalClauseRef": "第十四条",
+      "externalRequirement": "境外放款资金应在境外放款协议约定的用途范围内使用，并遵守以下规定： （一）不得违反国家法律法规...（四）不得违反反洗钱、反恐怖融资、反逃税的相关规定。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-016",
+      "externalClauseRef": "第十五条",
+      "externalRequirement": "放款人应按规定凭身份证明材料、境外放款业务登记凭证等材料在注册所在地国家外汇局分局辖区内银行开立境外放款专用账户...",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-017",
+      "externalClauseRef": "第十六条",
+      "externalRequirement": "境外放款专用账户收入范围：放款人境内资金账户划入的自有资金；以自有人民币购汇用于境外放款的外汇资金；境外放款本息；同名境外放款专用账户内资金划入。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-018",
+      "externalClauseRef": "第十七条",
+      "externalRequirement": "以人民币登记的境外放款，原则上应以人民币放款和收回；以外币登记的境外放款，原则上应以外币放款和收回，外币币种之间可根据实际情况选择配置。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-019",
+      "externalClauseRef": "第十八条",
+      "externalRequirement": "同一笔境外放款原则上展期不得超过一次。借款人不得通过展期规避境外放款本息偿还义务。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-020",
+      "externalClauseRef": "第十九条",
+      "externalRequirement": "放款人应对境外放款资金使用的真实性、合规性负责，监督借款人对放款资金的使用，督促借款人按时偿还。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-021",
+      "externalClauseRef": "第二十条",
+      "externalRequirement": "经办行应对境外放款资金来源进行真实性、合规性尽职审查，对照国家外汇局资本项目信息系统中的境外放款相关登记信息对境外放款业务进行一致性审查。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-022",
+      "externalClauseRef": "第二十一条",
+      "externalRequirement": "放款人发现借款人发生重大变更或出现逾期风险等异常情况应及时向注册所在地国家外汇局分局报告。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-023",
+      "externalClauseRef": "第二十二条",
+      "externalRequirement": "放款人、经办行应按照相关规定，及时准确进行国际收支统计申报及相关账户、结售汇和人民币跨境收付信息管理系统（ RCPMIS ）数据的报送。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-024",
+      "externalClauseRef": "第二十三条",
+      "externalRequirement": "中国人民银行及其分支机构、国家外汇局及其分局对境外放款业务进行统计监测，对异常或可疑情况实施核查或检查。放款人、借款人、经办行等相关主体应当配合。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-025",
+      "externalClauseRef": "第二十四条",
+      "externalRequirement": "放款人有下列情形之一的，中国人民银行及其分支机构、国家外汇局及其分局依据《中华人民共和国中国人民银行法》《中华人民共和国外汇管理条例》等法律法规予以处罚。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-026",
+      "externalClauseRef": "第二十五条",
+      "externalRequirement": "经办行有下列情形之一的，中国人民银行及其分支机构、国家外汇局及其分局依据《中华人民共和国中国人民银行法》《中华人民共和国外汇管理条例》等法律法规予以处罚。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-027",
+      "externalClauseRef": "第二十条",
+      "externalRequirement": "第二十条规定对境外放款业务进行审查的。 （二）未按规定办理资金汇兑和收付的。 （三）未按规定报送有关信息的。 （四）其他违反本办法规定的行为。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-028",
+      "externalClauseRef": "第二十六条",
+      "externalRequirement": "中国人民银行、国家外汇局可根据国际收支形势及国家宏观调控要求，对宏观审慎调节系数、币种转换因子等进行适时调整。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-029",
+      "externalClauseRef": "第二十七条",
+      "externalRequirement": "跨国公司本外币一体化资金池、跨国公司跨境资金集中运营项下境外放款，遵循跨国公司相关业务管理规定。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    },
+    {
+      "requirementId": "C-030",
+      "externalClauseRef": "第二十八条",
+      "externalRequirement": "企业集团财务公司以委托贷款方式办理境外放款业务，还应符合国家金融监管部门的相关规定。",
+      "matchedInternalPolicy": "",
+      "matchedInternalClauseRef": "",
+      "internalClauseText": "",
+      "mappingSummary": "候选集合中未发现实质匹配",
+      "dimension": "监管要求",
+      "confidence": 0.1,
+      "confidenceLevel": "低",
+      "signals": {
+        "bm25": 0,
+        "keyword": 0
+      },
+      "manualReviewStatus": "review_required",
+      "needsReview": true
+    }
+  ],
+  "review": {
+    "status": "pending",
+    "required": true,
+    "items": [
+      {
+        "targetType": "mapping",
+        "targetId": "C-001",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-002",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-003",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-004",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-005",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-006",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-007",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-008",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-009",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-010",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-011",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-012",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-013",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-014",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-015",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-016",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-017",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-018",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-019",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-020",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-021",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-022",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-023",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-024",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-025",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-026",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-027",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-028",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-029",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      },
+      {
+        "targetType": "mapping",
+        "targetId": "C-030",
+        "riskLevel": "high",
+        "reason": "低置信度映射需人工复核确认或排除。",
+        "decision": "pending"
+      }
+    ]
+  },
+  "artifacts": []
+}

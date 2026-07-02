@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>托管内控智能化平台</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">内控</div>
+          <div>
+            <p>智能内控中台</p>
+            <h1>托管内控智能化平台</h1>
+          </div>
+        </div>
+        <nav class="nav" aria-label="主导航">
+          <button class="nav-item is-active" data-route="/">首页总览</button>
+          <button class="nav-item" data-route="/foreign-regulation">外规内化</button>
+          <button class="nav-item" data-route="/diligence">尽职调查</button>
+          <button class="nav-item" data-route="/monitoring">风险监测</button>
+        </nav>
+      </aside>
+
+      <main class="workspace" id="main-workspace">
+        <header class="topbar">
+          <div class="topbar-title">
+            <nav class="breadcrumb" id="breadcrumb" aria-label="面包屑">首页总览</nav>
+            <p class="eyebrow" id="page-kicker">银行托管内控</p>
+            <h2 id="page-title">首页总览</h2>
+            <p id="page-subtitle">以外规内化、尽职调查和风险监测为核心的托管内控工作台。</p>
+          </div>
+          <div class="topbar-actions" id="page-actions">
+            <label class="upload-pill">
+              上传外规
+              <input type="file" data-upload-kind="external" accept=".doc,.docx,.pdf,.txt,.html" />
+            </label>
+            <label class="upload-pill">
+              上传内规
+              <input type="file" data-upload-kind="internal" accept=".doc,.docx,.pdf,.txt,.xlsx,.csv" />
+            </label>
+            <button class="primary-action" id="scan-button" type="button">真实抓取新规</button>
+          </div>
+        </header>
+
+        <div class="content-container">
+          <section class="view is-active" id="view-home" aria-labelledby="page-title">
+            <div class="home-summary-grid">
+              <article class="kpi-card" data-route="/foreign-regulation/tasks/pboc-2026-04?tab=review">
+                <span>待复核监管事项</span>
+                <strong>3</strong>
+                <em>条待复核</em>
+              </article>
+              <article class="kpi-card" data-route="/foreign-regulation/tasks/pboc-2026-04?tab=gap-analysis">
+                <span>高风险差距</span>
+                <strong>8</strong>
+                <em>来自既有报告摘要</em>
+              </article>
+              <article class="kpi-card" data-route="/diligence">
+                <span>进行中的尽调任务</span>
+                <strong>5</strong>
+                <em>实时跟踪</em>
+              </article>
+              <article class="kpi-card" data-route="/monitoring">
+                <span>待处置风险预警</span>
+                <strong>1</strong>
+                <em>实时监测</em>
+              </article>
+            </div>
+
+            <div class="two-column-layout">
+              <section class="section-card">
+                <div class="section-title-row">
+                  <div>
+                    <span class="mini-label">重点事项</span>
+                    <h3>近期重点事项</h3>
+                  </div>
+                </div>
+                <div class="list-stack">
+                  <button class="list-row list-row-button" type="button" data-route="/foreign-regulation/tasks/pboc-2026-04?tab=overview">
+                    <div>
+                      <strong>人民银行令〔2026〕第4号外规内化复核</strong>
+                      <span>统一进入标准任务详情页；报告结论来自既有网页报告输出。</span>
+                    </div>
+                    <em>待复核</em>
+                  </button>
+                  <button class="list-row list-row-button" type="button" data-route="/foreign-regulation/tasks/pboc-2026-04?tab=gap-analysis">
+                    <div>
+                      <strong>高风险差距清单检查</strong>
+                      <span>保留制度型、执行型、混合型分类，不在前端重判。</span>
+                    </div>
+                    <em>来自差距分析</em>
+                  </button>
+                  <button class="list-row list-row-button" type="button" data-route="/foreign-regulation/tasks/pboc-2026-04?tab=deliverables">
+                    <div>
+                      <strong>外规内化交付物归档</strong>
+                      <span>网页报告 / 文档报告按真实文件存在性展示。</span>
+                    </div>
+                    <em>可预览</em>
+                  </button>
+                </div>
+              </section>
+
+              <section class="section-card">
+                <div class="section-title-row">
+                  <div>
+                    <span class="mini-label">智能体状态</span>
+                    <h3>智能体运行状态</h3>
+                  </div>
+                </div>
+                <div class="status-stack">
+                  <button type="button" data-route="/foreign-regulation">
+                    <strong>外规内化</strong>
+                    <span class="status-badge done">已接入既有报告</span>
+                  </button>
+                  <button type="button" data-route="/diligence">
+                    <strong>尽职调查</strong>
+                    <span class="status-badge done">私募管理人尽调已接入</span>
+                  </button>
+                  <button type="button" data-route="/monitoring">
+                    <strong>风险监测</strong>
+                    <span class="status-badge done">控制点监测已接入</span>
+                  </button>
+                </div>
+              </section>
+            </div>
+
+            <div class="agent-grid compact">
+              <article class="agent-card accent-red" data-route="/foreign-regulation">
+                <span>核心能力</span>
+                <h3>外规内化</h3>
+                <p>监管识别、监管解读、内规映射、制度差距分析、整改落地五步闭环。</p>
+                <button type="button">进入工作台</button>
+              </article>
+              <article class="agent-card accent-blue" data-route="/diligence">
+                <span>核心能力</span>
+                <h3>尽职调查</h3>
+                <p>面向私募基金管理人的准入尽调、管理人画像与动态风险监测。</p>
+                <button type="button">进入尽调工作台</button>
+              </article>
+              <article class="agent-card accent-green" data-route="/monitoring">
+                <span>核心能力</span>
+                <h3>风险监测</h3>
+                <p>覆盖托管业务日常运营全流程的内控控制点持续监测。</p>
+                <button type="button">进入风险监测</button>
+              </article>
+            </div>
+
+            <section class="section-card control-tower">
+              <div class="section-title-row">
+                <div>
+                  <span class="mini-label">托管内控控制塔</span>
+                  <h3>监管义务执行链路</h3>
+                  <p>把“外规要求 → 内规承接 → 执行落地 → 风险监测”串成一条闭环。其中“执行型”监管义务由尽职调查 / 风险监测承接落地，与外规内化共用同一任务上下文。</p>
+                </div>
+                <span class="status-badge pending">演示链路</span>
+              </div>
+              <div class="ct-chain-list">
+                <article class="ct-chain">
+                  <div class="ct-head">
+                    <strong>M13 · 反洗钱执行</strong>
+                    <em class="tone-medium">执行型 · 中风险 · 托管业务部</em>
+                  </div>
+                  <div class="ct-flow">
+                    <div class="ct-stage">
+                      <span>① 外规依据</span>
+                      <strong>PBOC令〔2026〕第4号</strong>
+                      <p>账户开立环节须落实反洗钱审查</p>
+                    </div>
+                    <i class="ct-arrow" aria-hidden="true">→</i>
+                    <div class="ct-stage">
+                      <span>② 内规承接</span>
+                      <strong>账户管理办法</strong>
+                      <p>制度层面已衔接，待执行落地</p>
+                    </div>
+                    <i class="ct-arrow" aria-hidden="true">→</i>
+                    <div class="ct-stage is-exec">
+                      <span>③ 执行落地</span>
+                      <strong>客户身份识别 / 反洗钱审查</strong>
+                      <button type="button" class="bridge-link" data-bridge-action="to-diligence" data-concern="账户开立环节落实反洗钱审查与客户身份识别">去尽调执行 →</button>
+                    </div>
+                    <i class="ct-arrow" aria-hidden="true">→</i>
+                    <div class="ct-stage is-monitor">
+                      <span>④ 风险监测</span>
+                      <strong>持续监测</strong>
+                      <p>控制点监测中</p>
+                    </div>
+                  </div>
+                </article>
+                <article class="ct-chain">
+                  <div class="ct-head">
+                    <strong>M09 · 关联方与关联交易管控</strong>
+                    <em class="tone-medium">混合型 · 中风险 · 托管业务部</em>
+                  </div>
+                  <div class="ct-flow">
+                    <div class="ct-stage">
+                      <span>① 外规依据</span>
+                      <strong>PBOC令〔2026〕第4号</strong>
+                      <p>业务隔离需含关联方产品专项管控</p>
+                    </div>
+                    <i class="ct-arrow" aria-hidden="true">→</i>
+                    <div class="ct-stage">
+                      <span>② 内规承接</span>
+                      <strong>管理办法（拟修订）</strong>
+                      <p>补关联方专项管控条款</p>
+                    </div>
+                    <i class="ct-arrow" aria-hidden="true">→</i>
+                    <div class="ct-stage is-exec">
+                      <span>③ 执行落地</span>
+                      <strong>关联方识别 / 关联交易尽调</strong>
+                      <button type="button" class="bridge-link" data-bridge-action="to-diligence" data-concern="关联方识别与关联交易尽调，关注关联交易真实性与利益输送">去尽调执行 →</button>
+                    </div>
+                    <i class="ct-arrow" aria-hidden="true">→</i>
+                    <div class="ct-stage is-monitor">
+                      <span>④ 风险监测</span>
+                      <strong>关联交易监测</strong>
+                      <p>控制点监测中</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </section>
+
+          <section class="view" id="view-regulatory" aria-labelledby="page-title">
+            <div id="regulatory-workbench">
+              <div class="agent-head">
+                <div>
+                  <p class="eyebrow">外规内化</p>
+                  <h3>外规内化工作台</h3>
+                  <p>前台接入既有专业模块输出和网页报告；专业逻辑、阈值、执行指令与输出口径保持不变。</p>
+                </div>
+                <div class="case-card">
+                  <span>当前案例</span>
+                  <strong id="case-title">人民银行令〔2026〕第4号</strong>
+                  <small id="case-meta">中国人民银行 · 2026-05-26 发布 · 2026-07-01 生效</small>
+                </div>
+              </div>
+
+              <div class="case-controls">
+                <label>
+                  <span>选择已抓取新规</span>
+                  <select id="case-select"></select>
+                </label>
+                <button class="primary-action" id="reanalyze-button" type="button">重新分析当前新规</button>
+                <button class="ghost-action" id="refresh-cases-button" type="button">刷新新规库</button>
+                <p id="case-status">当前使用内置样例数据。</p>
+              </div>
+
+              <section class="section-card">
+                <div class="section-title-row">
+                  <div>
+                    <span class="mini-label">监管识别智能体</span>
+                    <h3>监管识别真实扫描</h3>
+                    <p>从官方监管网站发现候选文件、获取详情页正文、保存来源证据，并由后端智能分析链路仅对已抓取内容做分类和摘要。</p>
+                  </div>
+                  <button class="primary-action" type="button" id="scanner-run-button">立即执行真实扫描</button>
+                </div>
+                <div class="scanner-controls">
+                  <label><span>监管机构</span><select id="scanner-sources" multiple size="4"></select></label>
+                  <label><span>回溯天数</span><input id="scanner-days" type="number" min="1" max="365" value="30" /></label>
+                  <label><span>业务领域</span><input id="scanner-domain" type="text" value="托管业务" /></label>
+                  <label><span>文件类型</span><select id="scanner-doc-types" multiple size="4">
+                    <option selected>部门规章</option>
+                    <option selected>规范性文件</option>
+                    <option selected>公告</option>
+                    <option selected>办法</option>
+                    <option selected>通知</option>
+                    <option selected>监管规则</option>
+                    <option selected>征求意见</option>
+                  </select></label>
+                  <label class="checkbox-line"><input id="scanner-custody-only" type="checkbox" /> <span>仅查看托管相关文件</span></label>
+                </div>
+                <div id="scanner-status" class="empty-state small">尚未执行真实扫描。</div>
+                <div class="table-wrap">
+                  <table class="diligence-table">
+                    <thead>
+                      <tr>
+                        <th>监管机构</th>
+                        <th>文件名称</th>
+                        <th>文号</th>
+                        <th>发布日期</th>
+                        <th>生效日期</th>
+                        <th>文件类型</th>
+                        <th>托管相关性</th>
+                        <th>抓取状态</th>
+                        <th>原文状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody id="scanner-document-list"></tbody>
+                  </table>
+                </div>
+              </section>
+
+              <div class="pipeline" id="pipeline"></div>
+
+              <section class="section-card">
+                <div class="section-title-row">
+                  <div>
+                    <span class="mini-label">任务清单</span>
+                    <h3>外规内化任务</h3>
+                    <p>所有入口统一进入同一个标准任务详情页。</p>
+                  </div>
+                  <button class="primary-action" type="button" id="open-current-case-button">查看当前任务详情</button>
+                </div>
+                <div class="table-wrap">
+                  <table class="diligence-table">
+                    <thead>
+                      <tr>
+                        <th>任务名称</th>
+                        <th>监管机构</th>
+                        <th>发布日期</th>
+                        <th>状态</th>
+                        <th>数据口径</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody id="regulatory-task-list"></tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+
+            <div id="regulatory-detail" hidden>
+              <div class="detail-page-head">
+                <button class="ghost-action" type="button" data-route="/foreign-regulation">返回工作台</button>
+                <div>
+                  <p class="eyebrow">外规内化任务工作台</p>
+                  <h3 id="regulatory-detail-title">PBOC令〔2026〕第4号 / 托管业务监管制度合规分析</h3>
+                  <p id="regulatory-detail-meta">中国人民银行 · 2026-05-26 发布 · 2026-07-01 生效</p>
+                </div>
+                <div class="button-row">
+                  <button class="primary-action" type="button" data-detail-deliverables>查看交付物</button>
+                </div>
+              </div>
+
+              <div class="detail-tabs" id="regulatory-detail-tabs" role="tablist" aria-label="外规内化任务工作台导航"></div>
+              <div class="detail-panel" id="regulatory-detail-panel"></div>
+            </div>
+          </section>
+
+          <section class="view" id="view-diligence" aria-labelledby="page-title">
+            <div class="diligence-workbench">
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">智能尽职调查</p>
+                  <h3>智能尽职调查工作台</h3>
+                  <p>面向托管业务的私募基金管理人尽调：围绕同一管理人，串联准入尽调、管理人画像、动态风险监测、尽调总览、洞察任务、尽调报告与知识中心。</p>
+                </div>
+                <div class="diligence-select">
+                  <label for="diligence-company-select">当前企业</label>
+                  <select id="diligence-company-select"></select>
+                </div>
+              </div>
+
+              <div class="diligence-tabs" role="tablist" aria-label="尽职调查功能导航">
+                <button class="is-active" type="button" data-diligence-tab="custody-admittance">管理人准入尽调</button>
+                <button type="button" data-diligence-tab="profile">管理人画像</button>
+                <button type="button" data-diligence-tab="alerts">动态风险监测</button>
+                <button type="button" data-diligence-tab="home">尽调总览</button>
+                <button type="button" data-diligence-tab="tasks">洞察任务</button>
+                <button type="button" data-diligence-tab="reports">尽调报告</button>
+                <button type="button" data-diligence-tab="knowledge">知识中心</button>
+              </div>
+
+              <div class="diligence-panel" id="diligence-panel">
+                <div class="empty-state">正在加载尽职调查数据...</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="view" id="view-monitoring" aria-labelledby="page-title">
+            <div id="monitoring-panel"></div>
+          </section>
+
+        </div>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
