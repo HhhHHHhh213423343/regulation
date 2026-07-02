@@ -716,18 +716,82 @@ function monitorStatusTone(status) {
   return "low";
 }
 
+// ── 商户管理流程文本解析 ────────────────────────────────────────────
+// 源数据把一个环节的“校验点”和“外规条款依据”各塞在一大段文本里。
+// 下面两个解析器把大段文本拆成结构化条目，供左右并列、逐条展示。
+function parseCheckItems(text) {
+  if (!text) return { theme: "", items: [] };
+  let t = String(text).replace(/\s+/g, " ").trim();
+  let theme = "";
+  const themeMatch = t.match(/^([一二三四五六七八九十]+、\s*[^0-9]+?)(?=\s*\d+[.．、]\s*\D)/);
+  if (themeMatch) {
+    theme = themeMatch[1].replace(/^[一二三四五六七八九十]+、\s*/, "").trim();
+    t = t.slice(themeMatch[0].length);
+  }
+  const parts = t.split(/\s*(?=(?:^|\s)\d+[.．、]\s*\D)/).map((s) => s.trim()).filter(Boolean);
+  let items = parts.map((p) => p.replace(/^\d+[.．、]\s*/, "").trim()).filter(Boolean);
+  if (!items.length && t) items = [t];
+  return { theme, items };
+}
+
+function cleanArticle(s) {
+  return String(s).replace(/^[•·\-\s]+/, "").trim();
+}
+
+function parseLegalRefs(text) {
+  if (!text) return [];
+  const t = String(text).replace(/\s+/g, " ").trim();
+  const lawRegex = /《[^》]+》/g;
+  const matches = [];
+  let m;
+  while ((m = lawRegex.exec(t)) !== null) matches.push({ law: m[0], index: m.index });
+  if (!matches.length) {
+    const body = cleanArticle(t);
+    return body ? [{ law: "", articles: [body] }] : [];
+  }
+  const refs = [];
+  for (let i = 0; i < matches.length; i++) {
+    const start = matches[i].index + matches[i].law.length;
+    const end = i + 1 < matches.length ? matches[i + 1].index : t.length;
+    const body = t.slice(start, end).trim();
+    let articles = body
+      .split(/\s*(?=第[〇一二三四五六七八九十百千零\d]+条)/)
+      .map(cleanArticle)
+      .filter((a) => a.replace(/[^一-龥a-zA-Z0-9]/g, "").length >= 4);
+    if (!articles.length && body) {
+      const b = cleanArticle(body);
+      if (b.replace(/[^一-龥a-zA-Z0-9]/g, "").length >= 4) articles = [b];
+    }
+    if (articles.length) refs.push({ law: matches[i].law, articles });
+  }
+  return refs;
+}
+
 function renderPaymentDiligence() {
   const panel = document.getElementById("diligence-panel");
   const workbench = document.querySelector(".diligence-workbench");
   if (!panel || !workbench) return;
   const data = paymentData();
-  const byLink = (data.merchantProcesses || []).reduce((acc, item) => {
+  const processes = (data.merchantProcesses || []).map((item) => {
+    const check = parseCheckItems(item.checkPoint);
+    const refs = parseLegalRefs(item.legalBasis);
+    return {
+      ...item,
+      theme: check.theme || item.businessLink || "商户管理",
+      checkItems: check.items,
+      legalRefs: refs,
+      clauseCount: refs.reduce((n, r) => n + r.articles.length, 0),
+    };
+  });
+  const byLink = processes.reduce((acc, item) => {
     const key = item.businessLink || "其他";
     if (!acc[key]) acc[key] = [];
     acc[key].push(item);
     return acc;
   }, {});
   const links = Object.entries(byLink);
+  const totalCheck = processes.reduce((n, p) => n + p.checkItems.length, 0);
+  const totalClause = processes.reduce((n, p) => n + p.clauseCount, 0);
   const head = workbench.querySelector(".section-head");
   const tabs = workbench.querySelector(".diligence-tabs");
   const select = workbench.querySelector(".diligence-select");
@@ -738,42 +802,68 @@ function renderPaymentDiligence() {
       <div>
         <p class="eyebrow">商户管理合规</p>
         <h3>商户管理流程条款工作台</h3>
-        <p>把商户准入、签约、变更、续约和日常管理拆成可核验的校验要点，并挂接到支付行业法律条文。</p>
+        <p>把商户准入、签约、变更、续约和日常管理拆成可核验的校验点，每个校验环节右侧逐条列出对应外规条款依据。</p>
       </div>
       <div class="case-card">
-        <span>流程条款</span>
-        <strong>${data.summary?.merchantProcessCount || 0} 条</strong>
+        <span>校验点 / 外规条款</span>
+        <strong>${totalCheck} / ${totalClause}</strong>
         <small>来自《商户管理相关触及法律条文》</small>
       </div>
     `;
   }
+  const anchorId = (link) => "flow-" + encodeURIComponent(link);
   panel.innerHTML = `
     <section class="payment-process-hero">
       <div>
         <span class="mode-pill demo">商户管理流程</span>
-        <h3>从流程节点到监管依据</h3>
-        <p>这部分最适合 demo：客户能看到每个业务动作为什么要做、怎么校验、依据哪条监管要求。</p>
+        <h3>校验点 ↔ 外规条款逐条对照</h3>
+        <p>左侧是每个环节要核验什么，右侧是这么做的监管依据（逐条拆开）。客户能一眼看到“做什么动作、依据哪条外规”。</p>
+        <div class="flow-stage-nav">
+          ${links.map(([link, items]) => `<a href="#${anchorId(link)}"><span>${escapeHtml(items[0]?.subProcess || "商户管理")}</span><strong>${escapeHtml(link)}</strong><em>${items.length} 个校验环节</em></a>`).join("")}
+        </div>
       </div>
       <div class="payment-process-kpis">
         ${[
-          ["子流程", new Set((data.merchantProcesses || []).map((x) => x.subProcess)).size],
-          ["关键环节", links.length],
-          ["法律依据", data.summary?.merchantProcessCount || 0],
+          ["业务环节", links.length],
+          ["校验主题", processes.length],
+          ["校验点", totalCheck],
+          ["外规条款", totalClause],
         ].map(([label, value]) => `<div><span>${escapeHtml(label)}</span><strong>${value}</strong></div>`).join("")}
       </div>
     </section>
-    <div class="payment-process-grid">
+    <div class="payment-flow-groups">
       ${links.map(([link, items]) => `
-        <section class="section-card payment-process-card">
+        <section class="section-card flow-group" id="${anchorId(link)}">
           <div class="section-title-row">
             <div><span class="mini-label">${escapeHtml(items[0]?.subProcess || "商户管理")}</span><h3>${escapeHtml(link)}</h3></div>
-            <span class="status-badge pending">${items.length} 个校验点</span>
+            <span class="status-badge pending">${items.length} 个校验环节</span>
           </div>
-          <div class="payment-process-list">
+          <div class="check-clause-list">
             ${items.map((item) => `
-              <article>
-                <strong>${escapeHtml(item.checkPoint)}</strong>
-                <p>${escapeHtml(item.legalBasis)}</p>
+              <article class="check-clause-card">
+                <header class="cc-head">
+                  <strong>${escapeHtml(item.theme)}</strong>
+                  <span class="cc-meta">${item.checkItems.length} 校验点 · ${item.clauseCount} 条外规</span>
+                </header>
+                <div class="check-clause-split">
+                  <div class="cc-col cc-check">
+                    <span class="cc-col-label">校验点</span>
+                    <ol>
+                      ${item.checkItems.map((ci) => `<li>${escapeHtml(ci)}</li>`).join("")}
+                    </ol>
+                  </div>
+                  <div class="cc-col cc-legal">
+                    <span class="cc-col-label">外规条款依据</span>
+                    <div class="legal-ref-list">
+                      ${item.legalRefs.map((ref) => `
+                        <div class="legal-ref">
+                          <strong>${escapeHtml(ref.law || "相关监管要求")}</strong>
+                          ${ref.articles.map((a) => `<p>${escapeHtml(a)}</p>`).join("")}
+                        </div>
+                      `).join("")}
+                    </div>
+                  </div>
+                </div>
               </article>
             `).join("")}
           </div>
@@ -783,12 +873,102 @@ function renderPaymentDiligence() {
   `;
 }
 
+// ── 监管罚单统计分布 & 领域归因 ─────────────────────────────────────
+const PROVINCE_REGEX = /(北京|上海|天津|重庆|河北|山西|内蒙古|辽宁|吉林|黑龙江|江苏|浙江|安徽|福建|江西|山东|河南|湖北|湖南|广东|广西|海南|四川|贵州|云南|西藏|陕西|甘肃|青海|宁夏|新疆)/;
+
+function computeFineRegions(fines) {
+  const map = new Map();
+  (fines || []).forEach((f) => {
+    const m = PROVINCE_REGEX.exec(f.regulator || "");
+    const label = m ? m[1] : "总行/其他";
+    const cur = map.get(label) || { label, count: 0, amountWan: 0 };
+    cur.count += 1;
+    cur.amountWan += Number(f.amountWan || 0);
+    map.set(label, cur);
+  });
+  return [...map.values()].sort((a, b) => b.count - a.count);
+}
+
+function computeFineInstitutions(fines) {
+  const map = new Map();
+  (fines || []).forEach((f) => {
+    const label = f.target || "未标注机构";
+    const cur = map.get(label) || { label, count: 0, amountWan: 0 };
+    cur.count += 1;
+    cur.amountWan += Number(f.amountWan || 0);
+    map.set(label, cur);
+  });
+  return [...map.values()].sort((a, b) => b.count - a.count || b.amountWan - a.amountWan);
+}
+
+// 高频监管领域的“监管关注点 → 管理启示”归因文案（极客合规式领域归因）。
+const FIELD_INSIGHTS = {
+  清结算管理: {
+    focus: "清算通道合规、交易信息完整真实、资金结算路径可追溯，严禁“二清”、变相跨机构清算与截留挪用资金。",
+    lesson: "梳理清结算全链路，落实交易四要素与资金流一致核验，杜绝“大商户”模式与资金池。",
+  },
+  用户管理: {
+    focus: "支付账户实名制、身份识别与限额分类管理，防范匿名账户、超额交易与账户被冒用、出租出借。",
+    lesson: "完善账户开立与分类限额规则，强化身份核验与异常账户模型监测。",
+  },
+  反洗钱反恐及反诈管理: {
+    focus: "客户身份识别、大额与可疑交易报告、受益所有人识别与制裁名单筛查，防范电诈资金通道。",
+    lesson: "健全反洗钱三大制度，落实持续尽调与可疑交易模型，完整留存交易与身份资料。",
+  },
+  商户管理: {
+    focus: "特约商户实名制、准入尽调、经营真实性与受理终端“一机一户”管理，压实商户管理主体责任。",
+    lesson: "把准入—签约—变更—续约—日常巡检做成闭环校验，可直接对接“商户管理流程”页控制点。",
+  },
+  支付交易管理: {
+    focus: "交易信息真实完整可追溯、接口与终端合规，防范无证经营、违规拓展与通道套用。",
+    lesson: "建立订单号/商户号/终端号一致性监测，堵住违规接口与二次转包通道。",
+  },
+  产品管理: {
+    focus: "支付产品创新须持牌合规、明示费率与规则，防范未经许可开展业务与误导性宣传。",
+    lesson: "新产品上线前做合规前置评审，费率与规则向客户充分披露并留痕。",
+  },
+  法律合规管理: {
+    focus: "制度体系健全、协议合规、信息报送与配合监管检查，防范合规管理形式化。",
+    lesson: "建立外规到内规到控制点的映射台账，确保监管要求可追溯、可核查。",
+  },
+  风险控制管理: {
+    focus: "全面风险管理、交易风险监测与应急处置，防范风险敞口失控与资损。",
+    lesson: "完善风险限额与监测指标，把罚单高频问题固化为持续监控的控制目标。",
+  },
+  备付金管理: {
+    focus: "客户备付金全额集中交存、专用存管，禁止挪用、占用与违规计息。",
+    lesson: "落实备付金集中存管与每日对账，严格隔离自有资金与客户资金。",
+  },
+  "客户服务管理（金消保）": {
+    focus: "金融消费者信息保护、告知授权、投诉处理与收费公示透明。",
+    lesson: "落实个人金融信息最小必要与授权留痕，规范收费披露与投诉响应时效。",
+  },
+};
+
+function fieldInsight(label) {
+  return (
+    FIELD_INSIGHTS[label] || {
+      focus: "该领域罚单反映相关业务环节的合规执行存在薄弱点，需结合具体罚因归因到制度、流程或系统。",
+      lesson: "把该类罚因转化为可核查的控制点，纳入日常监测与整改闭环。",
+    }
+  );
+}
+
 function renderPaymentMonitoring() {
   const panel = document.getElementById("monitoring-panel");
   if (!panel) return;
   const data = paymentData();
+  const s = data.summary || {};
+  const fines = data.fines || [];
   const risks = data.fineStats?.topRisks || [];
   const management = data.fineStats?.management || [];
+  const byYear = data.fineStats?.byYear || [];
+  const regions = computeFineRegions(fines);
+  const institutions = computeFineInstitutions(fines);
+  const topFines = [...fines].sort((a, b) => Number(b.amountWan || 0) - Number(a.amountWan || 0)).slice(0, 6);
+  const detailFines = (data.featuredFines || []).length ? data.featuredFines : topFines;
+  const years = byYear.map((y) => y.label).filter(Boolean);
+  const yearRange = years.length ? `${years[0]}—${years[years.length - 1]}` : "—";
   const controls = [
     ["商户准入真实性", "商户管理", "关注", "营业执照、法人身份、结算账户、经营场景和禁入名单核验。"],
     ["交易信息真实完整可追溯", "支付交易管理", "预警", "交易链路、接口调用、订单号、商户号、终端号和资金流一致性监测。"],
@@ -799,30 +979,96 @@ function renderPaymentMonitoring() {
   ];
   const warn = controls.filter((item) => item[2] === "预警").length;
   panel.innerHTML = `
-    <section class="section-card">
-      <div class="section-title-row"><div><span class="mini-label">支付风险监测</span><h3>罚因驱动的控制点监测</h3><p>把罚单中的高频问题转成可持续监控的控制目标，形成“罚单库反哺流程控制”的 demo 逻辑。</p></div><span class="status-badge ${warn ? "pending" : "done"}">${warn} 项预警</span></div>
-      <div class="adm-kpis">
-        ${[
-          ["TOP 风险", risks.length],
-          ["管理分类", management.length],
-          ["罚单样本", data.summary?.fineCount || 0],
-          ["商户相关罚单", data.summary?.merchantFineCount || 0],
-          ["机构罚单", data.summary?.companyFineCount || 0],
-        ].map(([label, value]) => `<div><span>${escapeHtml(label)}</span><strong>${value}</strong></div>`).join("")}
+    <section class="payment-reg-hero">
+      <div>
+        <span class="mode-pill demo">监管罚单与风险监测</span>
+        <h3>处罚数据 → 统计分布 → 领域归因 → 风险监测</h3>
+        <p>参考监管处罚分析报告的做法：先做处罚画像，再按高频领域提炼监管关注点，最后落到可持续监测的控制目标。</p>
+        <div class="reg-hero-meta">
+          <span>罚单 ${s.fineCount || fines.length} 张</span>
+          <span>机构罚单 ${s.companyFineCount || 0} 张</span>
+          <span>涉及机构 ${institutions.length} 家</span>
+          <span>覆盖 ${yearRange}</span>
+        </div>
+      </div>
+      <div class="reg-hero-score">
+        <span>罚没金额合计</span>
+        <strong>${formatWan(s.totalFineAmountWan)}</strong>
+        <em>商户管理相关 ${s.merchantFineCount || 0} 张</em>
       </div>
     </section>
-    <div class="reg-section-grid">
-      <section class="section-card">
-        <div class="section-title-row"><div><span class="mini-label">TOP 风险</span><h3>按罚没金额排序</h3></div></div>
-        ${renderPaymentMiniBars(risks.slice(0, 8), "amountWan")}
-      </section>
-      <section class="section-card">
-        <div class="section-title-row"><div><span class="mini-label">管理分类</span><h3>按罚单数量排序</h3></div></div>
-        ${renderPaymentMiniBars(management.slice(0, 8), "count")}
-      </section>
-    </div>
+
     <section class="section-card">
-      <div class="section-title-row"><div><span class="mini-label">控制目标库</span><h3>支付行业控制点</h3></div></div>
+      <div class="section-title-row"><div><span class="mini-label">一、处罚概览</span><h3>典型大额罚单</h3><p>按罚没金额排序的头部案例，反映监管重点方向与力度。</p></div></div>
+      <div class="top-fine-grid">
+        ${topFines.map((f) => `
+          <article class="top-fine-card">
+            <div class="top-fine-amount">${formatWan(f.amountWan)}</div>
+            <strong>${escapeHtml(f.target)}</strong>
+            <p>${escapeHtml(f.reason)}</p>
+            <div class="top-fine-tags">${[...(f.managementTags || []), ...(f.riskTags || [])].slice(0, 3).map((t) => `<span class="tag-chip">${escapeHtml(t)}</span>`).join("")}</div>
+            <em>${escapeHtml(f.regulator)} · ${escapeHtml(f.date)}</em>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">二、统计分布</span><h3>处罚数据画像</h3><p>从业务领域、风险主题、地区和时间四个维度做结构化统计。</p></div></div>
+      <div class="dist-grid">
+        <div class="dist-panel">
+          <span class="dist-title">业务领域分布（按罚单数）</span>
+          ${renderPaymentMiniBars(management.slice(0, 8), "count")}
+        </div>
+        <div class="dist-panel">
+          <span class="dist-title">TOP 风险金额（按风险标签）</span>
+          ${renderPaymentMiniBars(risks.slice(0, 8), "amountWan")}
+        </div>
+        <div class="dist-panel">
+          <span class="dist-title">地区分布（按监管出具机关）</span>
+          ${renderPaymentMiniBars(regions.slice(0, 8), "count")}
+        </div>
+        <div class="dist-panel">
+          <span class="dist-title">年度趋势（按罚单数）</span>
+          ${renderPaymentMiniBars(byYear, "count")}
+        </div>
+      </div>
+      <div class="inst-rank">
+        <span class="dist-title">高频被罚机构 TOP 8</span>
+        <div class="inst-rank-list">
+          ${institutions.slice(0, 8).map((it, i) => `
+            <div class="inst-rank-row">
+              <span class="inst-rank-no">${i + 1}</span>
+              <strong>${escapeHtml(it.label)}</strong>
+              <span class="inst-rank-count">${it.count} 张</span>
+              <span class="inst-rank-amount">${formatWan(it.amountWan)}</span>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">三、处罚内容分析</span><h3>高频领域归因与监管关注点</h3><p>不只列罚单，而是按高频领域提炼监管关注点，并把处罚事实上升为合规管理问题。</p></div></div>
+      <div class="field-insight-grid">
+        ${management.slice(0, 6).map((mgmt) => {
+          const ins = fieldInsight(mgmt.label);
+          return `
+            <article class="field-insight-card">
+              <header>
+                <strong>${escapeHtml(mgmt.label)}</strong>
+                <span class="fi-stat">${mgmt.count} 张 · ${formatWan(mgmt.amountWan)}</span>
+              </header>
+              <div class="fi-block"><span>监管关注点</span><p>${escapeHtml(ins.focus)}</p></div>
+              <div class="fi-block"><span>管理启示</span><p>${escapeHtml(ins.lesson)}</p></div>
+            </article>
+          `;
+        }).join("")}
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">四、风险监测</span><h3>罚因驱动的控制目标</h3><p>把高频罚因固化为可持续监测的控制点，形成“罚单库反哺流程控制”闭环。</p></div><span class="status-badge ${warn ? "pending" : "done"}">${warn} 项预警</span></div>
       <div class="ctrl-grid">
         ${controls.map(([flow, category, status, desc]) => `
           <article class="ctrl-card tone-${monitorStatusTone(status)}">
@@ -834,6 +1080,27 @@ function renderPaymentMonitoring() {
             <em>${escapeHtml(category)}</em>
           </article>
         `).join("")}
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-title-row"><div><span class="mini-label">五、数据明细</span><h3>监管处罚数据明细</h3><p>罚单自带管理分类和风险标签，可作为搜索、筛选、画像和风险归因的数据底座。</p></div><span class="status-badge pending">${detailFines.length} 条样本</span></div>
+      <div class="table-wrap">
+        <table class="diligence-table payment-table">
+          <thead><tr><th>处罚对象</th><th>处罚原因</th><th>罚单文号</th><th>金额</th><th>分类标签</th><th>处罚日期</th></tr></thead>
+          <tbody>
+            ${detailFines.map((fine) => `
+              <tr>
+                <td><strong>${escapeHtml(fine.target)}</strong><span>${escapeHtml(fine.regulator)}</span></td>
+                <td>${escapeHtml(fine.reason)}</td>
+                <td>${escapeHtml(fine.noticeNo)}</td>
+                <td><strong>${formatWan(fine.amountWan)}</strong><span>${escapeHtml(fine.penalty)}</span></td>
+                <td>${[...(fine.managementTags || []), ...(fine.riskTags || [])].slice(0, 4).map((tag) => `<span class="tag-chip">${escapeHtml(tag)}</span>`).join("")}</td>
+                <td>${escapeHtml(fine.date)}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
       </div>
     </section>
   `;
@@ -1003,22 +1270,22 @@ function industryPageMeta(viewId) {
       kicker: "支付合规内控",
     },
     regulatory: {
-      title: "外规与罚单库",
-      subtitle: "展示支付行业外规清单、法规全文索引、处罚案例、风险标签和商户管理条款映射。",
-      breadcrumb: "支付行业总览 / 外规与罚单库",
+      title: "外规库",
+      subtitle: "展示支付行业外规清单与法规全文索引，可直接映射到平台外规库。",
+      breadcrumb: "支付行业总览 / 外规库",
       kicker: "支付外规内化",
     },
     diligence: {
       title: "商户管理流程",
-      subtitle: "围绕商户准入、签约、变更、续约和日常管理，展示校验要点与法律条文依据。",
+      subtitle: "围绕商户准入、签约、变更、续约和日常管理，把校验点与外规条款逐条对照展示。",
       breadcrumb: "支付行业总览 / 商户管理流程",
       kicker: "商户管理合规",
     },
     monitoring: {
-      title: "支付风险监测",
-      subtitle: "把高频罚因和 TOP 风险转成持续监测的控制目标与处置线索。",
-      breadcrumb: "支付行业总览 / 支付风险监测",
-      kicker: "支付风险监测",
+      title: "监管罚单与风险监测",
+      subtitle: "处罚概览、统计分布、高频领域归因，再落到罚因驱动的控制目标与数据明细。",
+      breadcrumb: "支付行业总览 / 监管罚单与风险监测",
+      kicker: "监管罚单与风险监测",
     },
   };
   return paymentPages[viewId] || paymentPages.home;
@@ -1051,6 +1318,30 @@ function updateShellBrand() {
   if (kicker) kicker.textContent = profile.brandKicker;
   if (title) title.textContent = profile.brandTitle;
   document.title = profile.brandTitle;
+  updateNavLabels();
+}
+
+const NAV_LABELS = {
+  custody: {
+    "/": "首页总览",
+    "/foreign-regulation": "外规内化",
+    "/diligence": "尽职调查",
+    "/monitoring": "风险监测",
+  },
+  payment: {
+    "/": "首页总览",
+    "/foreign-regulation": "外规库",
+    "/diligence": "商户管理流程",
+    "/monitoring": "监管罚单与风险监测",
+  },
+};
+
+function updateNavLabels() {
+  const labels = NAV_LABELS[currentIndustry] || NAV_LABELS.custody;
+  document.querySelectorAll(".nav-item").forEach((item) => {
+    const route = item.dataset.route || "/";
+    if (labels[route]) item.textContent = labels[route];
+  });
 }
 
 async function loadPaymentShowcase() {
@@ -3069,7 +3360,7 @@ function updatePageChrome(viewId, routeState) {
       ? `
         ${industrySwitcher}
         <button class="primary-action" type="button" data-route="/diligence">查看商户流程</button>
-        <button type="button" data-route="/monitoring">查看风险监测</button>
+        <button type="button" data-route="/monitoring">监管罚单与风险监测</button>
       `
       : industrySwitcher;
     return;
@@ -3207,12 +3498,12 @@ function renderHome() {
   view.innerHTML = `
     <div class="home-summary-grid payment-summary-grid">
       ${[
-        ["支付外规", s.ruleCount || 0, `${s.validRuleCount || 0} 条现行有效`],
-        ["处罚案例", s.fineCount || 0, `罚没合计 ${formatWan(s.totalFineAmountWan)}`],
-        ["商户管理条款", s.merchantProcessCount || 0, "准入、签约、变更、续约、日常管理"],
-        ["风险标签", s.topRiskCount || 0, topRisk?.label || "TOP 风险已归类"],
-      ].map(([label, value, hint]) => `
-        <article class="kpi-card" data-route="/foreign-regulation">
+        ["支付外规", s.ruleCount || 0, `${s.validRuleCount || 0} 条现行有效`, "/foreign-regulation"],
+        ["处罚案例", s.fineCount || 0, `罚没合计 ${formatWan(s.totalFineAmountWan)}`, "/monitoring"],
+        ["商户管理条款", s.merchantProcessCount || 0, "准入、签约、变更、续约、日常管理", "/diligence"],
+        ["风险标签", s.topRiskCount || 0, topRisk?.label || "TOP 风险已归类", "/monitoring"],
+      ].map(([label, value, hint, route]) => `
+        <article class="kpi-card" data-route="${route}">
           <span>${escapeHtml(label)}</span>
           <strong>${escapeHtml(value)}</strong>
           <em>${escapeHtml(hint)}</em>
@@ -3226,9 +3517,9 @@ function renderHome() {
         <h3>${escapeHtml(data.demoNarrative?.title || "支付行业合规专题演示")}</h3>
         <p>${escapeHtml(data.demoNarrative?.subtitle || "围绕支付外规、行政处罚和商户管理流程展示行业化能力。")}</p>
         <div class="payment-hero-actions">
-          <button class="primary-action" type="button" data-route="/foreign-regulation">进入外规与罚单库</button>
+          <button class="primary-action" type="button" data-route="/foreign-regulation">进入外规库</button>
           <button type="button" data-route="/diligence">查看商户管理流程</button>
-          <button type="button" data-route="/monitoring">查看风险监测</button>
+          <button type="button" data-route="/monitoring">查看监管罚单与风险监测</button>
         </div>
       </div>
       <div class="payment-loop">
@@ -3244,15 +3535,18 @@ function renderHome() {
         ${renderPaymentMiniBars((data.fineStats?.management || []).slice(0, 8), "count")}
       </section>
       <section class="section-card">
-        <div class="section-title-row"><div><span class="mini-label">商户流程重点</span><h3>商户管理闭环</h3><p>材料已形成流程节点、校验要点和法律条文三层映射，可直接作为 demo 的业务主线。</p></div></div>
+        <div class="section-title-row"><div><span class="mini-label">商户流程重点</span><h3>商户管理闭环</h3><p>材料已形成流程节点、校验点和外规条款三层映射，可直接作为 demo 的业务主线。</p></div></div>
         <div class="payment-process-list compact">
-          ${(data.merchantProcesses || []).slice(0, 5).map((item) => `
+          ${(data.merchantProcesses || []).slice(0, 5).map((item) => {
+            const c = parseCheckItems(item.checkPoint);
+            return `
             <article>
               <span>${escapeHtml(item.subProcess)}</span>
               <strong>${escapeHtml(item.businessLink)}</strong>
-              <p>${escapeHtml(item.checkPoint)}</p>
+              <p>${escapeHtml(c.theme || item.businessLink)}：${escapeHtml((c.items[0] || "").slice(0, 40))}${(c.items[0] || "").length > 40 ? "…" : ""}</p>
             </article>
-          `).join("")}
+          `;
+          }).join("")}
         </div>
       </section>
     </div>
@@ -3283,19 +3577,19 @@ function renderPaymentRegulatoryWorkbench() {
     <section class="payment-reg-hero">
       <div>
         <span class="mode-pill demo">支付行业版</span>
-        <h3>支付外规库、罚单库与商户管理条款</h3>
-        <p>当前数据来自同事提供的 4 份材料，已整理为外规目录、法规全文索引、处罚案例、分类统计和商户管理流程条款。</p>
+        <h3>支付外规库与商户管理条款</h3>
+        <p>当前数据来自同事提供的 4 份材料，已整理为外规目录与法规全文索引。罚单分析与风险监测已独立到“监管罚单与风险监测”页。</p>
         <div class="reg-hero-meta">
           <span>外规 ${s.ruleCount || 0} 条</span>
           <span>现行有效 ${s.validRuleCount || 0} 条</span>
-          <span>罚单 ${s.fineCount || 0} 条</span>
-          <span>商户流程 ${s.merchantProcessCount || 0} 条</span>
+          <span>已废止 ${s.expiredRuleCount || 0} 条</span>
+          <span>法规全文 ${s.docTitleCount || 0} 篇</span>
         </div>
       </div>
       <div class="reg-hero-score">
-        <span>罚没金额</span>
-        <strong>${formatWan(s.totalFineAmountWan)}</strong>
-        <em>商户管理相关 ${s.merchantFineCount || 0} 张</em>
+        <span>现行有效外规</span>
+        <strong>${s.validRuleCount || 0}<i> 条</i></strong>
+        <em>共 ${s.ruleCount || 0} 条外规入库</em>
       </div>
     </section>
 
@@ -3319,36 +3613,8 @@ function renderPaymentRegulatoryWorkbench() {
       </div>
     </section>
 
-    <div class="reg-section-grid">
-      <section class="section-card">
-        <div class="section-title-row"><div><span class="mini-label">罚单管理分类</span><h3>处罚原因归属</h3></div></div>
-        ${renderPaymentMiniBars((data.fineStats?.management || []).slice(0, 10), "count")}
-      </section>
-      <section class="section-card">
-        <div class="section-title-row"><div><span class="mini-label">TOP 风险金额</span><h3>按风险标签汇总</h3></div></div>
-        ${renderPaymentMiniBars((data.fineStats?.topRisks || []).slice(0, 8), "amountWan")}
-      </section>
-    </div>
-
-    <section class="section-card">
-      <div class="section-title-row"><div><span class="mini-label">支付业务罚单库</span><h3>处罚案例明细</h3><p>罚单自带管理分类和 TOP8 风险标签，适合演示搜索、筛选、画像和风险归因。</p></div><span class="status-badge pending">${s.companyFineCount || 0} 张机构罚单</span></div>
-      <div class="table-wrap">
-        <table class="diligence-table payment-table">
-          <thead><tr><th>处罚对象</th><th>处罚原因</th><th>罚单文号</th><th>金额</th><th>分类标签</th><th>处罚日期</th></tr></thead>
-          <tbody>
-            ${(data.featuredFines || []).map((fine) => `
-              <tr>
-                <td><strong>${escapeHtml(fine.target)}</strong><span>${escapeHtml(fine.regulator)}</span></td>
-                <td>${escapeHtml(fine.reason)}</td>
-                <td>${escapeHtml(fine.noticeNo)}</td>
-                <td><strong>${formatWan(fine.amountWan)}</strong><span>${escapeHtml(fine.penalty)}</span></td>
-                <td>${[...(fine.managementTags || []), ...(fine.riskTags || [])].slice(0, 4).map((tag) => `<span class="tag-chip">${escapeHtml(tag)}</span>`).join("")}</td>
-                <td>${escapeHtml(fine.date)}</td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
-      </div>
+    <section class="section-card reg-crosslink">
+      <div class="section-title-row"><div><span class="mini-label">关联视图</span><h3>罚单分析与风险监测</h3><p>${s.fineCount || 0} 张罚单、罚没合计 ${formatWan(s.totalFineAmountWan)} 的统计分布、领域归因与控制点监测，已迁移到独立页面。</p></div><button class="primary-action" type="button" data-route="/monitoring">进入监管罚单与风险监测</button></div>
     </section>
 
     <section class="section-card">
